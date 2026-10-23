@@ -1,0 +1,402 @@
+{
+  "source": "a full copy of the host repository kept beside it, deleted 2026-10-23",
+  "head": "8c4d712ac7b5aacb043bfcabf55c7ef2fe21c788",
+  "branch": "research/eda-coldchain",
+  "stashes": [
+    "stash@{0}: On master: cline restore transaction f20ad1ed-3415-47a1-9bd4-b5a459f1b6b7",
+    "stash@{1}: On master: cline restore transaction 88a2ad89-33c0-461d-a232-b21d130ab899"
+  ],
+  "entries": [
+    {
+      "code": " M",
+      "path": "research/README.md",
+      "sha256": "3e5c2db2cbc197de75a92765f3c249d80b99e90e82b45dc7df61bfee3604c996",
+      "bytes": 9634
+    },
+    {
+      "code": "RM",
+      "path": "research/_system/HOST_ASSET_INVENTORY.md",
+      "from": "research/docs/04_ASSET_INVENTORY.md",
+      "sha256": "7fde2b1016fa160a6f7d895de2efd9afd58cf16505ac0dec4cefb4dca1b71456",
+      "bytes": 3848
+    },
+    {
+      "code": "RM",
+      "path": "research/_system/HOST_SYSTEM_AUDIT.md",
+      "from": "research/docs/00_CAPABILITY_AUDIT.md",
+      "sha256": "48da4a790b9c9af1f3897a8afb6c886da1caeda60a8e0d7cc9a0d546c4b73699",
+      "bytes": 9211
+    },
+    {
+      "code": "RM",
+      "path": "research/_system/TRACK_A_EDA.md",
+      "from": "research/docs/01_TRACK_A_SILICON.md",
+      "sha256": "6782ef1edcc1ddf69ac96d8a4c546143c9e0c0f7a5d0abbf7f39aecd213d1d0c",
+      "bytes": 6032
+    },
+    {
+      "code": "RM",
+      "path": "research/_system/plans/PLAN_35_DAYS_superseded.md",
+      "from": "research/docs/05_PLAN_35_DAYS.md",
+      "sha256": "71d64a16909d10a584005b13f9ab08330ac3604b838655a2a0e6c73a5aeac857",
+      "bytes": 5583
+    },
+    {
+      "code": "RM",
+      "path": "research/_system/plans/PLAN_5_DAYS.md",
+      "from": "research/docs/05_PLAN_5_DAYS.md",
+      "sha256": "5e7b5cf9be7d0e24dd6463f830b1806c81887c3e0b9177969461891067af4903",
+      "bytes": 5544
+    },
+    {
+      "code": "RM",
+      "path": "research/_system/programme.json",
+      "from": "research/config/research_projects.json",
+      "sha256": "81d980f6fef51fb965417c234e49ef97ec708703b00254f3493d479b189bd49e",
+      "bytes": 26677
+    },
+    {
+      "code": " M",
+      "path": "research/config/physics.json",
+      "sha256": "de9ffa8efff393fecf168057af236f156551767f8e01ef8599720880956f8fda",
+      "bytes": 3100
+    },
+    {
+      "code": " M",
+      "path": "research/config/thresholds.json",
+      "sha256": "26e1849572047b10e6d63b8f33960248a7e1834cfc7451cc62f8da7ee62528d8",
+      "bytes": 461
+    },
+    {
+      "code": " M",
+      "path": "research/config/weather.json",
+      "sha256": "48a43713bb7f8760f1a00fdf4b0c5a879ec89b6916172c788c757c789966fe22",
+      "bytes": 1103
+    },
+    {
+      "code": " M",
+      "path": "research/config/weather_regions.json",
+      "sha256": "046d9c837cb4e4901b6bfcd21dc0199dfff1aef60590b47b0db6100ec04e7c8e",
+      "bytes": 4573
+    },
+    {
+      "code": " M",
+      "path": "research/docs/02_TRACK_B_COLDCHAIN.md",
+      "sha256": "601d31d2bbce830c22205588dab51971ad98bb6e517f363730eeb1742ce126c0",
+      "bytes": 6607
+    },
+    {
+      "code": " M",
+      "path": "research/docs/03_EVIDENCE_2026.md",
+      "sha256": "a31c9322dcf6653bb8223cbf81b8ba265d5272c16512a5e6086968fbfb162044",
+      "bytes": 6192
+    },
+    {
+      "code": " M",
+      "path": "research/docs/06_EVENT_AGNOSTIC_GATE.md",
+      "sha256": "3611672eec6af52f45b7ee0cecfd052e064d87327756bab09fe564be76e79d8d",
+      "bytes": 15568
+    },
+    {
+      "code": " M",
+      "path": "research/docs/07_LICENSING.md",
+      "sha256": "4e3ac56da232446becdf9a5c0952712eb54d46d722223f31bce6b353171ea8ae",
+      "bytes": 8107
+    },
+    {
+      "code": " M",
+      "path": "research/docs/08_B4_MEASUREMENT.md",
+      "sha256": "fa39ced3cceb0b1fc0e6859a78da4eec398d8268e85e5604b63c06600897d9fd",
+      "bytes": 6786
+    },
+    {
+      "code": " M",
+      "path": "research/docs/09_CATALYST_LAYER.md",
+      "sha256": "f82aed254ed65651af425ac579ca40b9f941ed88e820cc0629b7e3c3327210a7",
+      "bytes": 8450
+    },
+    {
+      "code": " M",
+      "path": "research/docs/10_NUMERIC_CORE.md",
+      "sha256": "5f2c14afe4c7d6eaab074512efc75b5156fd90f6d1f37d81baaa2b71f6a81d91",
+      "bytes": 6572
+    },
+    {
+      "code": " M",
+      "path": "research/docs/11_PHYSICS_LAYERS.md",
+      "sha256": "b6e40da11bab94a6a331aedfd1af96e4e222f2dc91ad8c5b446d31a390dd0d03",
+      "bytes": 11191
+    },
+    {
+      "code": " M",
+      "path": "research/docs/12_ROBUSTNESS.md",
+      "sha256": "2228e57b8fa98c3c9d28ae84c15a1d25200ce1375eb238eea1b36b572086e4c5",
+      "bytes": 2928
+    },
+    {
+      "code": " M",
+      "path": "research/engine/Cargo.toml",
+      "sha256": "3c079461e7c84533f47b091a781109c0cd978433c1d53716f3f8319b6337b291",
+      "bytes": 311
+    },
+    {
+      "code": " M",
+      "path": "research/engine/src/main.rs",
+      "sha256": "3ee9d30298751abc338c05e19ab2097469db3e69e2cc7ddf185e92dc35e14c08",
+      "bytes": 31202
+    },
+    {
+      "code": " M",
+      "path": "research/scripts/bench_gate.py",
+      "sha256": "f6f8a9af848d674e3dd61477207105f3884e97c697997f7fb07842e279806b00",
+      "bytes": 1604
+    },
+    {
+      "code": " M",
+      "path": "research/scripts/build_weather_regions.py",
+      "sha256": "18dc7afacbb1e8ab82cd02afd236b08988b89d3e63e6d4e43720b101837c76dc",
+      "bytes": 11813
+    },
+    {
+      "code": " M",
+      "path": "research/scripts/export_instances.py",
+      "sha256": "b6249d6bd673f02b327fa2961ee728ae12974719af73f0f316a6ec18727cc050",
+      "bytes": 6901
+    },
+    {
+      "code": " M",
+      "path": "research/scripts/run_b4.py",
+      "sha256": "b9871e91a4fe290a61ef83b3901cd986a2fca9300cf2fd48c4c2ce102c33b63d",
+      "bytes": 10341
+    },
+    {
+      "code": " M",
+      "path": "research/scripts/stress_parity.py",
+      "sha256": "478936b2398f7bad806f39404775d216f71954f5ae166df01754c9924ca7af83",
+      "bytes": 8271
+    },
+    {
+      "code": "RM",
+      "path": "research/src/switchyard/__init__.py",
+      "from": "research/src/bhr_rs/__init__.py",
+      "sha256": "09a4732cbd733c92c19120a35facd93dd446b3d0228d413cb3543e62381590f0",
+      "bytes": 865
+    },
+    {
+      "code": "R ",
+      "path": "research/src/switchyard/cascade.py",
+      "from": "research/src/bhr_rs/cascade.py",
+      "sha256": "55419d09bb33006bfde5931db0b6bc36c73bd06a65c3827e35a6ee3fe4fb1902",
+      "bytes": 8402
+    },
+    {
+      "code": "R ",
+      "path": "research/src/switchyard/compare.py",
+      "from": "research/src/bhr_rs/compare.py",
+      "sha256": "d05f44dd69fafa7881d7e3ff6b11f0129728ce898ad71e2cbd5b972bd38a5865",
+      "bytes": 17762
+    },
+    {
+      "code": "RM",
+      "path": "research/src/switchyard/evaluate.py",
+      "from": "research/src/bhr_rs/evaluate.py",
+      "sha256": "77f1e92f82f250acfbb879738e49517d6023fa05b9d72ae53ef8cc25435c6c9e",
+      "bytes": 12694
+    },
+    {
+      "code": "RM",
+      "path": "research/src/switchyard/gate.py",
+      "from": "research/src/bhr_rs/gate.py",
+      "sha256": "395d078bfb07d9e89811e07b4543985bb80baafd3b3fe7d1ce85a87ef08ca5a1",
+      "bytes": 25014
+    },
+    {
+      "code": "RM",
+      "path": "research/src/switchyard/graph.py",
+      "from": "research/src/bhr_rs/graph.py",
+      "sha256": "17102e686b98dba703b19ed2e3472720eaa3169c9a9931ef27cdab8732403ec5",
+      "bytes": 6265
+    },
+    {
+      "code": "RM",
+      "path": "research/src/switchyard/model.py",
+      "from": "research/src/bhr_rs/model.py",
+      "sha256": "d432aa1e2983a8f1d5d088b4bf77f07900a63ecd2f7cb3fb6cbb40fd6318c0b8",
+      "bytes": 9191
+    },
+    {
+      "code": "RM",
+      "path": "research/src/switchyard/physics.py",
+      "from": "research/src/bhr_rs/physics.py",
+      "sha256": "6fadef3075fba93520252eea9f859d9a41f30df299d8f43864c0a4db7b533eb5",
+      "bytes": 13400
+    },
+    {
+      "code": "RM",
+      "path": "research/src/switchyard/planners.py",
+      "from": "research/src/bhr_rs/planners.py",
+      "sha256": "5b4d3e353e0d07ae0675879deafbe42e767aed07e615ba3750e16287d7b61364",
+      "bytes": 27321
+    },
+    {
+      "code": "RM",
+      "path": "research/src/switchyard/risk.py",
+      "from": "research/src/bhr_rs/risk.py",
+      "sha256": "ed089d840ed1f7e68c111dd78bd0d593c6e374b85b4692bdb4e4171d72516c6b",
+      "bytes": 8952
+    },
+    {
+      "code": "R ",
+      "path": "research/src/switchyard/rng.py",
+      "from": "research/src/bhr_rs/rng.py",
+      "sha256": "ce79911c94be822ad52bed5aa962498e5c47e9533be2b7b06d7422668ec7a174",
+      "bytes": 2848
+    },
+    {
+      "code": "RM",
+      "path": "research/src/switchyard/scenarios.py",
+      "from": "research/src/bhr_rs/scenarios.py",
+      "sha256": "7073c141f2c7dd74e6133c5b9920dbe6b08220dc5470bfc9437acae4d554b5cc",
+      "bytes": 16216
+    },
+    {
+      "code": "RM",
+      "path": "research/src/switchyard/stats.py",
+      "from": "research/src/bhr_rs/stats.py",
+      "sha256": "71553633675702fb25837725fe90e7defd6e1809a522d404cd09dace585d00d3",
+      "bytes": 4255
+    },
+    {
+      "code": "RM",
+      "path": "research/src/switchyard/vector.py",
+      "from": "research/src/bhr_rs/vector.py",
+      "sha256": "6be8dc44dc21fcba01ef4d2ae1df27de3ba37041f7446ea6a6f769743b516cec",
+      "bytes": 11904
+    },
+    {
+      "code": "RM",
+      "path": "research/src/switchyard/weather.py",
+      "from": "research/src/bhr_rs/weather.py",
+      "sha256": "fe82f47d10468d44f04f29ac17b2bdc7cb92aa087460affeccd58c23da88ff9c",
+      "bytes": 12564
+    },
+    {
+      "code": " M",
+      "path": "tests/test_coldchain_engine_s.py",
+      "sha256": "c1b3aa6b1c156bcea61f9835d965da9dfd6d276c69fb73802d7d4339b646c466",
+      "bytes": 6951
+    },
+    {
+      "code": " M",
+      "path": "tests/test_physical_gate_s.py",
+      "sha256": "5a2abddc77b67b6a31e877d976f73af1e461d5e069229300b83ff0250c821f01",
+      "bytes": 7093
+    },
+    {
+      "code": " M",
+      "path": "tests/test_physics_layers_s.py",
+      "sha256": "1f1173354542f9390f4501be271ae65ed67fd25d58f572e2791d15b20f2e8b08",
+      "bytes": 7186
+    },
+    {
+      "code": " M",
+      "path": "tests/test_research_project_s.py",
+      "sha256": "a066edb3dbc0ebc5cccf5525f6faee84e8758f84cd331912e3f4ffb4726aa124",
+      "bytes": 15954
+    },
+    {
+      "code": " M",
+      "path": "tests/test_research_scrub_s.py",
+      "sha256": "429d1b17424f5b8b0f9c07bbd25e17d1b54a7c211615e52e4c25bc206e2631e5",
+      "bytes": 6523
+    },
+    {
+      "code": " M",
+      "path": "tests/test_stats_s.py",
+      "sha256": "b889f6e81827dfd9a66ccd380127de606513da0b7328911bc1bbbbd1b69b922e",
+      "bytes": 1997
+    },
+    {
+      "code": " M",
+      "path": "tests/test_weather_regions_s.py",
+      "sha256": "8fceb1589e404ea701b2e6394c124399dac3f889fbb9caa0588f1d9c57f96524",
+      "bytes": 10301
+    },
+    {
+      "code": " M",
+      "path": "tests/test_weather_risk_s.py",
+      "sha256": "7abef5cb37ef7f81f4dfbce3f875d832584ff5561940ff26b5ee4d6e3212fe0a",
+      "bytes": 11595
+    },
+    {
+      "code": "??",
+      "path": "research/PACKAGE.md",
+      "sha256": "7ba9d41d683682b53fe24f450c6d0853b6c21f45471e5a5eeb8f1b948f91733d",
+      "bytes": 2937,
+      "copied_to": "clone_untracked\\research\\PACKAGE.md"
+    },
+    {
+      "code": "??",
+      "path": "research/_system/DECISIONS.md",
+      "sha256": "d8ae78e02bf728f7b0a00c5897cad7b8fa04fa63d0fd3216088bc0750a9bc5d6",
+      "bytes": 9433,
+      "copied_to": "clone_untracked\\research\\_system\\DECISIONS.md"
+    },
+    {
+      "code": "??",
+      "path": "research/_system/FUTURE_PROJECTS.md",
+      "sha256": "453928cfc68e7aa4bc0d011408d5b212763a93a1d552bbcfe0b7067e71ef8d94",
+      "bytes": 10840,
+      "copied_to": "clone_untracked\\research\\_system\\FUTURE_PROJECTS.md"
+    },
+    {
+      "code": "??",
+      "path": "research/_system/PROFESSIONAL_MATERIAL.md",
+      "sha256": "28abdd90ad032f6dc7692d7b9552d54d6f2ed829299df08281a65f53f84bcb2b",
+      "bytes": 1352,
+      "copied_to": "clone_untracked\\research\\_system\\PROFESSIONAL_MATERIAL.md"
+    },
+    {
+      "code": "??",
+      "path": "research/_system/README.md",
+      "sha256": "952fcdcfb09a507db51f16f97c663f61395f08a455d300ccde16cb53da862db6",
+      "bytes": 3007,
+      "copied_to": "clone_untracked\\research\\_system\\README.md"
+    },
+    {
+      "code": "??",
+      "path": "research/_system/STATUS.md",
+      "sha256": "08fbdd8503ff1341fd8a49bf5c925714073ae85d3e53fa85f932bab4b02b87d8",
+      "bytes": 3539,
+      "copied_to": "clone_untracked\\research\\_system\\STATUS.md"
+    },
+    {
+      "code": "??",
+      "path": "research/docs/05_REPRODUCTION.md",
+      "sha256": "7493b75619b38f4cabd5b03c29f1cc046adf52cf7cab4a828ec93219716126e3",
+      "bytes": 5195,
+      "copied_to": "clone_untracked\\research\\docs\\05_REPRODUCTION.md"
+    },
+    {
+      "code": "??",
+      "path": "tests/test_doc_separation_s.py",
+      "sha256": "03d4af475b800e23340e0bbb00d7fcc19a77a8dc3cb289f69df70aeeed991418",
+      "bytes": 7843,
+      "copied_to": "clone_untracked\\tests\\test_doc_separation_s.py"
+    }
+  ],
+  "source_deleted": "2026-10-23",
+  "untracked_archive": {
+    "path": "clone_untracked.tar.gz",
+    "sha256": {
+      "research/PACKAGE.md": "7ba9d41d683682b53fe24f450c6d0853b6c21f45471e5a5eeb8f1b948f91733d",
+      "research/_system/DECISIONS.md": "d8ae78e02bf728f7b0a00c5897cad7b8fa04fa63d0fd3216088bc0750a9bc5d6",
+      "research/_system/FUTURE_PROJECTS.md": "453928cfc68e7aa4bc0d011408d5b212763a93a1d552bbcfe0b7067e71ef8d94",
+      "research/_system/PROFESSIONAL_MATERIAL.md": "28abdd90ad032f6dc7692d7b9552d54d6f2ed829299df08281a65f53f84bcb2b",
+      "research/_system/README.md": "952fcdcfb09a507db51f16f97c663f61395f08a455d300ccde16cb53da862db6",
+      "research/_system/STATUS.md": "08fbdd8503ff1341fd8a49bf5c925714073ae85d3e53fa85f932bab4b02b87d8",
+      "research/docs/05_REPRODUCTION.md": "7493b75619b38f4cabd5b03c29f1cc046adf52cf7cab4a828ec93219716126e3",
+      "tests/test_doc_separation_s.py": "03d4af475b800e23340e0bbb00d7fcc19a77a8dc3cb289f69df70aeeed991418"
+    }
+  }
+}

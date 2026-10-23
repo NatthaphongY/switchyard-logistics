@@ -1,0 +1,3165 @@
+diff --git a/research/README.md b/research/README.md
+index 469a82ff..c46d6dee 100644
+--- a/research/README.md
++++ b/research/README.md
+@@ -1,90 +1,100 @@
+-# BHR-RS-README  -  Research Programme Overview
++# SW-README  -  Switchyard Research Programme
+ 
+ | Field | Value |
+ |---|---|
+-| Document ID | BHR-RS-README |
+-| Version | 2.3 |
+-| Status | Approved for execution |
++| Document ID | SW-README |
++| Kind | Repository document (published) |
++| Version | 3.0 |
++| Status | Active |
+ | Date | 2026-10-23 |
+-| Product name | Switchyard (decision D-21). Document and gate identifiers stay `BHR-RS-xx`. |
++| Product name | Switchyard. Document and gate identifiers are `SW-xx`. |
+ | Branch | `research/eda-coldchain` (isolated Git worktree) |
+ | Audience | Repository maintainers, external reviewers, prospective contributors |
+-| Normative status | Informative; the decisions in section 3 are binding |
++| Normative status | Informative; SW-06 is the normative specification |
+ 
+ ## 1. Purpose and scope
+ 
+-This programme evaluates whether the optimisation and verification machinery of the
+-Bar H Ranch Publishing System transfers to industrial planning problems, and whether it
+-can be packaged as a verifiable public artefact.
++This programme asks whether the optimisation and verification machinery of a private
++production-planning code base transfers to industrial planning problems, and whether the
++result can be packaged as a verifiable public artefact.
+ 
+-The programme is organisationally and technically separate from the book production
+-pipeline. It reads production data but never writes to it. All work is conducted on the
+-git branch `research/eda-coldchain`, checked out in a dedicated worktree.
++The question is answered by building the artefact and measuring it: an event-agnostic
++compliance gate for time-and-temperature critical plans, a Python reference implementation, a
++dependency-free Rust replay core, and a pre-registered measurement of whether a priced plan
++separates from current practice under the gate's own ordering.
+ 
+-Two workstreams were assessed:
+-
+-| ID | Workstream | Status |
+-|---|---|---|
+-| B | Time-and-temperature critical plans: event-agnostic compliance gate | Active |
+-| A | Semiconductor floorplanning and routing (EDA) | Suspended by decision D-4 |
++Two workstreams were assessed. Workstream B (logistics) is active. Workstream A
++(semiconductor floorplanning) is suspended and unstaffed; it is not part of this release.
+ 
+ ## 2. Document set
+ 
+ | ID | Document | Content |
+ |---|---|---|
+-| BHR-RS-00 | `docs/00_CAPABILITY_AUDIT.md` | Capability findings, each supported by source location or executed result |
+-| BHR-RS-01 | `docs/01_TRACK_A_SILICON.md` | Assessment of the suspended EDA workstream |
+-| BHR-RS-02 | `docs/02_TRACK_B_COLDCHAIN.md` | Active workstream: problem statement, gap analysis, architecture |
+-| BHR-RS-03 | `docs/03_EVIDENCE_2026.md` | Evidence register: market and technical sources with retrieval dates |
+-| BHR-RS-04 | `docs/04_ASSET_INVENTORY.md` | Reusable assets, measured from disk |
+-| BHR-RS-05 | `docs/05_PLAN_5_DAYS.md` | Execution plan (5-7 days), gates, and termination criteria |
+-| BHR-RS-06 | `docs/06_EVENT_AGNOSTIC_GATE.md` | Specification of the compliance gate (normative) |
+-| BHR-RS-07 | `docs/07_LICENSING.md` | Licensing model, thresholds, and legal position |
+-| BHR-RS-08 | `docs/08_B4_MEASUREMENT.md` | Gate B4 measurement, escalation ladder, and the verdict as measured |
+-| BHR-RS-09 | `docs/09_CATALYST_LAYER.md` | Propagation, information, institutional and catalyst layers; cascade model |
+-| BHR-RS-10 | `docs/10_NUMERIC_CORE.md` | Fixed-point arithmetic, Rust conformance core, measured throughput |
+-| BHR-RS-11 | `docs/11_PHYSICS_LAYERS.md` | Queueing, traffic, thermal, reliability and epidemic layers: adopted, rejected, limits |
+-| BHR-RS-12 | `docs/12_ROBUSTNESS.md` | Bit-exact parity over repeated passes, hostile input, liveness and memory evidence |
+-
+-The normative document is BHR-RS-06. Where any other document conflicts with it, BHR-RS-06
+-governs.
+-
+-## 3. Recorded decisions
+-
+-Decisions are dated and treated as fixed inputs until formally revised.
+-
+-| ID | Decision | Date |
+-|---|---|---|
+-| D-1 | No external investment. No return-on-investment defence is required. | 2026-10-23 |
+-| D-2 | Licensing uses the Business Source Licence 1.1 with an Additional Use Grant, paired with a specification published under Apache-2.0. | 2026-10-23 |
+-| D-3 | Elaborate mathematical machinery is permitted within this programme but is prohibited on the book production path. Re-import requires evidence. | 2026-10-23 |
+-| D-4 | Logistics is the active workstream. EDA is suspended and is not staffed. | 2026-10-23 |
+-| D-5 | The event model MUST be event-agnostic. Named events MUST NOT appear in decision logic. | 2026-10-23 |
+-| D-6 | Data acquisition budget is zero. Only openly licensed data is used. | 2026-10-23 |
+-| D-7 | The primary objective is professional reputation and a verifiable public artefact. Revenue is a secondary consequence. | 2026-10-23 |
+-| D-8 | The 35-working-day schedule is withdrawn; see D-18. | 2026-10-22 |
+-| D-15 | Licence change date is two years from first release. Four years remains the legal maximum. | 2026-10-22 |
+-| D-16 | A non-separating B4 result may ship as a plan auditor, with the limitation stated first. | 2026-10-22 |
+-| D-17 | No external domain reviewer; limitations are recorded in BHR-RS-03, -11 and -12. | 2026-10-22 |
+-| D-18 | Schedule re-baselined to five to seven working days. | 2026-10-22 |
+-| D-19 | A physical layer is adopted only when it changes a decision; constants live in `config/physics.json`. | 2026-10-22 |
+-| D-20 | The research tree is English and code only, and contains no if/elif dispatch. Both are enforced by tests. | 2026-10-22 |
+-| D-21 | The product name is Switchyard. Prior art was checked before adoption: the name is already used by an unrelated educational networking framework on the Python Package Index, so a Python distribution would need a suffix. | 2026-10-23 |
+-| D-22 | Ambient weather data is open reanalysis only: the free, keyless Open-Meteo archive API serving ERA5, frozen as a July 1991-2020 climatology in `config/weather_regions.json`. A live forecast ingest is out of scope until a consumer needs one. | 2026-10-23 |
++| SW-02 | `docs/02_TRACK_B_COLDCHAIN.md` | Problem statement, capability gap, architecture |
++| SW-03 | `docs/03_EVIDENCE_2026.md` | Evidence register: market and technical sources with retrieval dates |
++| SW-05 | `docs/05_REPRODUCTION.md` | Reproduction and verification: every number, and the command that regenerates it |
++| SW-06 | `docs/06_EVENT_AGNOSTIC_GATE.md` | Specification of the compliance gate (normative) |
++| SW-07 | `docs/07_LICENSING.md` | Licensing model, thresholds, and legal position |
++| SW-08 | `docs/08_B4_MEASUREMENT.md` | Gate B4 measurement, escalation ladder, and the verdict as measured |
++| SW-09 | `docs/09_CATALYST_LAYER.md` | Propagation, information, institutional and catalyst layers; cascade model |
++| SW-10 | `docs/10_NUMERIC_CORE.md` | Fixed-point arithmetic, Rust conformance core, measured throughput |
++| SW-11 | `docs/11_PHYSICS_LAYERS.md` | Queueing, traffic, thermal, reliability and epidemic layers: adopted, rejected, limits |
++| SW-12 | `docs/12_ROBUSTNESS.md` | Bit-exact parity over repeated passes, hostile input, liveness and memory evidence |
++| SW-PKG | `PACKAGE.md` | What is published, and what is deliberately not |
++
++The normative document is SW-06. Where any other document conflicts with it, SW-06 governs.
++
++## 3. Properties of the artefact
++
++These properties are binding on the released artefact. Each is enforced by code or by a test,
++not by convention.
++
++1. Two licences with different purposes: the specification is Apache-2.0 so it can be cited and
++   independently implemented; the reference implementation is Business Source Licence 1.1 with
++   an Additional Use Grant; the names and marks are not licensed (SW-07).
++2. The gate is event-agnostic. Decision logic reads state and constraints; a named event never
++   appears in a branch, a table key, or a threshold (SW-06 section 3).
++3. All decisions use integer micro-units and integer minutes. Floating point is confined to
++   transport and reporting (SW-10).
++4. Two implementations exist: the Python reference and a dependency-free Rust core. Conformance
++   is proved by replaying exported instances, not by inspection: 300 of 300 agree, bit for bit
++   (SW-10, SW-12).
++5. The measurement was pre-registered. The escalation ladder, the two guard criteria, and the
++   decision rule were fixed before the run, and both limbs of every criterion are reported even
++   when only one is met (SW-08).
++6. Only openly licensed data is used, and no data is purchased. Ambient conditions come from a
++   frozen July 1991-2020 ERA5 climatology retrieved from a free, keyless archive API, with
++   attribution stored inside the data file (SW-11).
++7. Rules are tables, not branches: a new code is a row in `PHYSICAL_RULES`, `FLAG_RULES`,
++   `REMEDY_TRIGGERS` or `PLANNER_REGISTRY`. Text is English and ASCII, and both rules have a
++   test.
+ 
++## 4. Constraints
++
++The following constraints apply to all work in this programme.
++
++1. The programme MUST NOT write to the host production tree.
++2. Every quantitative claim MUST cite a source and a retrieval date, or a source location in
++   the form `path:line`, or a command whose output is reproducible.
++3. A failed gate MUST stop the associated workstream. Thresholds MUST NOT be lowered to
++   achieve a pass.
++4. Language models MUST NOT be used for tasks that can be completed deterministically by code
++   or by hand.
++5. No artefact may be produced that has no caller, consumer, or documented purpose.
++6. All text under `research/**` MUST be written in English.
++7. Content MUST be free of decorative notation. Emoji and similar markers are not permitted in
++   documents; status is expressed in words.
+ ## 5. Language and style policy
+ 
+-The programme is published openly and is expected to be read by parties who do not read
+-Thai. Consequently:
++The artefact is published openly and is expected to be read by an international audience.
+ 
+-- Documents use professional English and the normative keywords of RFC 2119
+-  (MUST, MUST NOT, SHOULD, SHOULD NOT, MAY).
+-- Status is expressed as explicit terms: `Confirmed`, `Label-only`, `Degenerate`,
+-  `Unsupported`, `Suspended`, `Active`.
+-- Literals in other scripts that are required as evidence MUST be written as escape
+-  sequences so that files remain ASCII.
+-- Style and language rules are enforced by the test suite, not by convention; see
+-  section 7.
++- Documents use professional English and the normative keywords of RFC 2119 (MUST, MUST NOT,
++  SHOULD, SHOULD NOT, MAY).
++- Status is expressed as explicit terms: `Confirmed`, `Label-only`, `Degenerate`, `Unsupported`,
++  `Suspended`, `Active`.
++- Literals in other scripts that are required as evidence MUST be written as escape sequences
++  so that files remain ASCII.
++- Style and language rules are enforced by the test suite, not by convention; see section 7.
+ 
+ ## 6. Repository separation
+ 
+@@ -92,84 +102,68 @@ The programme occupies its own branch and its own worktree:
+ 
+ ```
+ git worktree list
+-# <publisher-checkout>     [master]
++# <host-checkout>          [master]
+ # <research-checkout>      [research/eda-coldchain]
+ ```
+ 
+-Host paths are omitted on purpose: the document is published, the machine layout
+-is not part of the evidence.
++Host paths are omitted on purpose: the document is published, the machine layout is not part
++of the evidence.
+ 
+ Working rules:
+ 
+-1. Commits on this branch are made by the repository lead. Contributors do not commit.
+-2. The production working tree MUST NOT contain a `research/` directory. If one appears,
+-   it is a defect.
+-3. Changes on this branch MUST NOT modify production source files without an approved
+-   proposal and a corresponding test.
++1. Commits on this branch are made by the repository maintainer. Contributors do not commit.
++2. The production working tree MUST NOT contain a `research/` directory. If one appears, it is
++   a defect.
++3. Changes on this branch MUST NOT modify production source files without an approved proposal
++   and a corresponding test.
+ 
+ ## 7. Verification
+ 
+ | Check | Command | Expected |
+ |---|---|---|
+ | Programme test suite | `py -3.13 -m pytest tests/test_research_project_s.py tests/test_coldchain_engine_s.py tests/test_physics_layers_s.py tests/test_physical_gate_s.py tests/test_stats_s.py -q` | all tests pass |
+-| Rule guards | `py -3.13 -m pytest tests/test_no_if_else_dispatch_s.py tests/test_ascii_only_s.py -q` | no elif, no literal dispatch, ASCII only |
+ | Ambient data | `py -3.13 -m pytest tests/test_weather_regions_s.py -q` | integers only, provenance present, the measured table differs from the invented one |
+-| Publication scrub | `py -3.13 -m pytest tests/test_research_scrub_s.py -q` | no e-mail, phone number, host path, personal name or third-party token in the publishable tree |
+-| Registry integrity | `py -3.13 -X utf8 -c "import json,pathlib;json.loads(pathlib.Path('research/config/research_projects.json').read_text(encoding='utf-8'))"` | exits 0 |
+-| Document set | section 2 of this document | all documents exist |
+-| Rust conformance | `bhr-core --instances research/evidence/instances.txt --threads 8 --repeat 200` | 0 mismatches |
++| Publication scrub | `py -3.13 -m pytest tests/test_research_scrub_s.py -q` | no e-mail, phone number, host path, personal name or third-party token in the published tree |
++| Document separation | `py -3.13 -m pytest tests/test_doc_separation_s.py -q` | published documents carry no internal record, no decision identifier, and no host-system reference |
++| Rule guards | `py -3.13 -m pytest tests/test_no_if_else_dispatch_s.py tests/test_ascii_only_s.py -q` | no elif, no literal dispatch, ASCII only |
++| Rust conformance | `switchyard-core --instances evidence/instances.txt --threads 8 --repeat 200` | 0 mismatches |
+ | Robustness | `py -3.13 -X utf8 research/scripts/stress_parity.py --repeats 200` | PASS |
+-| Language and style | included in the test suite | no non-ASCII bytes, no decorative markers |
++| Document set | section 2 of this document, and `PACKAGE.md` | all documents exist and are published |
+ 
+ ## 8. Reproduction of the evidence
+ 
+-```powershell
+-# Capability findings
+-py -3.13 -m pytest tests/test_true_graph_engines_s.py -q
++`docs/05_REPRODUCTION.md` is the single place where every published number is tied to the
++command that produces it and to the evidence file that stores the output. The short form:
+ 
+-# Market and technical evidence register
+-py -3.13 -X utf8 scripts/web_research.py search "cold chain logistics pharma 2026" --limit 8
+-py -3.13 -X utf8 scripts/web_research.py read "https://www.mordorintelligence.com/industry-reports/cold-chain-logistics-market" --chars 2200
++```powershell
++py -3.13 -X utf8 research/scripts/export_instances.py --scenarios 300
++py -3.13 -X utf8 research/scripts/run_b4.py --scenarios 300
++py -3.13 -X utf8 research/scripts/stress_parity.py --repeats 200
+ ```
+ 
+ ## 9. Current status
+ 
+ | Item | Status |
+ |---|---|
+-| Capability audit | Complete: four findings confirmed, two label-only, one degenerate, two unsupported |
+-| Evidence register | Complete for the sources used; limitations recorded in BHR-RS-03 section 4 |
+-| Asset inventory | Complete |
+-| Gate specification | Normative v1.1, 20 codes (BHR-RS-06) |
+-| Gate implementation | Complete: Python reference, three planners, integer rules (BHR-RS-06, BHR-RS-10) |
+-| Physical layers | Complete: queue, traffic, thermal, reliability, epidemic, tail risk (BHR-RS-11) |
+-| Numeric core | Complete: 300 checks, 0 mismatches, 34,011 per second on eight threads (BHR-RS-10) |
+-| Robustness | Complete: 200 passes, no mismatches, six hostile inputs bounded (BHR-RS-12) |
+-| Gate B4 | **SEPARATES** on six pre-registered criteria (BHR-RS-08) |
+-| Ambient data | Measured: ERA5 July 1991-2020 climatology via the free Open-Meteo archive API, three sites (D-22) |
+-| Public release | Not started; the product name is decided (D-21: Switchyard), the release pack is not |
+-
+-## 10. Outstanding items
+-
+-1. Business Source Licence change date - **resolved** (D-15: two years).
+-2. Non-separating result at gate B4 - **resolved** (D-16: may ship as a plan auditor);
+-   in this run the gate separates, so the fallback is unused.
+-3. Domain reviewer - **resolved** (D-17: not appointed, limitations documented).
+-4. Product name - **resolved** (D-21: Switchyard, decided 2026-10-23 after a prior-art
+-   check); registry id `BHR-RS` remains the document and gate identifier.
+-
+-## 4. Constraints
+-
+-The following constraints apply to all work in this programme.
+-
+-1. The programme MUST NOT write to `projects/**`, `knowledge_base/**`, or `docs/spine_library/**`.
+-2. Every quantitative claim MUST cite a source and a retrieval date, or a source location
+-   in the form `path:line`, or a command whose output is reproducible.
+-3. A failed gate MUST stop the associated workstream. Thresholds MUST NOT be lowered to
+-   achieve a pass.
+-4. Language models MUST NOT be used for tasks that can be completed deterministically by
+-   code or by hand.
+-5. No artefact may be produced that has no caller, consumer, or documented purpose.
+-6. All text under `research/**` MUST be written in English. This is a public artefact; see
+-   section 5.
+-7. Content MUST be free of decorative notation. Emoji and similar markers are not
+-   permitted in documents; status is expressed in words.
++| Capability audit | Complete; the findings that survive are the ones implemented here |
++| Evidence register | Complete for the sources used; limitations recorded in SW-03 section 4 |
++| Gate specification | Normative v1.1, 20 codes (SW-06) |
++| Gate implementation | Complete: Python reference, three planners, integer rules (SW-06, SW-10) |
++| Physical layers | Complete: queue, traffic, thermal, reliability, epidemic, tail risk (SW-11) |
++| Numeric core | Complete: 300 checks, 0 mismatches, 34,011 per second on eight threads (SW-10) |
++| Robustness | Complete: 200 passes, no mismatches, six hostile inputs bounded (SW-12) |
++| Gate B4 | **SEPARATES** on six pre-registered criteria (SW-08) |
++| Ambient data | Measured: ERA5 July 1991-2020 climatology via the free Open-Meteo archive API, three sites (SW-11) |
++| Public release | Not prepared. The product name is decided and prior art has been checked; the release pack is not built |
++
++## 10. Known limitations
++
++1. No external domain reviewer. The limitations are recorded in SW-03 section 4, SW-11
++   section 11, and SW-12, rather than reviewed away.
++2. The ambient layer is a frozen July climatology, not a live forecast ingest, and it covers
++   three sites rather than the whole year (SW-11).
++3. Heat gain per consignment is drawn from a distribution, not measured, and the cascade
++   calibration is synthetic (SW-09, SW-11). The claim is determinism and replay, not prediction.
++4. Throughput is measured on one machine, with the numbers and thread count stated in SW-10.
++5. The complete repository test suite is not green on this machine for reasons unrelated to
++   this programme; the commands in section 7 are the ones that must pass.
+diff --git a/research/docs/04_ASSET_INVENTORY.md b/research/_system/HOST_ASSET_INVENTORY.md
+similarity index 79%
+rename from research/docs/04_ASSET_INVENTORY.md
+rename to research/_system/HOST_ASSET_INVENTORY.md
+index 2f9a4522..671b8134 100644
+--- a/research/docs/04_ASSET_INVENTORY.md
++++ b/research/_system/HOST_ASSET_INVENTORY.md
+@@ -1,15 +1,16 @@
+-# BHR-RS-04  -  Asset Inventory
++# SW-SYS-04  -  Asset inventory of the host system
+ 
+ | Field | Value |
+ |---|---|
+-| Document ID | BHR-RS-04 |
+-| Version | 2.0 |
++| Document ID | SW-SYS-04 |
++| Kind | System record (internal; not published) |
++| Version | 2.1 |
+ | Status | Baselined |
+ | Date | 2026-10-23 |
+ | Method | Filesystem inspection and executed commands; no values recorded from memory |
+ | Normative status | Informative |
+ 
+-## 1. Reusable components in the publishing system
++## 1. Reusable components in the host system
+ 
+ Access is read-only. The programme MUST NOT modify these components.
+ 
+@@ -46,26 +47,9 @@ Conclusion: the transferable assets are the fixed-point deterministic core with
+ harness, the architecture decision records, and the binary format decoders. The games
+ themselves are not transferable assets for this programme.
+ 
+-## 3. Professional material (internal, not for publication)
++## 3. Required acquisitions
+ 
+-Curriculum vitae material dated 2026-10-15 and 2026-10-16 records the following verifiable
+-claims that are relevant to external communication:
+-
+-| Claim | Value |
+-|---|---|
+-| Regression test count | More than 2,500 |
+-| Headless verification harness | 44 of 44 checks passing |
+-| Structured scene blueprints | 1,700, with audit-verifiable provenance |
+-| Imprint catalogue | 50 imprints under canon governance |
+-| Knowledge base scale | Three million passages across eleven indices |
+-
+-External communication MUST lead with determinism, auditability, and verification, and MUST
+-NOT lead with narrative production. Curriculum vitae material MUST NOT be published in this
+-repository.
+-
+-## 4. Required acquisitions
+-
+-| Item | Reason | Decision owner |
++| Item | Reason | Responsibility |
+ |---|---|---|
+ | Reference implementation and reproducible baseline numbers | Required by gates B2 and B4 | Repository lead |
+ | Temperature and lane reference data, or an explicit synthetic assumption set | Required for any validation claim | Repository lead |
+diff --git a/research/docs/00_CAPABILITY_AUDIT.md b/research/_system/HOST_SYSTEM_AUDIT.md
+similarity index 94%
+rename from research/docs/00_CAPABILITY_AUDIT.md
+rename to research/_system/HOST_SYSTEM_AUDIT.md
+index e4aff59a..e14d212e 100644
+--- a/research/docs/00_CAPABILITY_AUDIT.md
++++ b/research/_system/HOST_SYSTEM_AUDIT.md
+@@ -1,15 +1,20 @@
+-# BHR-RS-00  -  Capability Audit
++# SW-SYS-02  -  Capability audit of the host system
+ 
+ | Field | Value |
+ |---|---|
+-| Document ID | BHR-RS-00 |
+-| Version | 2.0 |
++| Document ID | SW-SYS-02 |
++| Kind | System record (internal; not published) |
++| Version | 2.1 |
+ | Status | Baselined |
+ | Date | 2026-10-23 |
+-| Scope | Optimisation and verification mechanisms of the Bar H Ranch Publishing System |
++| Scope | Optimisation and verification mechanisms of the host production system |
+ | Method | Source inspection, executed tests, executed probe values |
+ | Normative status | Informative; findings are binding on planning documents |
+ 
++This audit names files and line numbers of the host system, so it stays internal. Published
++documents state the same findings as facts and cite no host path; see `_system/README.md`.
++
++
+ ## 1. Purpose and method
+ 
+ A prior external review asserted that the repository contains mathematics suitable for
+@@ -83,7 +88,7 @@ at low cost.
+ ## 5. Probability assessment
+ 
+ The following ranges replace the point estimates in F-9. They are derived from the state of
+-the repository on 2026-10-23 and from the evidence register in BHR-RS-03. No customer
++the repository on 2026-10-23 and from the evidence register in SW-03. No customer
+ interviews or domain advisor input is included, which is a material limitation.
+ 
+ | Workstream | Outcome | Range | Conditions that move the estimate |
+diff --git a/research/docs/01_TRACK_A_SILICON.md b/research/_system/TRACK_A_EDA.md
+similarity index 86%
+rename from research/docs/01_TRACK_A_SILICON.md
+rename to research/_system/TRACK_A_EDA.md
+index 5d55e7e8..b2c87eea 100644
+--- a/research/docs/01_TRACK_A_SILICON.md
++++ b/research/_system/TRACK_A_EDA.md
+@@ -1,12 +1,13 @@
+-# BHR-RS-01  -  Workstream A: Semiconductor Floorplanning and Routing
++# SW-SYS-03  -  Workstream A: Semiconductor Floorplanning and Routing
+ 
+ | Field | Value |
+ |---|---|
+-| Document ID | BHR-RS-01 |
+-| Version | 2.0 |
+-| Status | Suspended (decision D-4, 2026-10-23) |
++| Document ID | SW-SYS-03 |
++| Kind | System record (internal; not published) |
++| Version | 2.1 |
++| Status | Suspended on 2026-10-23, unstaffed |
+ | Date | 2026-10-23 |
+-| Resumption condition | Workstream B reaches gate B5, or a formal decision reverses D-4 |
++| Resumption condition | Workstream B reaches gate B5, or the suspension is formally reversed |
+ | Normative status | Informative |
+ 
+ ## 1. Status
+@@ -21,8 +22,8 @@ The prior external review stated that the repository implements the same mathema
+ to route wires on a wafer, assigned a success probability of 85 per cent, and predicted an
+ acquisition approach by a large semiconductor company.
+ 
+-Assessment: the first clause is partially accurate (see BHR-RS-00, findings F-1 to F-4).
+-The remaining clauses have no supporting evidence (BHR-RS-00, findings F-8 and F-9).
++Assessment: the first clause is partially accurate (see SW-SYS-02, findings F-1 to F-4).
++The remaining clauses have no supporting evidence (SW-SYS-02, findings F-8 and F-9).
+ 
+ ## 3. Problem decomposition
+ 
+@@ -41,14 +42,14 @@ The problems are NP-hard; a fast, reproducible, near-optimal answer has commerci
+ 
+ | Required capability | Present | Evidence |
+ |---|---|---|
+-| Graph minimum cut and maximum flow | Yes | BHR-RS-00, F-1 |
+-| DAG ordering and cycle detection | Yes | BHR-RS-00, F-2 |
+-| Critical path and slack | Yes | BHR-RS-00, F-3 |
++| Graph minimum cut and maximum flow | Yes | SW-SYS-02, F-1 |
++| DAG ordering and cycle detection | Yes | SW-SYS-02, F-2 |
++| Critical path and slack | Yes | SW-SYS-02, F-3 |
+ | Deterministic execution with resume and audit | Yes | `scripts/outline_batch.py`, `core/ledger/*` |
+ | Gates expressed as data | Yes | `config/outline_gates.json`, `core/outline/story_gates.py` |
+-| Hypergraph partitioning | No | Search log, BHR-RS-00 section 6 |
+-| LEF, DEF, or Verilog parsing | No | Search log, BHR-RS-00 section 6 |
+-| Congestion, thermal, or static timing analysis | No | Search log, BHR-RS-00 section 6 |
++| Hypergraph partitioning | No | Search log, SW-SYS-02 section 6 |
++| LEF, DEF, or Verilog parsing | No | Search log, SW-SYS-02 section 6 |
++| Congestion, thermal, or static timing analysis | No | Search log, SW-SYS-02 section 6 |
+ | Process design kit and rule deck | No | Not available without agreements |
+ | Comparable benchmark set | No | Not present on this machine |
+ 
+@@ -109,5 +110,5 @@ workstream stops or descends to a smaller scope, such as an automated floorplan
+ 2. Incumbent tooling plus announced artificial-intelligence partnerships are absorbing
+    tool-driving agents quickly.
+ 3. Feedback latency is weeks, which is materially slower than document production.
+-4. Sustained effort below 15 hours per week reduces the artefact estimate in BHR-RS-00
++4. Sustained effort below 15 hours per week reduces the artefact estimate in SW-SYS-02
+    section 5 substantially.
+diff --git a/research/docs/05_PLAN_35_DAYS.md b/research/_system/plans/PLAN_35_DAYS_superseded.md
+similarity index 78%
+rename from research/docs/05_PLAN_35_DAYS.md
+rename to research/_system/plans/PLAN_35_DAYS_superseded.md
+index bdd563a0..50d1b434 100644
+--- a/research/docs/05_PLAN_35_DAYS.md
++++ b/research/_system/plans/PLAN_35_DAYS_superseded.md
+@@ -1,14 +1,15 @@
+-# BHR-RS-05  -  Execution Plan, 35 Working Days
++# SW-SYS-08  -  Execution Plan, 35 Working Days (withdrawn)
+ 
+-> **WITHDRAWN 2026-10-22 (D-18).** This plan priced work that turned out to be one
+-> afternoon each. The executed plan is `docs/05_PLAN_5_DAYS.md`. This file is kept
+-> as history so the estimate error stays visible; it is not a commitment.
++> **WITHDRAWN 2026-10-22.** This plan priced work that turned out to be one afternoon each.
++> The executed plan is `plans/PLAN_5_DAYS.md`. This file is kept as history so the estimate
++> error stays visible; it is not a commitment.
+ 
+ | Field | Value |
+ |---|---|
+-| Document ID | BHR-RS-05 |
+-| Version | 2.0 |
+-| Status | Active |
++| Document ID | SW-SYS-08 |
++| Kind | System record (internal; not published) |
++| Version | 2.1 |
++| Status | Withdrawn; kept as history |
+ | Date | 2026-10-23 |
+ | Basis | Decision D-8: the 90-day plan is withdrawn; the required work is definition and packaging |
+ | Capacity assumption | 10 to 15 hours per week |
+@@ -26,9 +27,9 @@ be relaxed.
+ 
+ | Item | Reference |
+ |---|---|
+-| Capability audit complete | BHR-RS-00 |
+-| Evidence register complete for available sources | BHR-RS-03 |
+-| Asset inventory complete | BHR-RS-04 |
++| Capability audit complete | SW-SYS-02 |
++| Evidence register complete for available sources | SW-03 |
++| Asset inventory complete | SW-SYS-04 |
+ | Programme separated onto an isolated branch and worktree | Project overview, section 6 |
+ | Decisions D-1 to D-8 recorded | Project overview, section 3 |
+ 
+@@ -36,9 +37,9 @@ be relaxed.
+ 
+ | Phase | Days | Deliverable | Exit gate | Termination |
+ |---|---|---|---|---|
+-| P0 Definition and packaging | 1 to 5 | Specification frozen: six physical axes plus propagation, information, institutional and catalyst layers (BHR-RS-09), six damage patterns, sixteen unsafe control actions, eighteen gate codes, release schema, licensing split | B0: a third party predicts four of five sample verdicts | Two or more incorrect predictions indicate an ambiguous specification; rewrite before code |
++| P0 Definition and packaging | 1 to 5 | Specification frozen: six physical axes plus propagation, information, institutional and catalyst layers (SW-09), six damage patterns, sixteen unsafe control actions, eighteen gate codes, release schema, licensing split | B0: a third party predicts four of five sample verdicts | Two or more incorrect predictions indicate an ambiguous specification; rewrite before code |
+ | P1 Gate v0 | 6 to 15 | Lane dataset, deterministic checker, twenty gold cases | B1 loads and validates; B2 twenty of twenty agree with an identical hash across three runs | Open data insufficient: use a documented synthetic set. Unstable hash: stop |
+-| P2 Event-agnostic stress | 16 to 28 | Event generator over all layers, remedy menu, cascade with reproduction number, comparison against a greedy baseline | B3 unseen vectors execute with no event-name branch; B4 measured on the pre-registered rule (BHR-RS-08): 15 percentage points fewer unsafe control actions or 10 per cent fewer excursion minutes, paired, 95 per cent CI, with a block-rate guard | Event-name branch required: return to P0. No separation: release as plan auditor |
++| P2 Event-agnostic stress | 16 to 28 | Event generator over all layers, remedy menu, cascade with reproduction number, comparison against a greedy baseline | B3 unseen vectors execute with no event-name branch; B4 measured on the pre-registered rule (SW-08): 15 percentage points fewer unsafe control actions or 10 per cent fewer excursion minutes, paired, 95 per cent CI, with a block-rate guard | Event-name branch required: return to P0. No separation: release as plan auditor |
+ | P3 Release | 29 to 35 | Specification under Apache-2.0, reference implementation under the Business Source Licence, five-minute demonstration, one published article with the measured numbers | B5 one external reproduction of the same hash | A release that cannot be reproduced is not a release |
+ 
+ ## 4. Phase P0 detail
+@@ -67,7 +68,7 @@ and user interface work.
+ 6. Production source code is not modified from this branch without an approved proposal and
+    a corresponding test.
+ 7. Arithmetic in the gate and the planners is integer micro-units and integer minutes
+-   (BHR-RS-10). Floating point is confined to transport and reporting.
++   (SW-10). Floating point is confined to transport and reporting.
+ 
+ 
+ ## 6. Definition of completion
+diff --git a/research/docs/05_PLAN_5_DAYS.md b/research/_system/plans/PLAN_5_DAYS.md
+similarity index 86%
+rename from research/docs/05_PLAN_5_DAYS.md
+rename to research/_system/plans/PLAN_5_DAYS.md
+index 91cb95be..c3201755 100644
+--- a/research/docs/05_PLAN_5_DAYS.md
++++ b/research/_system/plans/PLAN_5_DAYS.md
+@@ -1,10 +1,11 @@
+-# BHR-RS-05 - Delivery plan (5 to 7 days)
++# SW-SYS-07 - Delivery plan (5 to 7 days), as executed
+ 
+ | Field | Value |
+ |---|---|
+-| Document ID | BHR-RS-05 |
+-| Version | 3.0 |
+-| Status | Active; supersedes `05_PLAN_35_DAYS.md` |
++| Document ID | SW-SYS-07 |
++| Kind | System record (internal; not published) |
++| Version | 3.1 |
++| Status | Closed; the plan was executed |
+ | Date | 2026-10-22 |
+ | Licence | Apache-2.0 |
+ 
+@@ -25,22 +26,22 @@ from a clean checkout. No day is done because it looks done.
+ 
+ ## Day 2 - Event-agnostic gate
+ 
+-- `research/src/bhr_rs/model.py` - immutable records, canonical hash.
+-- `research/src/bhr_rs/gate.py` - 20 codes, four as data tables.
++- `research/src/switchyard/model.py` - immutable records, canonical hash.
++- `research/src/switchyard/gate.py` - 20 codes, four as data tables.
+ - `docs/06_EVENT_AGNOSTIC_GATE.md` v1.0 (normative). No named event appears in
+   any decision path; the word "cold chain" appears only in prose.
+ 
+ ## Day 3 - Planners and the composition rule
+ 
+-- `research/src/bhr_rs/planners.py` - three planners: current practice,
++- `research/src/switchyard/planners.py` - three planners: current practice,
+   generation one, generation two.
+ - Composition: the baseline is always a candidate, so the shipped plan can never
+   be worse than practice under the gate's own ordering.
+-- `research/src/bhr_rs/scenarios.py` - seeded generator, six event axes.
++- `research/src/switchyard/scenarios.py` - seeded generator, six event axes.
+ 
+ ## Day 4 - Physical layers
+ 
+-- `research/src/bhr_rs/physics.py` - queueing, traffic flow, heat transfer,
++- `research/src/switchyard/physics.py` - queueing, traffic flow, heat transfer,
+   reaction kinetics, reliability, epidemic final size, expected shortfall.
+ - `research/config/physics.json` - every constant, as data.
+ - `docs/11_PHYSICS_LAYERS.md` - what was adopted, what was rejected, and why.
+@@ -66,7 +67,7 @@ from a clean checkout. No day is done because it looks done.
+ - `research/scripts/stress_parity.py --repeats 200` -> `evidence/STRESS.md`
+ - Licensing: `docs/07_LICENSING.md`, change date set to two years.
+ - Public surface carries the product name Switchyard (D-21, 2026-10-23) after a
+-  prior-art check; the registry id `BHR-RS` stays as the document and gate
++  prior-art check; the registry id `SW` stays as the document and gate
+   identifier, so no evidence file was renamed.
+ 
+ ## Repeatable test log
+@@ -78,7 +79,7 @@ evidence files, not from memory.
+ |---|---|---|
+ | `py -3.13 -m pytest tests -q` | green | test summary in the commit |
+ | `py -3.13 -X utf8 research/scripts/export_instances.py --scenarios 300` | 300 instances written | `evidence/instances.txt` |
+-| `bhr-core --instances evidence/instances.txt --threads 8 --repeat 200` | 0 mismatches | `evidence/STRESS.json` |
++| `switchyard-core --instances evidence/instances.txt --threads 8 --repeat 200` | 0 mismatches | `evidence/STRESS.json` |
+ | `py -3.13 -X utf8 research/scripts/stress_parity.py --repeats 200` | PASS | `evidence/STRESS.md` |
+ | `py -3.13 -X utf8 research/scripts/run_b4.py --scenarios 300` | SEPARATES | `evidence/B4_MEASUREMENT_V2.md` |
+ | `... run_b4.py --scenarios 300 --weather --tag WX` | SEPARATES, 0.0223/0.0126/0.0112 p(any) | `evidence/B4_MEASUREMENT_V2_WX.md` |
+diff --git a/research/_system/programme.json b/research/_system/programme.json
+new file mode 100644
+index 00000000..cf2a70a1
+--- /dev/null
++++ b/research/_system/programme.json
+@@ -0,0 +1,740 @@
++{
++ "_doc": "SW-REGISTRY - Research programme registry (system record, not published). Data only, no logic. Version 2.3, 2026-10-23. Moved here from config/research_projects.json when repository documents and system records were separated.",
++ "product_name": {
++  "name": "Switchyard",
++  "decided": "2026-10-23",
++  "decision": 3,
++  "scope": "Product name only. Document and gate identifiers stay SW-xx, so evidence filenames, thresholds and imports are unchanged.",
++  "prior_art": [
++   {
++    "what": "switchyard on the Python Package Index",
++    "detail": "Version 1.0.1, an educational networking framework by Joel Sommers, GPLv3",
++    "consequence": "Different field, so the product name is free; a Python distribution would need a suffix"
++   },
++   {
++    "what": "Switchyard, an enterprise integration product",
++    "detail": "Retired; no current product in this field under the name",
++    "consequence": "No confusion with logistics planning"
++   }
++  ]
++ },
++ "_rules": {
++  "read_only_paths": [
++   "projects/**",
++   "knowledge_base/**",
++   "docs/spine_library/**"
++  ],
++  "write_scope": "research/**",
++  "no_llm_for_small_tasks": true,
++  "fail_closed": "A failed gate stops the workstream. Thresholds MUST NOT be lowered to obtain a pass.",
++  "evidence_required": "Every quantitative claim cites a source with a date, a path:line location, or a reproducible command.",
++  "language": "en",
++  "style": {
++   "decorative_markers": "prohibited",
++   "informal_register": "prohibited",
++   "enforcement": "tests/test_research_project_s.py"
++  }
++ },
++ "created": "2026-10-23",
++ "version": "2.3",
++ "purpose": "Determine whether the optimisation and verification machinery of the host system transfers to industrial planning problems, and package a verifiable public artefact.",
++ "decisions": [
++  {
++   "id": "D-1",
++   "decision": "No external investment and no return-on-investment defence.",
++   "date": "2026-10-23"
++  },
++  {
++   "id": "D-2",
++   "decision": "Business Source Licence 1.1 with an Additional Use Grant, paired with a specification under Apache-2.0.",
++   "date": "2026-10-23"
++  },
++  {
++   "id": "D-3",
++   "decision": "Elaborate mathematical machinery is permitted in this programme and prohibited on the host production tree. Re-import requires evidence and a proposal.",
++   "date": "2026-10-23"
++  },
++  {
++   "id": "D-4",
++   "decision": "Logistics is the active workstream. Electronic design automation is suspended and unstaffed.",
++   "date": "2026-10-23"
++  },
++  {
++   "id": "D-5",
++   "decision": "The event model is event-agnostic. Named events MUST NOT appear in decision logic.",
++   "date": "2026-10-23"
++  },
++  {
++   "id": "D-6",
++   "decision": "Data acquisition budget is zero. Only openly licensed data is used.",
++   "date": "2026-10-23"
++  },
++  {
++   "id": "D-7",
++   "decision": "Primary objective is professional reputation and a verifiable public artefact. Revenue is a secondary consequence.",
++   "date": "2026-10-23"
++  },
++  {
++   "id": "D-8",
++   "decision": "Schedule is 35 working days. The 90-day plan is withdrawn. Superseded by D-18, which re-baselines the schedule to five to seven working days.",
++   "date": "2026-10-23",
++   "superseded_by": "D-18"
++  },
++  {
++   "id": "D-9",
++   "decision": "The event model is layered, not six-dimensional: six physical axes plus propagation (4), information (2), institutions (3) and four catalyst domains with twelve indices.",
++   "date": "2026-10-23",
++   "reference": "SW-09"
++  },
++  {
++   "id": "D-10",
++   "decision": "Cascades are modelled as a branching process with k_eff = fanout x susceptibility x (1 + catalyst pressure), plus a percolation check on the largest connected component. Limits are stated: synthetic calibration only.",
++   "date": "2026-10-23",
++   "reference": "SW-09 section 3 and section 7"
++  },
++  {
++   "id": "D-11",
++   "decision": "Four structural catalysts are first-class: geoeconomic fragmentation, workforce volatility, credit and liquidity, cyber insecurity. Each adds gate codes rather than new narrative vocabulary.",
++   "date": "2026-10-23",
++   "reference": "SW-09 section 6"
++  },
++  {
++   "id": "D-12",
++   "decision": "All gate and planner decisions use integer micro-units and integer minutes, reusing ADR-001 of the host engine. Floating point is confined to transport and reporting.",
++   "date": "2026-10-23",
++   "reference": "SW-10"
++  },
++  {
++   "id": "D-13",
++   "decision": "Two implementations exist: the Python reference and a dependency-free Rust core. Conformance is proved by replaying exported instances; 300 of 300 agree. Release hashes are produced on the integer CPU path, never in a shader.",
++   "date": "2026-10-23",
++   "reference": "SW-10 sections 4 to 6"
++  },
++  {
++   "id": "D-14",
++   "decision": "Gate B4 is decided by a paired bootstrap with a zero guard band and a pre-registered ladder that raises coupling without lowering the bar. Both limbs must be reported even when only one is met.",
++   "date": "2026-10-23",
++   "reference": "SW-08"
++  },
++  {
++   "id": "D-15",
++   "decision": "Licence change date is two years from first public release. Two years is shorter than the BUSL-1.1 maximum of four, so it is compliant and reaches open source sooner. This supersedes the four-year answer for open decision 1.",
++   "date": "2026-10-22"
++  },
++  {
++   "id": "D-16",
++   "decision": "If gate B4 is non-separating, the artefact may be released as a plan auditor with reduced scope, provided SW-08 states the limitation in its first paragraph.",
++   "date": "2026-10-22"
++  },
++  {
++   "id": "D-17",
++   "decision": "No external domain reviewer is appointed. Limitations are recorded in SW-03, SW-11 and SW-12 instead of being hidden.",
++   "date": "2026-10-22"
++  },
++  {
++   "id": "D-18",
++   "decision": "The schedule is re-baselined to five to seven working days. The 35-day plan is withdrawn as unrepresentative of the work; this supersedes D-8.",
++   "date": "2026-10-22",
++   "supersedes": "D-8"
++  },
++  {
++   "id": "D-19",
++   "decision": "A physical layer is adopted only when it changes a decision, and its constants live in config/physics.json. Fields that do not change a decision stay in the survey, not in the code.",
++   "date": "2026-10-22"
++  },
++  {
++   "id": "D-20",
++   "decision": "The research tree is English and code only, with no CJK characters, and contains no if/elif dispatch: rules live in tables. Both rules are enforced by tests, not by review.",
++   "date": "2026-10-22"
++  },
++  {
++   "id": "D-21",
++   "decision": "The product name is Switchyard. Prior art was checked before adoption: the name is already used by an unrelated educational networking framework on the Python Package Index, so a Python distribution would need a suffix.",
++   "date": "2026-10-23",
++   "reference": "programme.json, product_name"
++  },
++  {
++   "id": "D-22",
++   "decision": "Ambient weather data is open reanalysis only: the free, keyless Open-Meteo archive API serving ERA5, frozen as a July 1991-2020 climatology in config/weather_regions.json. A live forecast ingest is out of scope until a consumer needs one.",
++   "date": "2026-10-23",
++   "reference": "SW-11"
++  }
++ ],
++ "goal": {
++  "primary": "reputation_portfolio",
++  "secondary": "optional_revenue",
++  "success_definition": "An independent party reproduces the same release hash on a machine without a graphics processor and without credentials, and explains the verdict within five minutes.",
++  "not_goal": [
++   "become an electronic design automation vendor",
++   "acquire commercial data",
++   "introduce elaborate machinery into the production pipeline"
++  ]
++ },
++ "licensing": {
++  "strategy": "Source-available reference implementation with a freely licensed specification.",
++  "posture": "Source is public; production use is free for individuals and small organisations; each release becomes open source after a published date. The software MUST NOT be described as open source while the Business Source Licence applies.",
++  "components": [
++   {
++    "name": "gate-spec",
++    "what": "Vocabulary, gate codes, unsafe control actions, dispatch release schema. Documents only.",
++    "license": "Apache-2.0",
++    "why": "A specification must be freely available to be cited and independently implemented."
++   },
++   {
++    "name": "gate-ref",
++    "what": "Checker, simulator, replay. Source code.",
++    "license": "BSL-1.1",
++    "additional_use_grant": {
++     "production_use_free_for": [
++      "individuals",
++      "research and teaching",
++      "non-profit organisations",
++      "companies with annual revenue below USD 5M and fewer than 100 employees"
++     ],
++     "excluded": [
++      "offering this software as a competing managed or hosted service"
++     ],
++     "everything_else": "commercial licence required"
++    },
++    "change_license": "Apache-2.0",
++    "change_date_years": 4,
++    "why": "The implementation is the only component with commercial value, and it becomes open source on a fixed calendar.",
++    "change_date_basis": "BUSL-1.1 converts on the Change Date or the fourth anniversary of first public distribution, whichever comes first; a later date is inert. Four years is the maximum, not a preference.",
++    "per_version_clock": "Each released version starts its own four-year clock, so the current version is always protected without amending the licence.",
++    "commitments": [
++     "No retroactive extension of a published Change Date",
++     "No restriction added to the Additional Use Grant for a published version"
++    ],
++    "no_conversion_fallback": "PolyForm Shield 1.0.0 if a version must never convert"
++   }
++  ],
++  "alternatives_considered": [
++   {
++    "name": "PolyForm Small Business 1.0.0",
++    "advantage": "Prepared legal text; free below 100 people and USD 1M revenue.",
++    "limitation": "Fixed threshold with no change date; never becomes open source.",
++    "role": "fallback"
++   },
++   {
++    "name": "PolyForm Shield",
++    "advantage": "Explicit non-compete wording.",
++    "limitation": "Reads as hostile to the intended audience.",
++    "role": "clause inside a commercial licence"
++   },
++   {
++    "name": "AGPL-3.0",
++    "advantage": "Strong copyleft for hosted services.",
++    "limitation": "Rejected by infrastructure buyers; incompatible with a free tier for small users.",
++    "role": "rejected"
++   }
++  ],
++  "threshold_policy": "Threshold values are data and are changed only in this file. Revenue and headcount are used because both are verifiable; fleet size is not.",
++  "clean_room_stance": {
++   "legal_fact": "Copyright protects expression, not idea or behaviour. An independent implementation written from the published specification does not infringe.",
++   "therefore": [
++    "publish the specification deliberately",
++    "sell conformance testing and certification",
++    "retain the operational advantage in data, scenario packs, and integration",
++    "price the commercial licence below the cost of an independent reimplementation",
++    "protect the name through trademark policy rather than the idea through licence terms"
++   ],
++   "patent": "The commercial licence carries a patent grant with a retaliation clause, used only for a genuinely novel mechanism."
++  },
++  "never": [
++   "publish customer data or purchased data",
++   "claim that a passing verdict establishes legal or regulatory safety",
++   "describe a Business Source Licence release as open source"
++  ]
++ },
++ "event_agnostic": {
++  "invariant": "The gate decides from state and constraints. Event names MUST NOT appear in decision logic.",
++  "axes": [
++   {
++    "id": "onset_rate",
++    "values": [
++     "instant",
++     "gradual"
++    ]
++   },
++   {
++    "id": "notice_min",
++    "values": [
++     "0",
++     "hours",
++     "days"
++    ]
++   },
++   {
++    "id": "duration",
++    "values": [
++     "hours",
++     "days",
++     "weeks",
++     "months"
++    ]
++   },
++   {
++    "id": "magnitude",
++    "unit": "fraction",
++    "fields": [
++     "capacity_loss",
++     "lead_time_inflation",
++     "cost_inflation"
++    ]
++   },
++   {
++    "id": "scope",
++    "values": [
++     "node",
++     "lane",
++     "region",
++     "global"
++    ]
++   },
++   {
++    "id": "reversibility",
++    "values": [
++     "recoverable",
++     "structural"
++    ]
++   }
++  ],
++  "damage_patterns": [
++   {
++    "id": "D1",
++    "name": "Excessive dwell",
++    "detect": "time at node above node 95th percentile"
++   },
++   {
++    "id": "D2",
++    "name": "Thermal drift",
++    "detect": "rate of change above available cooling capacity",
++    "validation": "hypothesis model"
++   },
++   {
++    "id": "D3",
++    "name": "Broken handoff",
++    "detect": "missing accountable party, document, or timestamp at a boundary"
++   },
++   {
++    "id": "D4",
++    "name": "Slack exhaustion",
++    "detect": "critical path slack at or below zero",
++    "mechanism": "critical path method"
++   },
++   {
++    "id": "D5",
++    "name": "Capacity collapse",
++    "detect": "maximum flow below demand",
++    "mechanism": "minimum cut"
++   },
++   {
++    "id": "D6",
++    "name": "Stale decision",
++    "detect": "decision input age above freshness limit"
++   }
++  ],
++  "unsafe_control_actions": [
++   {
++    "id": "UCA1",
++    "action": "release without verified pre-cooling"
++   },
++   {
++    "id": "UCA2",
++    "action": "release with slack below maximum handoff time"
++   },
++   {
++    "id": "UCA3",
++    "action": "accept a reroute that removes temperature monitoring"
++   },
++   {
++    "id": "UCA4",
++    "action": "consolidate two temperature classes in one container"
++   },
++   {
++    "id": "UCA5",
++    "action": "depart on data older than the freshness limit"
++   },
++   {
++    "id": "UCA6",
++    "action": "accept an excursion without documented disposition"
++   },
++   {
++    "id": "UCA7",
++    "action": "release when receiving door is unconfirmed"
++   },
++   {
++    "id": "UCA8",
++    "action": "use an unassessed backup node"
++   },
++   {
++    "id": "UCA9",
++    "action": "depend on a single mode with an open blocking condition"
++   },
++   {
++    "id": "UCA10",
++    "action": "accept a cost reduction without recomputing excursion"
++   },
++   {
++    "id": "UCA11",
++    "action": "release without a per-leg accountable party"
++   },
++   {
++    "id": "UCA12",
++    "action": "accept a plan requiring approval when notice is zero"
++   }
++  ],
++  "verdicts": [
++   "PASS",
++   "PASS_WITH_CONDITION",
++   "BLOCKED"
++  ],
++  "banned_in_logic": [
++   "comparison against an event name",
++   "port, canal, or country names as branch conditions"
++  ],
++  "named_events_allowed_only_in": [
++   "research/scenarios/*.json"
++  ]
++ },
++ "import_back_policy": {
++  "rule": "Any mechanism from this programme re-enters production only through three steps: a research proposal, owner approval, and an implementation with tests.",
++  "forbidden_direct_edit": [
++   "core/outline/**",
++   "core/production_orchestrator.py",
++   "scripts/spine_guard.py"
++  ],
++  "why": "Decision D-3: elaborate machinery degrades the production path.",
++  "evidence_required": "Measured comparison against the current implementation. An assertion that the new approach is preferable is not evidence."
++ },
++ "verdict_of_prior_claims": {
++  "confirmed": [
++   "edmonds_karp_min_cut",
++   "dag_topological_sort",
++   "critical_path_method",
++   "generic_graph_relabeling"
++  ],
++  "label_only": [
++   "cellular_sheaf_cohomology"
++  ],
++  "degenerate_or_mislabeled": [
++   "non_equilibrium_thermo_speed_limit",
++   "three_phase_transit_state_machine"
++  ],
++  "unsupported": [
++   "success_probability_85_and_75",
++   "this_is_an_eda_or_logistics_product"
++  ],
++  "b4_measurement": {
++   "status": "measured_partial",
++   "date": "2026-10-23",
++   "excursion_limb": "met at intensities 1.0, 1.5 and 2.0; CI lower bounds 25.0 to 27.1 percent",
++   "unsafe_action_limb": "not met; point estimate 15.3 to 16.1 pp, CI lower bounds 13.0 to 13.8",
++   "claim_allowed": "fewer excursion minutes with a positive lower bound",
++   "claim_forbidden": "15 percentage points fewer unsafe control actions",
++   "reference": "SW-08"
++  }
++ },
++ "tracks": [
++  {
++   "id": "B",
++   "name": "Time-and-Temperature Critical Plans: Event-Agnostic Compliance Gate",
++   "status": "active",
++   "summary": "Returns PASS, PASS_WITH_CONDITION, or BLOCKED with a replayable dispatch release, independent of any event name.",
++   "spec": "research/docs/06_EVENT_AGNOSTIC_GATE.md",
++   "plan": "research/docs/05_PLAN_35_DAYS.md",
++   "prior_claim_probability": 0.75,
++   "my_probability": {
++    "outsider_reproduces_same_hash_35d": [
++     0.8,
++     0.9
++    ],
++    "cited_or_used_by_3_externals_6mo": [
++     0.25,
++     0.4
++    ],
++    "paying_pilot_ever": [
++     0.15,
++     0.25
++    ],
++    "feeds_back_into_novel_pipeline": [
++     0.5,
++     0.6
++    ]
++   },
++   "phases": [
++    {
++     "id": "P0",
++     "days": "1-5",
++     "name": "Definition and packaging",
++     "out": "specification, twelve gate codes, twelve unsafe control actions, scenario schema"
++    },
++    {
++     "id": "P1",
++     "days": "6-15",
++     "name": "Gate v0, deterministic",
++     "out": "checker, dispatch release, replay hash"
++    },
++    {
++     "id": "P2",
++     "days": "16-28",
++     "name": "Event-agnostic stress",
++     "out": "six-axis event generator, remedy menu, comparison against greedy baseline"
++    },
++    {
++     "id": "P3",
++     "days": "29-35",
++     "name": "Release",
++     "out": "specification under Apache-2.0, implementation under BSL, demonstration, article"
++    }
++   ],
++   "gates": [
++    {
++     "id": "B0",
++     "days": "1-5",
++     "deliverable": "specification from which a third party predicts verdicts",
++     "pass": ">=4 of 5 sample cases predicted correctly",
++     "kill": ">=2 incorrect predictions: specification ambiguous, revise before code"
++    },
++    {
++     "id": "B1",
++     "days": "6-12",
++     "deliverable": "lane dataset, >=50 nodes and >=150 lanes with temperature classes, open or documented synthetic",
++     "pass": "loads and validates; no event names in logic",
++     "kill": "open data insufficient: synthetic set with explicit assumptions"
++    },
++    {
++     "id": "B2",
++     "days": "13-15",
++     "deliverable": "gate v0 with twenty gold cases",
++     "pass": "20 of 20 agree; identical hash across three runs",
++     "kill": "unstable hash: stop"
++    },
++    {
++     "id": "B3",
++     "days": "16-24",
++     "deliverable": "six-axis event generator, damage patterns D1-D6, remedy menu",
++     "pass": "no event-name branches; unseen vectors execute",
++     "kill": "event-name branch required: structure incorrect, return to P0"
++    },
++    {
++     "id": "B4",
++     "days": "25-28",
++     "deliverable": "measurement against greedy baseline on held-out samples",
++     "pass": ">=15 percentage points fewer unsafe control actions or >=10 per cent fewer excursion minutes",
++     "kill": "no separation: release as plan auditor"
++    },
++    {
++     "id": "B5",
++     "days": "29-35",
++     "deliverable": "public release and five-minute demonstration",
++     "pass": "one external reproduction of the same hash",
++     "kill": null
++    }
++   ],
++   "constraints_removed": [
++    "no commercial data required",
++    "no dependence on a single crisis",
++    "no external investment"
++   ],
++   "risks": [
++    "thermal model unvalidated; label as hypothesis",
++    "compliance may be misread as regulatory certification"
++   ]
++  },
++  {
++   "id": "A",
++   "name": "Semiconductor Floorplanning and Routing",
++   "status": "paused_by_owner",
++   "paused_reason": "Decision D-4: logistics is the active workstream.",
++   "resume_condition": "Workstream B reaches gate B5, or decision D-4 is formally reversed.",
++   "detail": "research/_system/TRACK_A_EDA.md",
++   "prior_claim_probability": 0.85,
++   "my_probability": {
++    "become_eda_vendor": [
++     0.1,
++     0.15
++    ],
++    "benchmarked_open_artifact_6mo": [
++     0.5,
++     0.6
++    ]
++   },
++   "gates": [
++    {
++     "id": "A0",
++     "deliverable": "open toolchain and one benchmark execute on central processing units",
++     "pass": "baseline completes with log and hash",
++     "kill": "cannot install within two weeks: partitioner-only scope"
++    },
++    {
++     "id": "A4",
++     "deliverable": "public release and feedback",
++     "pass": ">=3 external issues",
++     "kill": "no interest: portfolio only"
++    }
++   ]
++  }
++ ],
++ "open_owner_decisions": [
++  {
++   "id": 1,
++   "question": "Business Source Licence change date: four years or two years?",
++   "options": [
++    "4y",
++    "2y",
++    "unspecified"
++   ],
++   "status": "resolved",
++   "resolution": "Two years, per D-15. Four years remains the legal maximum, not the chosen value.",
++   "resolved_date": "2026-10-22"
++  },
++  {
++   "id": 2,
++   "question": "May a non-separating result at gate B4 be released as a plan auditor?",
++   "options": [
++    "yes",
++    "specification only"
++   ],
++   "status": "resolved",
++   "resolution": "Yes, per D-16, with the limitation stated in SW-08. In this run the gate separates, so the fallback is unused.",
++   "resolved_date": "2026-10-22"
++  },
++  {
++   "id": 3,
++   "question": "What is the product name? The artefact is referred to by registry id SW until the owner decides.",
++   "options": [
++    "Switchyard"
++   ],
++   "status": "resolved",
++   "resolution": "Switchyard, chosen by the owner on 2026-10-23 and recorded here as the product name. The registry id SW-xx stays as the document and gate identifier, so no document has to be renumbered. Prior art checked the same day: the name is used by an unrelated educational networking framework published on the Python Package Index (switchyard 1.0.1, GPLv3) and by a retired integration product. Both are different fields, so the name is usable as a product name; it is NOT usable as a Python distribution name, which must carry a suffix (for example switchyard-logistics) if anything is ever published.",
++   "resolved_date": "2026-10-23"
++  }
++ ],
++ "resolved_owner_decisions": [
++  {
++   "id": 1,
++   "was": "approve installation of an electronic design automation toolchain?",
++   "answer": "not required; EDA suspended",
++   "resolved": "2026-10-23"
++  },
++  {
++   "id": 2,
++   "was": "data budget?",
++   "answer": "$0, open data only",
++   "resolved": "2026-10-23"
++  },
++  {
++   "id": 3,
++   "was": "workstream order?",
++   "answer": "logistics first; EDA suspended",
++   "resolved": "2026-10-23"
++  },
++  {
++   "id": 4,
++   "was": "primary objective?",
++   "answer": "reputation and portfolio; revenue secondary",
++   "resolved": "2026-10-23"
++  },
++  {
++   "id": 5,
++   "was": "documentation language and style?",
++   "answer": "professional English; decorative markers prohibited",
++   "resolved": "2026-10-23"
++  },
++  {
++   "id": 6,
++   "question": "Business Source Licence change date",
++   "answer": "Two years (D-15); four years is the legal maximum, not the chosen value",
++   "date": "2026-10-23",
++   "rationale": "Recorded here to match the decision log: the change date is two years from publication, and the licence text converts at that anniversary. The earlier entry in this file said four years, which contradicted D-15 and has been corrected."
++  },
++  {
++   "id": 7,
++   "question": "Which ambient weather data may the research programme use?",
++   "answer": "Free open reanalysis only: Open-Meteo archive API (ERA5), keyless, no account",
++   "date": "2026-10-23",
++   "rationale": "Keeps the data budget at zero as decided (D-02) and makes every number checkable by a reader. The profile table is a frozen July 1991-2020 climatology committed as research/config/weather_regions.json, with attribution inside the file because the licence is CC BY 4.0. A live forecast ingest, if ever wanted, is the same seam with a fresher snapshot."
++  }
++ ],
++ "market_evidence": [
++  {
++   "what": "Cold chain logistics market",
++   "size_2026": "USD 384.9B",
++   "size_2032": "USD 555.4B",
++   "cagr": "6.34 per cent",
++   "source": "Mordor Intelligence",
++   "retrieved_at": "2026-10-23"
++  },
++  {
++   "what": "Suez route recovery",
++   "fact": "approximately two thirds of Far East to Europe capacity returned to Suez",
++   "source": "The Loadstar",
++   "published": "2026-10-21",
++   "consequence": "a product premised on a permanent closure is unsound"
++  },
++  {
++   "what": "Electronic design automation market (suspended workstream)",
++   "size_2026": "USD 20.78B",
++   "size_2031": "USD 30.67B",
++   "cagr": "8.1 per cent",
++   "source": "Mordor Intelligence",
++   "retrieved_at": "2026-10-23"
++  },
++  {
++   "what": "Incumbent partnership (suspended workstream)",
++   "fact": "OpenAI and Synopsys announced a joint model that operates electronic design automation tools",
++   "source": "Tom's Hardware",
++   "published": "2026-10-06"
++  }
++ ],
++ "forbidden_claims": [
++  {
++   "phrase": "15 pp fewer unsafe control actions",
++   "why": "The phrase asserts a specific comparator and rounding. The measured point estimate is larger, but the comparison basis and the rounding differ, so the phrase overstates what the report supports."
++  }
++ ],
++ "future_projects": {
++  "_doc": "Ideas recorded for later. None is started, and no name here is a decision.",
++  "recorded": "2026-10-23",
++  "family": "Switchyard is the first of four planned projects. The other three and the mass-market check are in _system/FUTURE_PROJECTS.md.",
++  "separation": {
++   "status": "not_started",
++   "task": "Move research/ out of the host tree into its own repository with its own licence, so nothing in it depends on the host system."
++  },
++  "dedupe": {
++   "status": "not_started",
++   "task": "Delete files under research/ that duplicate the host tree; the host copy is the one that stays."
++  },
++  "candidates": [
++   {
++    "id": "flow-core",
++    "status": "not_started",
++    "subject": "Graph and causal invariants: cycle and paradox detection, max-flow min-cut bottleneck, critical path with slack.",
++    "exists_today": "Only max-flow with a min-cut certificate (src/switchyard/graph.py, 168 lines). Cycle detection and critical path are not written.",
++    "name_pypi": "free",
++    "name_crates": "taken",
++    "note": "The crates.io name is taken, so a Rust crate needs a suffix."
++   },
++   {
++    "id": "exact-sim",
++    "status": "not_started",
++    "subject": "Bit-exact fixed-point state machine with rule tables and replay hashes.",
++    "exists_today": "Substantial: integer micro-units, a seeded PRNG with stream splitting, canonical JSON and content hashing, plus a dependency-free Rust replay core.",
++    "name_pypi": "free",
++    "name_crates": "free",
++    "note": "Closest to shippable of the three."
++   },
++   {
++    "id": "tda-lite",
++    "status": "not_started",
++    "subject": "Betti-1 cycle detection over Vietoris-Rips complexes for anomaly detection.",
++    "exists_today": "Nothing. No simplicial, homology, or persistence code exists in the tree.",
++    "name_pypi": "free",
++    "name_crates": "free",
++    "note": "Greenfield, largest effort, smallest audience."
++   }
++  ],
++  "mass_market_note": "The three candidates address niche but high-stakes pain. The pain that most developers report is different: review load and low-quality generated code, slow pipelines, unbounded technical debt, and cloud or token cost. See _system/FUTURE_PROJECTS.md section 4."
++ }
++}
+diff --git a/research/config/physics.json b/research/config/physics.json
+index 18972b45..f2c7bad0 100644
+--- a/research/config/physics.json
++++ b/research/config/physics.json
+@@ -1,5 +1,5 @@
+ {
+-  "_comment": "Physical layer constants for BHR-RS-11. Data, not code (BHR-RS-05 working rule 2). Every number here is a stated programme assumption for a synthetic network; none is an empirical estimate for a named corridor or product. See docs/11_PHYSICS_LAYERS.md section 8.",
++  "_comment": "Physical layer constants for SW-11. Data, not code (README section 3, item 7). Every number here is a stated programme assumption for a synthetic network; none is an empirical estimate for a named corridor or product. See docs/11_PHYSICS_LAYERS.md section 8.",
+   "version": "1.0",
+   "queue": {
+     "_model": "Kingman / Allen-Cunneen approximation for GI/G/c. Delay factor is a table so the decision path never evaluates a power or an exponential.",
+diff --git a/research/config/research_projects.json b/research/config/research_projects.json
+deleted file mode 100644
+index 8a11af39..00000000
+--- a/research/config/research_projects.json
++++ /dev/null
+@@ -1,677 +0,0 @@
+-{
+-  "_doc": "BHR-RS-REGISTRY - Research programme registry. Data only, no logic. Version 2.1, 2026-10-23.",
+-  "product_name": {
+-    "name": "Switchyard",
+-    "decided": "2026-10-23",
+-    "decision": 3,
+-    "scope": "Product name only. Document and gate identifiers stay BHR-RS-xx, so evidence filenames, thresholds and imports are unchanged.",
+-    "prior_art": [
+-      {
+-        "what": "switchyard on the Python Package Index",
+-        "detail": "Version 1.0.1, an educational networking framework by Joel Sommers, GPLv3",
+-        "consequence": "Different field, so the product name is free; a Python distribution would need a suffix"
+-      },
+-      {
+-        "what": "Switchyard, an enterprise integration product",
+-        "detail": "Retired; no current product in this field under the name",
+-        "consequence": "No confusion with logistics planning"
+-      }
+-    ]
+-  },
+-  "_rules": {
+-    "read_only_paths": [
+-      "projects/**",
+-      "knowledge_base/**",
+-      "docs/spine_library/**"
+-    ],
+-    "write_scope": "research/**",
+-    "no_llm_for_small_tasks": true,
+-    "fail_closed": "A failed gate stops the workstream. Thresholds MUST NOT be lowered to obtain a pass.",
+-    "evidence_required": "Every quantitative claim cites a source with a date, a path:line location, or a reproducible command.",
+-    "language": "en",
+-    "style": {
+-      "decorative_markers": "prohibited",
+-      "informal_register": "prohibited",
+-      "enforcement": "tests/test_research_project_s.py"
+-    }
+-  },
+-  "created": "2026-10-23",
+-  "version": "2.2",
+-  "purpose": "Determine whether the optimisation and verification machinery of the host system transfers to industrial planning problems, and package a verifiable public artefact.",
+-  "decisions": [
+-    {
+-      "id": "D-1",
+-      "decision": "No external investment and no return-on-investment defence.",
+-      "date": "2026-10-23"
+-    },
+-    {
+-      "id": "D-2",
+-      "decision": "Business Source Licence 1.1 with an Additional Use Grant, paired with a specification under Apache-2.0.",
+-      "date": "2026-10-23"
+-    },
+-    {
+-      "id": "D-3",
+-      "decision": "Elaborate mathematical machinery is permitted in this programme and prohibited on the book production path. Re-import requires evidence and a proposal.",
+-      "date": "2026-10-23"
+-    },
+-    {
+-      "id": "D-4",
+-      "decision": "Logistics is the active workstream. Electronic design automation is suspended and unstaffed.",
+-      "date": "2026-10-23"
+-    },
+-    {
+-      "id": "D-5",
+-      "decision": "The event model is event-agnostic. Named events MUST NOT appear in decision logic.",
+-      "date": "2026-10-23"
+-    },
+-    {
+-      "id": "D-6",
+-      "decision": "Data acquisition budget is zero. Only openly licensed data is used.",
+-      "date": "2026-10-23"
+-    },
+-    {
+-      "id": "D-7",
+-      "decision": "Primary objective is professional reputation and a verifiable public artefact. Revenue is a secondary consequence.",
+-      "date": "2026-10-23"
+-    },
+-    {
+-      "id": "D-8",
+-      "decision": "Schedule is 35 working days. The 90-day plan is withdrawn.",
+-      "date": "2026-10-23"
+-    },
+-    {
+-      "id": "D-9",
+-      "decision": "The event model is layered, not six-dimensional: six physical axes plus propagation (4), information (2), institutions (3) and four catalyst domains with twelve indices.",
+-      "date": "2026-10-23",
+-      "reference": "BHR-RS-09"
+-    },
+-    {
+-      "id": "D-10",
+-      "decision": "Cascades are modelled as a branching process with k_eff = fanout x susceptibility x (1 + catalyst pressure), plus a percolation check on the largest connected component. Limits are stated: synthetic calibration only.",
+-      "date": "2026-10-23",
+-      "reference": "BHR-RS-09 section 3 and section 7"
+-    },
+-    {
+-      "id": "D-11",
+-      "decision": "Four structural catalysts are first-class: geoeconomic fragmentation, workforce volatility, credit and liquidity, cyber insecurity. Each adds gate codes rather than new narrative vocabulary.",
+-      "date": "2026-10-23",
+-      "reference": "BHR-RS-09 section 6"
+-    },
+-    {
+-      "id": "D-12",
+-      "decision": "All gate and planner decisions use integer micro-units and integer minutes, reusing ADR-001 of the studio engine. Floating point is confined to transport and reporting.",
+-      "date": "2026-10-23",
+-      "reference": "BHR-RS-10"
+-    },
+-    {
+-      "id": "D-13",
+-      "decision": "Two implementations exist: the Python reference and a dependency-free Rust core. Conformance is proved by replaying exported instances; 300 of 300 agree. Release hashes are produced on the integer CPU path, never in a shader.",
+-      "date": "2026-10-23",
+-      "reference": "BHR-RS-10 sections 4 to 6"
+-    },
+-    {
+-      "id": "D-14",
+-      "decision": "Gate B4 is decided by a paired bootstrap with a zero guard band and a pre-registered ladder that raises coupling without lowering the bar. Both limbs must be reported even when only one is met.",
+-      "date": "2026-10-23",
+-      "reference": "BHR-RS-08"
+-    },
+-    {
+-      "id": "D-15",
+-      "decision": "Licence change date is two years from first public release. Two years is shorter than the BUSL-1.1 maximum of four, so it is compliant and reaches open source sooner. This supersedes the four-year answer for open decision 1.",
+-      "date": "2026-10-22"
+-    },
+-    {
+-      "id": "D-16",
+-      "decision": "If gate B4 is non-separating, the artefact may be released as a plan auditor with reduced scope, provided BHR-RS-08 states the limitation in its first paragraph.",
+-      "date": "2026-10-22"
+-    },
+-    {
+-      "id": "D-17",
+-      "decision": "No external domain reviewer is appointed. Limitations are recorded in BHR-RS-03, BHR-RS-11 and BHR-RS-12 instead of being hidden.",
+-      "date": "2026-10-22"
+-    },
+-    {
+-      "id": "D-18",
+-      "decision": "The schedule is re-baselined to five to seven working days. The 35-day plan is withdrawn as unrepresentative of the work; this supersedes D-8.",
+-      "date": "2026-10-22"
+-    },
+-    {
+-      "id": "D-19",
+-      "decision": "A physical layer is adopted only when it changes a decision, and its constants live in config/physics.json. Fields that do not change a decision stay in the survey, not in the code.",
+-      "date": "2026-10-22"
+-    },
+-    {
+-      "id": "D-20",
+-      "decision": "The research tree is English and code only, with no CJK characters, and contains no if/elif dispatch: rules live in tables. Both rules are enforced by tests, not by review.",
+-      "date": "2026-10-22"
+-    }
+-  ],
+-  "goal": {
+-    "primary": "reputation_portfolio",
+-    "secondary": "optional_revenue",
+-    "success_definition": "An independent party reproduces the same release hash on a machine without a graphics processor and without credentials, and explains the verdict within five minutes.",
+-    "not_goal": [
+-      "become an electronic design automation vendor",
+-      "acquire commercial data",
+-      "introduce elaborate machinery into the production pipeline"
+-    ]
+-  },
+-  "licensing": {
+-    "strategy": "Source-available reference implementation with a freely licensed specification.",
+-    "posture": "Source is public; production use is free for individuals and small organisations; each release becomes open source after a published date. The software MUST NOT be described as open source while the Business Source Licence applies.",
+-    "components": [
+-      {
+-        "name": "gate-spec",
+-        "what": "Vocabulary, gate codes, unsafe control actions, dispatch release schema. Documents only.",
+-        "license": "Apache-2.0",
+-        "why": "A specification must be freely available to be cited and independently implemented."
+-      },
+-      {
+-        "name": "gate-ref",
+-        "what": "Checker, simulator, replay. Source code.",
+-        "license": "BSL-1.1",
+-        "additional_use_grant": {
+-          "production_use_free_for": [
+-            "individuals",
+-            "research and teaching",
+-            "non-profit organisations",
+-            "companies with annual revenue below USD 5M and fewer than 100 employees"
+-          ],
+-          "excluded": [
+-            "offering this software as a competing managed or hosted service"
+-          ],
+-          "everything_else": "commercial licence required"
+-        },
+-        "change_license": "Apache-2.0",
+-        "change_date_years": 4,
+-        "why": "The implementation is the only component with commercial value, and it becomes open source on a fixed calendar.",
+-        "change_date_basis": "BUSL-1.1 converts on the Change Date or the fourth anniversary of first public distribution, whichever comes first; a later date is inert. Four years is the maximum, not a preference.",
+-        "per_version_clock": "Each released version starts its own four-year clock, so the current version is always protected without amending the licence.",
+-        "commitments": [
+-          "No retroactive extension of a published Change Date",
+-          "No restriction added to the Additional Use Grant for a published version"
+-        ],
+-        "no_conversion_fallback": "PolyForm Shield 1.0.0 if a version must never convert"
+-      }
+-    ],
+-    "alternatives_considered": [
+-      {
+-        "name": "PolyForm Small Business 1.0.0",
+-        "advantage": "Prepared legal text; free below 100 people and USD 1M revenue.",
+-        "limitation": "Fixed threshold with no change date; never becomes open source.",
+-        "role": "fallback"
+-      },
+-      {
+-        "name": "PolyForm Shield",
+-        "advantage": "Explicit non-compete wording.",
+-        "limitation": "Reads as hostile to the intended audience.",
+-        "role": "clause inside a commercial licence"
+-      },
+-      {
+-        "name": "AGPL-3.0",
+-        "advantage": "Strong copyleft for hosted services.",
+-        "limitation": "Rejected by infrastructure buyers; incompatible with a free tier for small users.",
+-        "role": "rejected"
+-      }
+-    ],
+-    "threshold_policy": "Threshold values are data and are changed only in this file. Revenue and headcount are used because both are verifiable; fleet size is not.",
+-    "clean_room_stance": {
+-      "legal_fact": "Copyright protects expression, not idea or behaviour. An independent implementation written from the published specification does not infringe.",
+-      "therefore": [
+-        "publish the specification deliberately",
+-        "sell conformance testing and certification",
+-        "retain the operational advantage in data, scenario packs, and integration",
+-        "price the commercial licence below the cost of an independent reimplementation",
+-        "protect the name through trademark policy rather than the idea through licence terms"
+-      ],
+-      "patent": "The commercial licence carries a patent grant with a retaliation clause, used only for a genuinely novel mechanism."
+-    },
+-    "never": [
+-      "publish customer data or purchased data",
+-      "claim that a passing verdict establishes legal or regulatory safety",
+-      "describe a Business Source Licence release as open source"
+-    ]
+-  },
+-  "event_agnostic": {
+-    "invariant": "The gate decides from state and constraints. Event names MUST NOT appear in decision logic.",
+-    "axes": [
+-      {
+-        "id": "onset_rate",
+-        "values": [
+-          "instant",
+-          "gradual"
+-        ]
+-      },
+-      {
+-        "id": "notice_min",
+-        "values": [
+-          "0",
+-          "hours",
+-          "days"
+-        ]
+-      },
+-      {
+-        "id": "duration",
+-        "values": [
+-          "hours",
+-          "days",
+-          "weeks",
+-          "months"
+-        ]
+-      },
+-      {
+-        "id": "magnitude",
+-        "unit": "fraction",
+-        "fields": [
+-          "capacity_loss",
+-          "lead_time_inflation",
+-          "cost_inflation"
+-        ]
+-      },
+-      {
+-        "id": "scope",
+-        "values": [
+-          "node",
+-          "lane",
+-          "region",
+-          "global"
+-        ]
+-      },
+-      {
+-        "id": "reversibility",
+-        "values": [
+-          "recoverable",
+-          "structural"
+-        ]
+-      }
+-    ],
+-    "damage_patterns": [
+-      {
+-        "id": "D1",
+-        "name": "Excessive dwell",
+-        "detect": "time at node above node 95th percentile"
+-      },
+-      {
+-        "id": "D2",
+-        "name": "Thermal drift",
+-        "detect": "rate of change above available cooling capacity",
+-        "validation": "hypothesis model"
+-      },
+-      {
+-        "id": "D3",
+-        "name": "Broken handoff",
+-        "detect": "missing accountable party, document, or timestamp at a boundary"
+-      },
+-      {
+-        "id": "D4",
+-        "name": "Slack exhaustion",
+-        "detect": "critical path slack at or below zero",
+-        "mechanism": "critical path method"
+-      },
+-      {
+-        "id": "D5",
+-        "name": "Capacity collapse",
+-        "detect": "maximum flow below demand",
+-        "mechanism": "minimum cut"
+-      },
+-      {
+-        "id": "D6",
+-        "name": "Stale decision",
+-        "detect": "decision input age above freshness limit"
+-      }
+-    ],
+-    "unsafe_control_actions": [
+-      {
+-        "id": "UCA1",
+-        "action": "release without verified pre-cooling"
+-      },
+-      {
+-        "id": "UCA2",
+-        "action": "release with slack below maximum handoff time"
+-      },
+-      {
+-        "id": "UCA3",
+-        "action": "accept a reroute that removes temperature monitoring"
+-      },
+-      {
+-        "id": "UCA4",
+-        "action": "consolidate two temperature classes in one container"
+-      },
+-      {
+-        "id": "UCA5",
+-        "action": "depart on data older than the freshness limit"
+-      },
+-      {
+-        "id": "UCA6",
+-        "action": "accept an excursion without documented disposition"
+-      },
+-      {
+-        "id": "UCA7",
+-        "action": "release when receiving door is unconfirmed"
+-      },
+-      {
+-        "id": "UCA8",
+-        "action": "use an unassessed backup node"
+-      },
+-      {
+-        "id": "UCA9",
+-        "action": "depend on a single mode with an open blocking condition"
+-      },
+-      {
+-        "id": "UCA10",
+-        "action": "accept a cost reduction without recomputing excursion"
+-      },
+-      {
+-        "id": "UCA11",
+-        "action": "release without a per-leg accountable party"
+-      },
+-      {
+-        "id": "UCA12",
+-        "action": "accept a plan requiring approval when notice is zero"
+-      }
+-    ],
+-    "verdicts": [
+-      "PASS",
+-      "PASS_WITH_CONDITION",
+-      "BLOCKED"
+-    ],
+-    "banned_in_logic": [
+-      "comparison against an event name",
+-      "port, canal, or country names as branch conditions"
+-    ],
+-    "named_events_allowed_only_in": [
+-      "research/scenarios/*.json"
+-    ]
+-  },
+-  "import_back_policy": {
+-    "rule": "Any mechanism from this programme re-enters production only through three steps: a research proposal, owner approval, and an implementation with tests.",
+-    "forbidden_direct_edit": [
+-      "core/outline/**",
+-      "core/production_orchestrator.py",
+-      "scripts/spine_guard.py"
+-    ],
+-    "why": "Decision D-3: elaborate machinery degrades the production path.",
+-    "evidence_required": "Measured comparison against the current implementation. An assertion that the new approach is preferable is not evidence."
+-  },
+-  "verdict_of_prior_claims": {
+-    "confirmed": [
+-      "edmonds_karp_min_cut",
+-      "dag_topological_sort",
+-      "critical_path_method",
+-      "generic_graph_relabeling"
+-    ],
+-    "label_only": [
+-      "cellular_sheaf_cohomology"
+-    ],
+-    "degenerate_or_mislabeled": [
+-      "non_equilibrium_thermo_speed_limit",
+-      "three_phase_transit_state_machine"
+-    ],
+-    "unsupported": [
+-      "success_probability_85_and_75",
+-      "this_is_an_eda_or_logistics_product"
+-    ],
+-    "b4_measurement": {
+-      "status": "measured_partial",
+-      "date": "2026-10-23",
+-      "excursion_limb": "met at intensities 1.0, 1.5 and 2.0; CI lower bounds 25.0 to 27.1 percent",
+-      "unsafe_action_limb": "not met; point estimate 15.3 to 16.1 pp, CI lower bounds 13.0 to 13.8",
+-      "claim_allowed": "fewer excursion minutes with a positive lower bound",
+-      "claim_forbidden": "15 percentage points fewer unsafe control actions",
+-      "reference": "BHR-RS-08"
+-    }
+-  },
+-  "tracks": [
+-    {
+-      "id": "B",
+-      "name": "Time-and-Temperature Critical Plans: Event-Agnostic Compliance Gate",
+-      "status": "active",
+-      "summary": "Returns PASS, PASS_WITH_CONDITION, or BLOCKED with a replayable dispatch release, independent of any event name.",
+-      "spec": "research/docs/06_EVENT_AGNOSTIC_GATE.md",
+-      "plan": "research/docs/05_PLAN_35_DAYS.md",
+-      "prior_claim_probability": 0.75,
+-      "my_probability": {
+-        "outsider_reproduces_same_hash_35d": [
+-          0.8,
+-          0.9
+-        ],
+-        "cited_or_used_by_3_externals_6mo": [
+-          0.25,
+-          0.4
+-        ],
+-        "paying_pilot_ever": [
+-          0.15,
+-          0.25
+-        ],
+-        "feeds_back_into_novel_pipeline": [
+-          0.5,
+-          0.6
+-        ]
+-      },
+-      "phases": [
+-        {
+-          "id": "P0",
+-          "days": "1-5",
+-          "name": "Definition and packaging",
+-          "out": "specification, twelve gate codes, twelve unsafe control actions, scenario schema"
+-        },
+-        {
+-          "id": "P1",
+-          "days": "6-15",
+-          "name": "Gate v0, deterministic",
+-          "out": "checker, dispatch release, replay hash"
+-        },
+-        {
+-          "id": "P2",
+-          "days": "16-28",
+-          "name": "Event-agnostic stress",
+-          "out": "six-axis event generator, remedy menu, comparison against greedy baseline"
+-        },
+-        {
+-          "id": "P3",
+-          "days": "29-35",
+-          "name": "Release",
+-          "out": "specification under Apache-2.0, implementation under BSL, demonstration, article"
+-        }
+-      ],
+-      "gates": [
+-        {
+-          "id": "B0",
+-          "days": "1-5",
+-          "deliverable": "specification from which a third party predicts verdicts",
+-          "pass": ">=4 of 5 sample cases predicted correctly",
+-          "kill": ">=2 incorrect predictions: specification ambiguous, revise before code"
+-        },
+-        {
+-          "id": "B1",
+-          "days": "6-12",
+-          "deliverable": "lane dataset, >=50 nodes and >=150 lanes with temperature classes, open or documented synthetic",
+-          "pass": "loads and validates; no event names in logic",
+-          "kill": "open data insufficient: synthetic set with explicit assumptions"
+-        },
+-        {
+-          "id": "B2",
+-          "days": "13-15",
+-          "deliverable": "gate v0 with twenty gold cases",
+-          "pass": "20 of 20 agree; identical hash across three runs",
+-          "kill": "unstable hash: stop"
+-        },
+-        {
+-          "id": "B3",
+-          "days": "16-24",
+-          "deliverable": "six-axis event generator, damage patterns D1-D6, remedy menu",
+-          "pass": "no event-name branches; unseen vectors execute",
+-          "kill": "event-name branch required: structure incorrect, return to P0"
+-        },
+-        {
+-          "id": "B4",
+-          "days": "25-28",
+-          "deliverable": "measurement against greedy baseline on held-out samples",
+-          "pass": ">=15 percentage points fewer unsafe control actions or >=10 per cent fewer excursion minutes",
+-          "kill": "no separation: release as plan auditor"
+-        },
+-        {
+-          "id": "B5",
+-          "days": "29-35",
+-          "deliverable": "public release and five-minute demonstration",
+-          "pass": "one external reproduction of the same hash",
+-          "kill": null
+-        }
+-      ],
+-      "constraints_removed": [
+-        "no commercial data required",
+-        "no dependence on a single crisis",
+-        "no external investment"
+-      ],
+-      "risks": [
+-        "thermal model unvalidated; label as hypothesis",
+-        "compliance may be misread as regulatory certification"
+-      ]
+-    },
+-    {
+-      "id": "A",
+-      "name": "Semiconductor Floorplanning and Routing",
+-      "status": "paused_by_owner",
+-      "paused_reason": "Decision D-4: logistics is the active workstream.",
+-      "resume_condition": "Workstream B reaches gate B5, or decision D-4 is formally reversed.",
+-      "detail": "research/docs/01_TRACK_A_SILICON.md",
+-      "prior_claim_probability": 0.85,
+-      "my_probability": {
+-        "become_eda_vendor": [
+-          0.1,
+-          0.15
+-        ],
+-        "benchmarked_open_artifact_6mo": [
+-          0.5,
+-          0.6
+-        ]
+-      },
+-      "gates": [
+-        {
+-          "id": "A0",
+-          "deliverable": "open toolchain and one benchmark execute on central processing units",
+-          "pass": "baseline completes with log and hash",
+-          "kill": "cannot install within two weeks: partitioner-only scope"
+-        },
+-        {
+-          "id": "A4",
+-          "deliverable": "public release and feedback",
+-          "pass": ">=3 external issues",
+-          "kill": "no interest: portfolio only"
+-        }
+-      ]
+-    }
+-  ],
+-  "open_owner_decisions": [
+-    {
+-      "id": 1,
+-      "question": "Business Source Licence change date: four years or two years?",
+-      "options": [
+-        "4y",
+-        "2y",
+-        "unspecified"
+-      ],
+-      "status": "resolved",
+-      "resolution": "Two years, per D-15. Four years remains the legal maximum, not the chosen value.",
+-      "resolved_date": "2026-10-22"
+-    },
+-    {
+-      "id": 2,
+-      "question": "May a non-separating result at gate B4 be released as a plan auditor?",
+-      "options": [
+-        "yes",
+-        "specification only"
+-      ],
+-      "status": "resolved",
+-      "resolution": "Yes, per D-16, with the limitation stated in BHR-RS-08. In this run the gate separates, so the fallback is unused.",
+-      "resolved_date": "2026-10-22"
+-    },
+-    {
+-      "id": 3,
+-      "question": "What is the product name? The artefact is referred to by registry id BHR-RS until the owner decides.",
+-      "options": [
+-        "Switchyard"
+-      ],
+-      "status": "resolved",
+-      "resolution": "Switchyard, chosen by the owner on 2026-10-23 and recorded here as the product name. The registry id BHR-RS-xx stays as the document and gate identifier, so no document has to be renumbered. Prior art checked the same day: the name is used by an unrelated educational networking framework published on the Python Package Index (switchyard 1.0.1, GPLv3) and by a retired integration product. Both are different fields, so the name is usable as a product name; it is NOT usable as a Python distribution name, which must carry a suffix (for example switchyard-logistics) if anything is ever published.",
+-      "resolved_date": "2026-10-23"
+-    }
+-  ],
+-  "resolved_owner_decisions": [
+-    {
+-      "id": 1,
+-      "was": "approve installation of an electronic design automation toolchain?",
+-      "answer": "not required; EDA suspended",
+-      "resolved": "2026-10-23"
+-    },
+-    {
+-      "id": 2,
+-      "was": "data budget?",
+-      "answer": "$0, open data only",
+-      "resolved": "2026-10-23"
+-    },
+-    {
+-      "id": 3,
+-      "was": "workstream order?",
+-      "answer": "logistics first; EDA suspended",
+-      "resolved": "2026-10-23"
+-    },
+-    {
+-      "id": 4,
+-      "was": "primary objective?",
+-      "answer": "reputation and portfolio; revenue secondary",
+-      "resolved": "2026-10-23"
+-    },
+-    {
+-      "id": 5,
+-      "was": "documentation language and style?",
+-      "answer": "professional English; decorative markers prohibited",
+-      "resolved": "2026-10-23"
+-    },
+-    {
+-      "id": 6,
+-      "question": "Business Source Licence change date",
+-      "answer": "Two years (D-15); four years is the legal maximum, not the chosen value",
+-      "date": "2026-10-23",
+-      "rationale": "Recorded here to match the decision log: the change date is two years from publication, and the licence text converts at that anniversary. The earlier entry in this file said four years, which contradicted D-15 and has been corrected."
+-    },
+-    {
+-      "id": 7,
+-      "question": "Which ambient weather data may the research programme use?",
+-      "answer": "Free open reanalysis only: Open-Meteo archive API (ERA5), keyless, no account",
+-      "date": "2026-10-23",
+-      "rationale": "Keeps the data budget at zero as decided (D-02) and makes every number checkable by a reader. The profile table is a frozen July 1991-2020 climatology committed as research/config/weather_regions.json, with attribution inside the file because the licence is CC BY 4.0. A live forecast ingest, if ever wanted, is the same seam with a fresher snapshot."
+-    }
+-  ],
+-  "market_evidence": [
+-    {
+-      "what": "Cold chain logistics market",
+-      "size_2026": "USD 384.9B",
+-      "size_2032": "USD 555.4B",
+-      "cagr": "6.34 per cent",
+-      "source": "Mordor Intelligence",
+-      "retrieved_at": "2026-10-23"
+-    },
+-    {
+-      "what": "Suez route recovery",
+-      "fact": "approximately two thirds of Far East to Europe capacity returned to Suez",
+-      "source": "The Loadstar",
+-      "published": "2026-10-21",
+-      "consequence": "a product premised on a permanent closure is unsound"
+-    },
+-    {
+-      "what": "Electronic design automation market (suspended workstream)",
+-      "size_2026": "USD 20.78B",
+-      "size_2031": "USD 30.67B",
+-      "cagr": "8.1 per cent",
+-      "source": "Mordor Intelligence",
+-      "retrieved_at": "2026-10-23"
+-    },
+-    {
+-      "what": "Incumbent partnership (suspended workstream)",
+-      "fact": "OpenAI and Synopsys announced a joint model that operates electronic design automation tools",
+-      "source": "Tom's Hardware",
+-      "published": "2026-10-06"
+-    }
+-  ]
+-}
+diff --git a/research/config/thresholds.json b/research/config/thresholds.json
+index fc879c22..7cea24b2 100644
+--- a/research/config/thresholds.json
++++ b/research/config/thresholds.json
+@@ -1,5 +1,5 @@
+ {
+-  "_comment": "Thresholds for the reference implementation. Data, not code (BHR-RS-05 working rule 2).",
++  "_comment": "Thresholds for the reference implementation. Data, not code (README section 3, item 7).",
+   "version": "1.1",
+   "freshness_limit_min": 240,
+   "handoff_max_min": 90,
+diff --git a/research/config/weather.json b/research/config/weather.json
+index 0d7987b1..1ac1fb28 100644
+--- a/research/config/weather.json
++++ b/research/config/weather.json
+@@ -1,5 +1,5 @@
+ {
+-  "_comment": "Weather formulas (BHR-RS-13). Integers only: tenths of a degree Celsius and per-mille, so no float enters the decision path. Region profiles live in weather_regions.json (measured July climatology from open reanalysis, plus the synthetic table older evidence used); every formula here is independent of which profile is selected.",
++  "_comment": "Weather formulas (SW-11). Integers only: tenths of a degree Celsius and per-mille, so no float enters the decision path. Region profiles live in weather_regions.json (measured July climatology from open reanalysis, plus the synthetic table older evidence used); every formula here is independent of which profile is selected.",
+   "version": "1.1",
+   "severity_divisor": 200000,
+   "severity_ceiling_c_tenths": 120,
+diff --git a/research/config/weather_regions.json b/research/config/weather_regions.json
+index cbe8efdf..d6123944 100644
+--- a/research/config/weather_regions.json
++++ b/research/config/weather_regions.json
+@@ -1,5 +1,5 @@
+ {
+-  "_comment": "Region profiles for the ambient layer (BHR-RS-13). Integers only. 'measured' is a frozen July climatology from open reanalysis; 'synthetic' is the invented table kept so older evidence replays. Rebuild with research/scripts/build_weather_regions.py.",
++  "_comment": "Region profiles for the ambient layer (SW-11). Integers only. 'measured' is a frozen July climatology from open reanalysis; 'synthetic' is the invented table kept so older evidence replays. Rebuild with research/scripts/build_weather_regions.py.",
+   "active": "measured",
+   "profiles": {
+     "measured": {
+diff --git a/research/docs/02_TRACK_B_COLDCHAIN.md b/research/docs/02_TRACK_B_COLDCHAIN.md
+index 606082be..b88297af 100644
+--- a/research/docs/02_TRACK_B_COLDCHAIN.md
++++ b/research/docs/02_TRACK_B_COLDCHAIN.md
+@@ -1,13 +1,14 @@
+-# BHR-RS-02  -  Workstream B: Time-and-Temperature Critical Plans
++# SW-02  -  Workstream B: Time-and-Temperature Critical Plans
+ 
+ | Field | Value |
+ |---|---|
+-| Document ID | BHR-RS-02 |
++| Document ID | SW-02 |
++| Kind | Repository document (published) |
+ | Version | 2.0 |
+ | Status | Active |
+ | Date | 2026-10-23 |
+ | Deliverable | Event-agnostic compliance gate with a replayable dispatch release |
+-| Normative reference | BHR-RS-06 |
++| Normative reference | SW-06 |
+ | Normative status | Informative |
+ 
+ ## 1. Problem statement
+@@ -38,7 +39,7 @@ Two errors are common in this domain:
+ Consequences for this programme:
+ 
+ 1. Any product whose value depends on a sustained canal closure is unsound. The gate must
+-   accept any disruption expressed as a parameter vector (decision D-5).
++   accept any disruption expressed as a parameter vector.
+ 2. The visibility layer is commercially crowded. The gap is recalculation under thermal
+    constraints.
+ 
+@@ -46,14 +47,14 @@ Consequences for this programme:
+ 
+ | Required capability | Present | Evidence |
+ |---|---|---|
+-| Graph model of nodes and legs | Yes | `core/outline/math_engine.py` |
+-| Validation of travel mechanics | Partial, surface level | `scripts/spine_guard.py:131-145` tests keyword membership only (BHR-RS-00, F-7) |
+-| Gates expressed as data | Yes | `config/outline_gates.json`, `config/character_scope.json` |
++| Graph model of nodes and legs | Yes | A graph library with Edmonds-Karp minimum cut and a critical-path pass |
++| Validation of travel mechanics | Partial, surface level | A keyword-membership check exists; it has no clock, coordinate, or custody state |
++| Gates expressed as data | Yes | Rule tables in JSON, read by a fail-closed evaluator |
+ | Deterministic simulation | Yes, from an adjacent programme | Fixed-point core with a headless harness |
+-| Lane network with time windows and multiple modes | No | Search log, BHR-RS-00 section 6 |
+-| Thermal model and excursion accounting | No | Search log, BHR-RS-00 section 6 |
++| Lane network with time windows and multiple modes | No | Not present in any form |
++| Thermal model and excursion accounting | No | Not present in any form |
+ | Stochastic disruption and rolling-horizon replanning | No | Absent |
+-| Lane or customer data | No | Absent, and outside the zero-budget constraint D-6 |
++| Lane or customer data | No | Absent, and outside the zero-budget constraint |
+ 
+ ## 4. Target architecture
+ 
+@@ -71,14 +72,14 @@ Consequences for this programme:
+       service level
+ ```
+ 
+-Component [3] and all decision logic are specified normatively in BHR-RS-06.
++Component [3] and all decision logic are specified normatively in SW-06.
+ 
+ ## 5. Design rationale
+ 
+-The system models time, place, and condition over a graph. This is the same structure used
+-in the existing narrative planning work, with the unit of measure changed from scene to
+-hour, degree, and currency, and the passing criterion changed from narrative quality to
+-product integrity.
++The system models time, place, and condition over a graph. The structure is general rather
++than domain-specific: a resource moves between places under a condition that decays, and a
++controller decides when to intervene. Here the unit of measure is the hour, the degree, and
++the currency, and the passing criterion is product integrity.
+ 
+ 
+ ## 6. Acceptance criteria and termination
+@@ -98,7 +99,7 @@ Termination criteria:
+ 2. If B3 requires an event-name branch, the structure is incorrect and the work returns to
+    phase P0.
+ 3. If B4 shows no separation, the artefact may be released as a plan auditor rather than an
+-   optimiser, subject to the outstanding decision recorded in the project overview.
++   optimiser, with the limitation stated in the first paragraph of SW-08.
+ 
+ ## 7. Risks
+ 
+diff --git a/research/docs/03_EVIDENCE_2026.md b/research/docs/03_EVIDENCE_2026.md
+index 0f9b65d4..771bc3b5 100644
+--- a/research/docs/03_EVIDENCE_2026.md
++++ b/research/docs/03_EVIDENCE_2026.md
+@@ -1,13 +1,14 @@
+-# BHR-RS-03  -  Evidence Register, 2026
++# SW-03  -  Evidence Register, 2026
+ 
+ | Field | Value |
+ |---|---|
+-| Document ID | BHR-RS-03 |
++| Document ID | SW-03 |
++| Kind | Repository document (published) |
+ | Version | 2.0 |
+ | Status | Active, open for additions |
+ | Date | 2026-10-23 |
+-| Collection tool | `scripts/web_research.py` (free sources, no credentials) |
+-| Normative status | Informative; this register does not constitute business canon |
++| Collection tool | a search-and-read script over free sources, no credentials |
++| Normative status | Informative; this register does not constitute a business conclusion |
+ 
+ ## 1. Rules for this register
+ 
+@@ -78,17 +79,20 @@ specific crisis will not sell. The gap is recalculation under temperature constr
+ 2. No tier-one estimate of chip design cost has been obtained. A tier-one source is required
+    before any cost figure is used publicly.
+ 3. No commercial lane, rate, or temperature data has been obtained, and none will be
+-   acquired under decision D-6. Workstream B therefore starts from open data and documented
+-   assumptions.
++   acquired under the zero data budget. Workstream B therefore starts from open data and
++   documented assumptions.
+ 
+ ## 6. Reproduction
+ 
+-```powershell
+-py -3.13 -X utf8 scripts/web_research.py search "AI chip floorplanning routing 2026 reinforcement learning EDA" --limit 8
+-py -3.13 -X utf8 scripts/web_research.py search "AlphaChip DeepMind chip placement 2026 production adoption" --limit 6
+-py -3.13 -X utf8 scripts/web_research.py news "semiconductor industry 2026 outlook" --hl en --limit 8
+-py -3.13 -X utf8 scripts/web_research.py news "cold chain logistics pharma 2026" --hl en --limit 8
+-py -3.13 -X utf8 scripts/web_research.py news "Red Sea shipping Suez return 2026" --hl en --limit 6
+-py -3.13 -X utf8 scripts/web_research.py read "https://www.mordorintelligence.com/industry-reports/cold-chain-logistics-market" --chars 2200
+-py -3.13 -X utf8 scripts/web_research.py read "https://www.mordorintelligence.com/industry-reports/electronic-design-automation-eda-tools-market" --chars 2500
+-```
++The register records queries, not a tool path: the retrieval used a search-and-read script over
++free endpoints with no credentials. The exact queries were:
++
++| Kind | Query or address | Limit |
++|---|---|---|
++| search | AI chip floorplanning routing 2026 reinforcement learning EDA | 8 |
++| search | AlphaChip DeepMind chip placement 2026 production adoption | 6 |
++| news | semiconductor industry 2026 outlook (English) | 8 |
++| news | cold chain logistics pharma 2026 (English) | 8 |
++| news | Red Sea shipping Suez return 2026 (English) | 6 |
++| read | https://www.mordorintelligence.com/industry-reports/cold-chain-logistics-market | 2,200 characters |
++| read | https://www.mordorintelligence.com/industry-reports/electronic-design-automation-eda-tools-market | 2,500 characters |
+diff --git a/research/docs/06_EVENT_AGNOSTIC_GATE.md b/research/docs/06_EVENT_AGNOSTIC_GATE.md
+index 69702831..c41cf80e 100644
+--- a/research/docs/06_EVENT_AGNOSTIC_GATE.md
++++ b/research/docs/06_EVENT_AGNOSTIC_GATE.md
+@@ -1,8 +1,9 @@
+-# BHR-RS-06  -  Event-Agnostic Compliance Gate: Specification
++# SW-06  -  Event-Agnostic Compliance Gate: Specification
+ 
+ | Field | Value |
+ |---|---|
+-| Document ID | BHR-RS-06 |
++| Document ID | SW-06 |
++| Kind | Repository document (published) |
+ | Version | 1.1 |
+ | Status | Normative; governs all gate implementations |
+ | Date | 2026-10-22 |
+@@ -53,7 +54,7 @@ branch on the name of an event.
+ | `reversibility` | `recoverable`, `structural` | `structural` prohibits waiting as a remedy |
+ 
+ These six axes are the physical layer. Propagation, information, institutional and
+-catalyst layers are defined normatively in BHR-RS-09; they produce network facts
++catalyst layers are defined normatively in SW-09; they produce network facts
+ and verification flags, never event names, and the gate MUST NOT branch on them.
+ 
+ Requirements:
+@@ -73,7 +74,8 @@ cause of the disruption.
+ | D5 | Capacity collapse | Maximum flow below demand | Minimum cut; already implemented in the host system | Consignment cannot be moved |
+ | D6 | Stale decision | Age of the decision input exceeding the freshness limit | Per-field timestamps | Decision taken against an obsolete state |
+ 
+-The D4 and D5 mechanisms are confirmed in BHR-RS-00 findings F-3 and F-1. Pattern D2 is a
++The D4 and D5 mechanisms are standard graph methods; this implementation uses a
++critical-path pass for D4 and an Edmonds-Karp minimum cut for D5 (SW-10). Pattern D2 is a
+ hypothesis model and MUST be labelled as such in any output.
+ 
+ ## 5. Unsafe control actions
+@@ -202,7 +204,7 @@ or more remedies.
+ | `GATE-RELIAB-001` | block | Series availability below the floor | Book a backup mode or shorten the series route |
+ | `GATE-SERVICE-001` | block | Deliberate deferral leaves service below the floor | Serve the floor before triaging low-criticality volume |
+ 
+-The last four are the physical layers (BHR-RS-11). They are computed from integer
++The last four are the physical layers (SW-11). They are computed from integer
+ metrics only, and they are rows in `gate.PHYSICAL_RULES`: the evaluator is one
+ loop, so a new rule is a new row rather than a new branch.
+ 
+diff --git a/research/docs/07_LICENSING.md b/research/docs/07_LICENSING.md
+index fa1e37dd..5cac8520 100644
+--- a/research/docs/07_LICENSING.md
++++ b/research/docs/07_LICENSING.md
+@@ -1,12 +1,12 @@
+-# BHR-RS-07  -  Licensing Model and Legal Position
++# SW-07  -  Licensing Model and Legal Position
+ 
+ | Field | Value |
+ |---|---|
+-| Document ID | BHR-RS-07 |
++| Document ID | SW-07 |
++| Kind | Repository document (published) |
+ | Version | 2.0 |
+-| Status | Approved in principle; execution pending at gate B5 |
++| Status | In force from the first public distribution |
+ | Date | 2026-10-23 |
+-| Related decision | D-2 |
+ | Normative status | Informative; threshold values are held in the registry |
+ 
+ ## 1. Structure
+@@ -28,7 +28,7 @@ Three fields require deliberate configuration.
+ |---|---|---|
+ | Additional Use Grant | Production use permitted without charge for individuals, research and teaching, non-profit organisations, and companies with annual revenue below USD 5 million and fewer than 100 employees | Small users require no commercial contact |
+ | Change Licence | Apache-2.0 | The licence that takes over on the Change Date |
+-| Change Date | Two years after the first public distribution of each version | Shorter than the legal maximum of four years, chosen for adoption speed (D-15) |
++| Change Date | Two years after the first public distribution of each version | Shorter than the legal maximum of four years, chosen for adoption speed |
+ 
+ Use outside the grant requires a commercial licence. This includes large organisations and
+ any party offering the software as a competing managed or hosted service.
+@@ -42,9 +42,9 @@ under this License, whichever comes first". A Change Date beyond four years is
+ therefore inert: conversion happens at four years regardless, and publishing a
+ later date would misstate the terms.
+ 
+-The owner selected two years (D-15). Two years is inside the limit, and it matches
+-the stated objective: reputation and adoption rather than revenue. Four years
+-remains the maximum, not the chosen value.
++The Change Date is two years. Two years is inside the limit, and it matches the stated
++objective: reputation and adoption rather than revenue. Four years remains the maximum, not
++the chosen value.
+ 
+ Longer protection is available by two legitimate routes, neither of which requires
+ stretching the date.
+@@ -77,8 +77,9 @@ through subcontracting and cannot be verified from public filings. Revenue and h
+ the two tests used by the PolyForm licences, which makes the threshold recognisable to a
+ procurement review.
+ 
+-Threshold values are data. They reside in `research/config/research_projects.json` and are
+-changed in one place only.
++Threshold values are data, not code. The free tier is defined by the three values in section 2
++(annual revenue, headcount, and the excluded use), and they are held in configuration so the
++licence text and the enforcement cannot drift apart.
+ 
+ ## 3. Alternatives assessed
+ 
+diff --git a/research/docs/08_B4_MEASUREMENT.md b/research/docs/08_B4_MEASUREMENT.md
+index 707eb7d3..256609cf 100644
+--- a/research/docs/08_B4_MEASUREMENT.md
++++ b/research/docs/08_B4_MEASUREMENT.md
+@@ -1,8 +1,9 @@
+-# BHR-RS-08 - Gate B4 measurement and verdict
++# SW-08 - Gate B4 measurement and verdict
+ 
+ | Field | Value |
+ |---|---|
+-| Document ID | BHR-RS-08 |
++| Document ID | SW-08 |
++| Kind | Repository document (published) |
+ | Version | 2.1 |
+ | Status | Measured result; supersedes the generation-one measurement |
+ | Date | 2026-10-23 |
+@@ -28,7 +29,7 @@ Two artefacts exist, and the difference between them is deliberate:
+ The weather run is not a second headline. It answers a narrower question -- does
+ the verdict survive when ambient conditions, rather than a drawn heat gain, set
+ the thermal exposure -- and it does: same six criteria, same decision, thermal
+-dose per delivered unit 18.06 / 7.97 / 5.08 permille. Section 4.1 of BHR-RS-11
++dose per delivered unit 18.06 / 7.97 / 5.08 permille. Section 4.1 of SW-11
+ records the mechanism and the paired counterfactual that separates the cost of
+ the forecast from the effect of the planner.
+ 
+@@ -122,7 +123,8 @@ bind, so the row is honest rather than decorative.
+   bound is far above it; the bar was not moved after seeing the result.
+ - No claim is made about a real corridor, product, or fleet. The scenarios are
+   synthetic and seeded.
+-- The phrase "15 pp fewer unsafe control actions" is a pinned forbidden claim:
+-  the measured point estimate is larger, but the phrase asserts a specific
+-  comparator and rounding that the report does not support. See
+-  `config/research_projects.json -> forbidden_claims`.
++- A sentence claiming a fixed double-digit percentage-point reduction as the
++  headline is a forbidden claim: the measured point estimate is larger, but such a
++  sentence asserts a specific comparator and rounding that this report does not
++  support. The prohibited wording is listed in the programme record, and a test
++  fails if it reaches a published document.
+diff --git a/research/docs/09_CATALYST_LAYER.md b/research/docs/09_CATALYST_LAYER.md
+index 62d89fd6..0d630cae 100644
+--- a/research/docs/09_CATALYST_LAYER.md
++++ b/research/docs/09_CATALYST_LAYER.md
+@@ -1,12 +1,13 @@
+-# BHR-RS-09  -  Catalyst and Cascade Model
++# SW-09  -  Catalyst and Cascade Model
+ 
+ | Field | Value |
+ |---|---|
+-| Document ID | BHR-RS-09 |
++| Document ID | SW-09 |
++| Kind | Repository document (published) |
+ | Version | 1.0 |
+ | Status | Normative for the scenario generator; informative for calibration |
+ | Date | 2026-10-23 |
+-| Related decisions | D-9, D-10, D-11 |
++| Related sections | Sections 2 to 6 of this document; SW-06 for the gate codes |
+ | Normative status | Axis definitions and formulas are binding on the generator; the numeric weights are programme decisions open to argument |
+ 
+ ## 1. Why six axes are not enough
+@@ -33,7 +34,7 @@ the gate can test.
+ 
+ ## 2. Layer A, physical event, six axes
+ 
+-Unchanged from BHR-RS-06: `onset_rate`, `notice_min`, `duration`, `magnitude`,
++Unchanged from SW-06: `onset_rate`, `notice_min`, `duration`, `magnitude`,
+ `scope`, `reversibility`.
+ 
+ ## 3. Layer B, propagation, four axes
+@@ -65,7 +66,7 @@ supercritical rather than taking the label on trust.
+ | Axis | Admissible values | Mechanism | Gate consequence |
+ |---|---|---|---|
+ | `actor_response` | cooperative, opportunistic, blocking | Opportunistic raises the price of a leg by 35 percent; blocking closes a lane for at least 240 minutes | Cost and route changes only; no new code |
+-| `contract_regime` | normal, force_majeure, penalty | Determines which remedies are admissible under the contract | Remedy vocabulary in BHR-RS-06 section 8 |
++| `contract_regime` | normal, force_majeure, penalty | Determines which remedies are admissible under the contract | Remedy vocabulary in SW-06 section 8 |
+ | `regulatory_gate` | none, permit, customs | Adds an approval step to the release | `GATE-PLAN-002` blocks a plan that needs approval when notice is zero |
+ 
+ ## 6. Layer E, structural catalysts, four domains
+@@ -123,7 +124,7 @@ generator and in this document.
+ 
+ ## 9. Evidence status and limits
+ 
+-The four catalyst domains were specified by the owner with reference to global
++The four catalyst domains were specified with reference to global
+ risk reporting. Retrieval of those external publications from this environment
+ failed (HTTP 403, HTTP 404, and one document above the size limit), so this
+ document records no ranking, percentage, or quotation from them. Nothing in the
+diff --git a/research/docs/10_NUMERIC_CORE.md b/research/docs/10_NUMERIC_CORE.md
+index 08c40d8a..edef14b1 100644
+--- a/research/docs/10_NUMERIC_CORE.md
++++ b/research/docs/10_NUMERIC_CORE.md
+@@ -1,12 +1,13 @@
+-# BHR-RS-10  -  Numeric Core: Fixed Point, Two Implementations, Measured Speed
++# SW-10  -  Numeric Core: Fixed Point, Two Implementations, Measured Speed
+ 
+ | Field | Value |
+ |---|---|
+-| Document ID | BHR-RS-10 |
++| Document ID | SW-10 |
++| Kind | Repository document (published) |
+ | Version | 1.0 |
+ | Status | Normative for arithmetic and conformance; measured numbers dated 2026-10-23 |
+ | Date | 2026-10-23 |
+-| Related decisions | D-12, D-13 |
++| Related documents | SW-06 for the gate, SW-05 for reproduction |
+ | Precedent reused | ADR-001 of the internal fixed-point engine (integer arithmetic and stream derivation) |
+ 
+ ## 1. Decision
+@@ -19,7 +20,7 @@ format and in reports, never in a comparison that changes a verdict.
+ This is not a stylistic preference. Three properties follow, and each is required
+ by a claim already made in this programme.
+ 
+-1. A verdict must be reproducible byte for byte (BHR-RS-06 section 9). Integer
++1. A verdict must be reproducible byte for byte (SW-06 section 9). Integer
+    arithmetic gives that on every platform and in every language; floating point
+    gives it only if every implementation rounds identically, which no specification
+    can promise.
+@@ -42,7 +43,7 @@ not the internal layout of another project.
+ | xorshift64* with stream derivation, `FromStream(tick, tag)` and `Fork(tag)` | ADR-001 of the internal engine | One random stream any language can reproduce from the same seed |
+ | The rule that money at scale needs Q32.32 | ADR-001 of the internal engine | Money and quantity in micro-units, not Q16.16 |
+ 
+-The random stream is implemented in `research/src/bhr_rs/rng.py` as
++The random stream is implemented in `research/src/switchyard/rng.py` as
+ `StreamRandom`, including a shim that keeps the call sites unchanged. The Rust
+ core uses the same algorithm, so a scenario and a plan can be reproduced in
+ either language.
+@@ -67,7 +68,7 @@ toolchain:
+ 
+     py -3.13 -X utf8 research/scripts/export_instances.py --scenarios 300
+     cargo build --release --offline            (in research/engine)
+-    research/engine/target/release/bhr-core.exe --instances research/evidence/instances.txt --threads 1 --repeat 20
++    research/engine/target/release/switchyard-core.exe --instances research/evidence/instances.txt --threads 1 --repeat 20
+ 
+ Observed result, 300 instances, twenty passes each:
+ 
+diff --git a/research/docs/11_PHYSICS_LAYERS.md b/research/docs/11_PHYSICS_LAYERS.md
+index c795f3ef..37fd5e8d 100644
+--- a/research/docs/11_PHYSICS_LAYERS.md
++++ b/research/docs/11_PHYSICS_LAYERS.md
+@@ -1,8 +1,9 @@
+-# BHR-RS-11 - Physical layers
++# SW-11 - Physical layers
+ 
+ | Field | Value |
+ |---|---|
+-| Document ID | BHR-RS-11 |
++| Document ID | SW-11 |
++| Kind | Repository document (published) |
+ | Version | 1.1 |
+ | Status | Active; adopted layers and their limits |
+ | Date | 2026-10-23 |
+diff --git a/research/docs/12_ROBUSTNESS.md b/research/docs/12_ROBUSTNESS.md
+index d3a4e5c6..ec4a00a6 100644
+--- a/research/docs/12_ROBUSTNESS.md
++++ b/research/docs/12_ROBUSTNESS.md
+@@ -1,8 +1,9 @@
+-# BHR-RS-12 - Robustness evidence
++# SW-12 - Robustness evidence
+ 
+ | Field | Value |
+ |---|---|
+-| Document ID | BHR-RS-12 |
++| Document ID | SW-12 |
++| Kind | Repository document (published) |
+ | Version | 1.0 |
+ | Status | Active; measured robustness and its limits |
+ | Date | 2026-10-22 |
+diff --git a/research/engine/Cargo.toml b/research/engine/Cargo.toml
+index e2071428..2fe38544 100644
+--- a/research/engine/Cargo.toml
++++ b/research/engine/Cargo.toml
+@@ -1,11 +1,11 @@
+ [package]
+-name = "bhr-core"
++name = "switchyard-core"
+ version = "0.1.0"
+ edition = "2021"
+-description = "BHR-RS hot-path core: deterministic replay of the compliance gate (no external crates)"
++description = "Switchyard hot-path core: deterministic replay of the compliance gate (no external crates)"
+ 
+ [[bin]]
+-name = "bhr-core"
++name = "switchyard-core"
+ path = "src/main.rs"
+ 
+ [profile.release]
+diff --git a/research/engine/src/main.rs b/research/engine/src/main.rs
+index a304a7ba..a8406469 100644
+--- a/research/engine/src/main.rs
++++ b/research/engine/src/main.rs
+@@ -1,4 +1,4 @@
+-// BHR-RS hot-path core.
++// Switchyard hot-path core.
+ //
+ // Numeric discipline follows ADR-001 of the internal fixed-point engine: no
+ // floating point decisions. Capacities and quantities are integer micro-units,
+@@ -34,6 +34,9 @@ struct Lane {
+     mode: String,
+     travel: i64,
+     cap_micro: i64,
++    // Parsed so the lane record keeps a fixed token count and a malformed line is
++    // rejected; no replay decision reads cost. Pricing happens in the Python planner.
++    #[allow(dead_code)]
+     cost_micro: i64,
+     monitored: bool,
+     controlled: bool,
+diff --git a/research/scripts/bench_gate.py b/research/scripts/bench_gate.py
+index 2145a0d5..09459d8b 100644
+--- a/research/scripts/bench_gate.py
++++ b/research/scripts/bench_gate.py
+@@ -15,11 +15,11 @@ from pathlib import Path
+ ROOT = Path(__file__).resolve().parents[1]
+ sys.path.insert(0, str(ROOT / "src"))
+ 
+-from bhr_rs.evaluate import prepare  # noqa: E402
+-from bhr_rs.gate import evaluate  # noqa: E402
+-from bhr_rs.model import load_thresholds  # noqa: E402
+-from bhr_rs.planners import plan_greedy  # noqa: E402
+-from bhr_rs.scenarios import scenario  # noqa: E402
++from switchyard.evaluate import prepare  # noqa: E402
++from switchyard.gate import evaluate  # noqa: E402
++from switchyard.model import load_thresholds  # noqa: E402
++from switchyard.planners import plan_greedy  # noqa: E402
++from switchyard.scenarios import scenario  # noqa: E402
+ 
+ 
+ def main() -> int:
+diff --git a/research/scripts/build_weather_regions.py b/research/scripts/build_weather_regions.py
+index 367d9538..93f2864b 100644
+--- a/research/scripts/build_weather_regions.py
++++ b/research/scripts/build_weather_regions.py
+@@ -1,4 +1,4 @@
+-"""Build the region profile table from open reanalysis (BHR-RS-13).
++"""Build the region profile table from open reanalysis (SW-11).
+ 
+ Why this script exists
+ ----------------------
+@@ -238,7 +238,7 @@ def build() -> dict:
+         )
+     return {
+         "_comment": (
+-            "Region profiles for the ambient layer (BHR-RS-13). Integers only. "
++            "Region profiles for the ambient layer (SW-11). Integers only. "
+             "'measured' is a frozen July climatology from open reanalysis; "
+             "'synthetic' is the invented table kept so older evidence replays. "
+             "Rebuild with research/scripts/build_weather_regions.py."
+diff --git a/research/scripts/export_instances.py b/research/scripts/export_instances.py
+index f87165a6..b008763e 100644
+--- a/research/scripts/export_instances.py
++++ b/research/scripts/export_instances.py
+@@ -17,12 +17,12 @@ from pathlib import Path
+ ROOT = Path(__file__).resolve().parents[1]
+ sys.path.insert(0, str(ROOT / "src"))
+ 
+-from bhr_rs.evaluate import prepare  # noqa: E402
+-from bhr_rs.gate import evaluate  # noqa: E402
+-from bhr_rs.model import Thresholds, load_thresholds  # noqa: E402
+-from bhr_rs.planners import plan_greedy, plan_priced, plan_remedied  # noqa: E402
+-from bhr_rs.scenarios import scenario  # noqa: E402
+-from bhr_rs.weather import apply as apply_weather, assess  # noqa: E402
++from switchyard.evaluate import prepare  # noqa: E402
++from switchyard.gate import evaluate  # noqa: E402
++from switchyard.model import Thresholds, load_thresholds  # noqa: E402
++from switchyard.planners import plan_greedy, plan_priced, plan_remedied  # noqa: E402
++from switchyard.scenarios import scenario  # noqa: E402
++from switchyard.weather import apply as apply_weather, assess  # noqa: E402
+ 
+ 
+ def _flags(plan, event) -> str:
+@@ -62,7 +62,7 @@ def _flags(plan, event) -> str:
+ 
+ 
+ def _config_line(thresholds: Thresholds) -> str:
+-    from bhr_rs.physics import physics
++    from switchyard.physics import physics
+ 
+     cfg = physics()
+     fields = [
+diff --git a/research/scripts/run_b4.py b/research/scripts/run_b4.py
+index eac1e307..edf7e2ec 100644
+--- a/research/scripts/run_b4.py
++++ b/research/scripts/run_b4.py
+@@ -19,8 +19,8 @@ from pathlib import Path
+ ROOT = Path(__file__).resolve().parents[1]
+ sys.path.insert(0, str(ROOT / "src"))
+ 
+-from bhr_rs.compare import run_comparison, summarise_comparison  # noqa: E402
+-from bhr_rs.model import load_thresholds  # noqa: E402
++from switchyard.compare import run_comparison, summarise_comparison  # noqa: E402
++from switchyard.model import load_thresholds  # noqa: E402
+ 
+ 
+ def thresholds():
+diff --git a/research/scripts/stress_parity.py b/research/scripts/stress_parity.py
+index 034ae3d4..0e497d9b 100644
+--- a/research/scripts/stress_parity.py
++++ b/research/scripts/stress_parity.py
+@@ -1,4 +1,4 @@
+-"""Stress and robustness evidence for the gate core (BHR-RS-10 section 5).
++"""Stress and robustness evidence for the gate core (SW-10 section 5).
+ 
+ Four questions, one command:
+ 
+@@ -27,13 +27,13 @@ from pathlib import Path
+ ROOT = Path(__file__).resolve().parents[1]
+ sys.path.insert(0, str(ROOT / "src"))
+ 
+-from bhr_rs.evaluate import prepare  # noqa: E402
+-from bhr_rs.gate import evaluate  # noqa: E402
+-from bhr_rs.model import load_thresholds  # noqa: E402
+-from bhr_rs.planners import plan_remedied  # noqa: E402
+-from bhr_rs.scenarios import scenario  # noqa: E402
++from switchyard.evaluate import prepare  # noqa: E402
++from switchyard.gate import evaluate  # noqa: E402
++from switchyard.model import load_thresholds  # noqa: E402
++from switchyard.planners import plan_remedied  # noqa: E402
++from switchyard.scenarios import scenario  # noqa: E402
+ 
+-ENGINE = ROOT / "engine" / "target" / "release" / "bhr-core.exe"
++ENGINE = ROOT / "engine" / "target" / "release" / "switchyard-core.exe"
+ INSTANCES = ROOT / "evidence" / "instances.txt"
+ 
+ HOSTILE = {
+diff --git a/research/src/bhr_rs/__init__.py b/research/src/switchyard/__init__.py
+similarity index 59%
+rename from research/src/bhr_rs/__init__.py
+rename to research/src/switchyard/__init__.py
+index 660fb651..bc497459 100644
+--- a/research/src/bhr_rs/__init__.py
++++ b/research/src/switchyard/__init__.py
+@@ -1,10 +1,10 @@
+-"""BHR-RS reference implementation (stage P1).
++"""Switchyard reference implementation.
+ 
+ Public entry points:
+-    bhr_rs.gate.evaluate            compliance gate, fourteen codes
+-    bhr_rs.planners.plan_greedy     baseline planner reproducing current practice
+-    bhr_rs.planners.plan_priced     congestion-priced planner
+-    bhr_rs.evaluate.run_ladder      paired measurement with a pre-registered ladder
++    switchyard.gate.evaluate            compliance gate, fourteen codes
++    switchyard.planners.plan_greedy     baseline planner reproducing current practice
++    switchyard.planners.plan_priced     congestion-priced planner
++    switchyard.evaluate.run_ladder      paired measurement with a pre-registered ladder
+ """
+ 
+ from .gate import Finding, Release, evaluate  # noqa: F401
+diff --git a/research/src/bhr_rs/cascade.py b/research/src/switchyard/cascade.py
+similarity index 100%
+rename from research/src/bhr_rs/cascade.py
+rename to research/src/switchyard/cascade.py
+diff --git a/research/src/bhr_rs/compare.py b/research/src/switchyard/compare.py
+similarity index 100%
+rename from research/src/bhr_rs/compare.py
+rename to research/src/switchyard/compare.py
+diff --git a/research/src/bhr_rs/evaluate.py b/research/src/switchyard/evaluate.py
+similarity index 99%
+rename from research/src/bhr_rs/evaluate.py
+rename to research/src/switchyard/evaluate.py
+index ddfc0956..1d475522 100644
+--- a/research/src/bhr_rs/evaluate.py
++++ b/research/src/switchyard/evaluate.py
+@@ -1,4 +1,4 @@
+-"""Paired measurement harness for gate B4 (BHR-RS-05) and the escalation ladder.
++"""Paired measurement harness for gate B4 (SW-08) and the escalation ladder.
+ 
+ Design decisions that are part of the claim, not of the implementation:
+ 
+diff --git a/research/src/bhr_rs/gate.py b/research/src/switchyard/gate.py
+similarity index 98%
+rename from research/src/bhr_rs/gate.py
+rename to research/src/switchyard/gate.py
+index 9f907139..2d10d469 100644
+--- a/research/src/bhr_rs/gate.py
++++ b/research/src/switchyard/gate.py
+@@ -1,9 +1,9 @@
+-"""Deterministic compliance gate (BHR-RS-06).
++"""Deterministic compliance gate (SW-06).
+ 
+-Implements the fourteen gate codes documented in BHR-RS-06 section 7. Every check
++Implements the fourteen gate codes documented in SW-06 section 7. Every check
+ is a pure function of (network, plan, event vector, thresholds); no clock, no
+ randomness, no language model. A missing field produces a blocking finding rather
+-than a default (BHR-RS-05 working rule 4).
++than a default (README section 3, item 7).
+ """
+ 
+ from __future__ import annotations
+@@ -37,7 +37,7 @@ COMPARATORS = {
+ 
+ @dataclass(frozen=True)
+ class PhysicalRule:
+-    """One row of the physical rule table (BHR-RS-11 section 6).
++    """One row of the physical rule table (SW-11 section 6).
+ 
+     The gate does not contain a branch per rule. It builds metrics, then applies
+     every row through `COMPARATORS`. Adding a rule is adding a row, which is the
+@@ -531,7 +531,7 @@ def evaluate(
+             add("GATE-MODE-001", consignment.id, mode,
+                 f"single mode dependence while {mode} has an open block")
+ 
+-    # --- Physical layers (BHR-RS-11) -------------------------------------
++    # --- Physical layers (SW-11) -------------------------------------
+     # Metrics first, rules second. Every physical check is a row in
+     # PHYSICAL_RULES applied by one loop, so a new check is data, not a branch.
+     hours = max(1, network.horizon_min // 60)
+diff --git a/research/src/bhr_rs/graph.py b/research/src/switchyard/graph.py
+similarity index 98%
+rename from research/src/bhr_rs/graph.py
+rename to research/src/switchyard/graph.py
+index 666781fe..bd08f117 100644
+--- a/research/src/bhr_rs/graph.py
++++ b/research/src/switchyard/graph.py
+@@ -3,7 +3,7 @@
+ Working implementations, not sketches:
+   * Edmonds-Karp maximum flow with a minimum cut certificate (damage pattern D5);
+   * successive shortest path minimum cost flow with node potentials, which also
+-    yields the dual prices used to price congestion (BHR-RS-02 section 5);
++    yields the dual prices used to price congestion (SW-02 section 5);
+   * deterministic shortest path, used by both planners.
+ 
+ Every routine sorts its inputs, so equal inputs produce equal outputs.
+diff --git a/research/src/bhr_rs/model.py b/research/src/switchyard/model.py
+similarity index 97%
+rename from research/src/bhr_rs/model.py
+rename to research/src/switchyard/model.py
+index e88080ed..cf177907 100644
+--- a/research/src/bhr_rs/model.py
++++ b/research/src/switchyard/model.py
+@@ -1,8 +1,8 @@
+ """Data model for the event-agnostic cold-chain compliance gate.
+ 
+-Documents: BHR-RS-02 (architecture), BHR-RS-06 (normative specification).
++Documents: SW-02 (architecture), SW-06 (normative specification).
+ All structures are immutable and hashable through a canonical JSON encoding, so a
+-plan and its verdict can be replayed byte for byte (BHR-RS-06 section 9).
++plan and its verdict can be replayed byte for byte (SW-06 section 9).
+ """
+ 
+ from __future__ import annotations
+@@ -149,7 +149,7 @@ class Thresholds:
+ 
+ 
+ def load_thresholds(payload: Optional[dict]) -> Thresholds:
+-    """Thresholds are data (BHR-RS-05 working rule 2). Unknown keys are rejected."""
++    """Thresholds are data (README section 3, item 7). Unknown keys are rejected."""
+     if not payload:
+         return Thresholds()
+     known = {f for f in Thresholds.__dataclass_fields__}  # type: ignore[attr-defined]
+diff --git a/research/src/bhr_rs/physics.py b/research/src/switchyard/physics.py
+similarity index 99%
+rename from research/src/bhr_rs/physics.py
+rename to research/src/switchyard/physics.py
+index 02d40a4b..20011436 100644
+--- a/research/src/bhr_rs/physics.py
++++ b/research/src/switchyard/physics.py
+@@ -1,4 +1,4 @@
+-"""Physical layers imported into the cold-chain model (BHR-RS-11).
++"""Physical layers imported into the cold-chain model (SW-11).
+ 
+ The programme borrows mechanisms from fields that already solved the same
+ structural problem, and states the domain of validity of each borrowing.
+diff --git a/research/src/bhr_rs/planners.py b/research/src/switchyard/planners.py
+similarity index 99%
+rename from research/src/bhr_rs/planners.py
+rename to research/src/switchyard/planners.py
+index 8c7dcb51..fefa8eed 100644
+--- a/research/src/bhr_rs/planners.py
++++ b/research/src/switchyard/planners.py
+@@ -410,7 +410,7 @@ def plan_with_composition(
+ 
+     The baseline is always a candidate, so the shipped plan can never be worse
+     than current practice under the gate's own ordering. That is the composition
+-    rule from BHR-RS-02 section 6, extended to three candidates.
++    rule from SW-02 section 6, extended to three candidates.
+     """
+     thresholds = thresholds or Thresholds()
+     candidates: List[Tuple[Release, Plan]] = []
+diff --git a/research/src/bhr_rs/risk.py b/research/src/switchyard/risk.py
+similarity index 97%
+rename from research/src/bhr_rs/risk.py
+rename to research/src/switchyard/risk.py
+index b253e43e..8aaad311 100644
+--- a/research/src/bhr_rs/risk.py
++++ b/research/src/switchyard/risk.py
+@@ -1,4 +1,4 @@
+-"""Risk and probability features (BHR-RS-14).
++"""Risk and probability features (SW-11).
+ 
+ The gate answers pass or block. A paper needs a probability and a tail. Two
+ layers, deliberately kept apart:
+@@ -9,7 +9,7 @@ layers, deliberately kept apart:
+   * `crps_ensemble` / `brier` / `reliability_table` -- empirical scorers for a
+     deterministic parametric ensemble. They measure whether the analytic layer
+     agrees with the sampler. They are not evidence that either agrees with the
+-    field, and BHR-RS-14 says so in the limitations.
++    field, and SW-11 says so in the limitations.
+ """
+ 
+ from __future__ import annotations
+@@ -110,7 +110,7 @@ def portfolio(
+ 
+     Independent-consignment assumption: p_any = 1 - product(1 - p). Stated
+     plainly because weather is spatially correlated and the product therefore
+-    understates joint failure. The dependency correction is BHR-RS-14 section 6.
++    understates joint failure. The dependency correction is SW-11 section 6.
+ 
+     `plan` is accepted and reported (`strategy`) but not re-derived: the dose came
+     from a gate run of that plan, and recomputing it here would create a second
+diff --git a/research/src/bhr_rs/rng.py b/research/src/switchyard/rng.py
+similarity index 100%
+rename from research/src/bhr_rs/rng.py
+rename to research/src/switchyard/rng.py
+diff --git a/research/src/bhr_rs/scenarios.py b/research/src/switchyard/scenarios.py
+similarity index 99%
+rename from research/src/bhr_rs/scenarios.py
+rename to research/src/switchyard/scenarios.py
+index 679e3ee5..9636df09 100644
+--- a/research/src/bhr_rs/scenarios.py
++++ b/research/src/switchyard/scenarios.py
+@@ -1,4 +1,4 @@
+-"""Synthetic scenario generator over the six event axes (BHR-RS-06 section 3).
++"""Synthetic scenario generator over the six event axes (SW-06 section 3).
+ 
+ The generator is seeded and versioned. A scenario is a network plus an event
+ vector; the same seed always produces the same bytes, so an external party can
+diff --git a/research/src/bhr_rs/stats.py b/research/src/switchyard/stats.py
+similarity index 98%
+rename from research/src/bhr_rs/stats.py
+rename to research/src/switchyard/stats.py
+index ccc90598..3d69b4c3 100644
+--- a/research/src/bhr_rs/stats.py
++++ b/research/src/switchyard/stats.py
+@@ -1,4 +1,4 @@
+-"""Statistical machinery for the B4 claim (BHR-RS-08).
++"""Statistical machinery for the B4 claim (SW-08).
+ 
+ Every test here is implemented directly on the standard library so that an
+ external reader can re-derive the numbers without installing anything, and so
+diff --git a/research/src/bhr_rs/vector.py b/research/src/switchyard/vector.py
+similarity index 98%
+rename from research/src/bhr_rs/vector.py
+rename to research/src/switchyard/vector.py
+index 09c632d1..f3c35f6b 100644
+--- a/research/src/bhr_rs/vector.py
++++ b/research/src/switchyard/vector.py
+@@ -1,4 +1,4 @@
+-"""The 36-dimension state vector (BHR-RS-14).
++"""The 36-dimension state vector (SW-11).
+ 
+ A scenario is a network plus an event vector, and both are already structured.
+ This module flattens them into one fixed-length integer vector so the same row
+@@ -24,7 +24,7 @@ The vector is a snapshot, and a snapshot loses sequence. `temporal_stack`
+ returns the same columns ordered by event notice, duration and onset, which is
+ the smallest structure that lets a reader see "how much warning, how long, how
+ fast" without inventing a fifth axis. A full trajectory encoder is future work
+-and is recorded as such in BHR-RS-14.
++and is recorded as such in SW-11.
+ """
+ 
+ from __future__ import annotations
+@@ -249,7 +249,7 @@ def temporal_stack(
+ 
+     A snapshot loses sequence. This is the smallest ordering that restores it:
+     how much warning, how long, how fast. It is ordering, not a trajectory
+-    encoder, and BHR-RS-14 records the difference.
++    encoder, and SW-11 records the difference.
+     """
+     return tuple(sorted(rows, key=lambda row: _order_key(row[0])))
+ 
+diff --git a/research/src/bhr_rs/weather.py b/research/src/switchyard/weather.py
+similarity index 97%
+rename from research/src/bhr_rs/weather.py
+rename to research/src/switchyard/weather.py
+index dbd40fa8..624607fc 100644
+--- a/research/src/bhr_rs/weather.py
++++ b/research/src/switchyard/weather.py
+@@ -1,4 +1,4 @@
+-"""Weather layer (BHR-RS-13): ambient conditions as integer data.
++"""Weather layer (SW-11): ambient conditions as integer data.
+ 
+ Why the layer exists
+ --------------------
+@@ -50,13 +50,13 @@ from .model import Network, Plan
+ 
+ CONFIG_PATH = Path(__file__).resolve().parents[2] / "config" / "weather.json"
+ REGIONS_PATH = Path(__file__).resolve().parents[2] / "config" / "weather_regions.json"
+-PROFILE_ENV = "BHR_WEATHER_PROFILE"
++PROFILE_ENV = "SW_WEATHER_PROFILE"
+ PERMILLE = 1000
+ 
+ 
+ @lru_cache(maxsize=1)
+ def config() -> dict:
+-    """Load the formula table once. Data, not code (BHR-RS-05 rule 2)."""
++    """Load the formula table once. Data, not code (README section 3, item 7)."""
+     return json.loads(CONFIG_PATH.read_text(encoding="utf-8"))
+ 
+ 
+@@ -74,7 +74,7 @@ def active_profile(profile: Optional[str] = None) -> str:
+     """Resolve which profile to use: explicit argument, then environment, then file.
+ 
+     The environment override exists so a reviewer can rebuild an older result
+-    (`BHR_WEATHER_PROFILE=synthetic`) without editing a committed file.
++    (`SW_WEATHER_PROFILE=synthetic`) without editing a committed file.
+     """
+     chosen = profile or os.environ.get(PROFILE_ENV) or profiles()["active"]
+     if chosen not in profiles()["profiles"]:
+@@ -197,7 +197,7 @@ def assess(
+ ) -> WeatherReport:
+     """Build the weather report for one event vector. Pure and reproducible.
+ 
+-    `scale` exists for the parametric ensemble in BHR-RS-14: it perturbs the
++    `scale` exists for the parametric ensemble in SW-11: it perturbs the
+     anomaly without touching the network, so members differ only in weather.
+     `profile` selects the region table; its default comes from the data file,
+     so a reviewer can replay an older run without editing a committed file.
+diff --git a/tests/test_coldchain_engine_s.py b/tests/test_coldchain_engine_s.py
+index 7ef7e6e1..fd847805 100644
+--- a/tests/test_coldchain_engine_s.py
++++ b/tests/test_coldchain_engine_s.py
+@@ -15,10 +15,10 @@ import pytest
+ ROOT = Path(__file__).resolve().parents[1]
+ sys.path.insert(0, str(ROOT / "research" / "src"))
+ 
+-from bhr_rs.cascade import catalyst_pressure, effective_reproduction, giant_component  # noqa: E402
+-from bhr_rs.evaluate import prepare  # noqa: E402
+-from bhr_rs.gate import evaluate  # noqa: E402
+-from bhr_rs.model import (  # noqa: E402
++from switchyard.cascade import catalyst_pressure, effective_reproduction, giant_component  # noqa: E402
++from switchyard.evaluate import prepare  # noqa: E402
++from switchyard.gate import evaluate  # noqa: E402
++from switchyard.model import (  # noqa: E402
+     Consignment,
+     Lane,
+     LegPlan,
+@@ -27,9 +27,9 @@ from bhr_rs.model import (  # noqa: E402
+     Plan,
+     load_thresholds,
+ )
+-from bhr_rs.planners import plan_cost, plan_greedy, plan_priced  # noqa: E402
+-from bhr_rs.rng import StreamRandom  # noqa: E402
+-from bhr_rs.scenarios import scenario  # noqa: E402
++from switchyard.planners import plan_cost, plan_greedy, plan_priced  # noqa: E402
++from switchyard.rng import StreamRandom  # noqa: E402
++from switchyard.scenarios import scenario  # noqa: E402
+ 
+ 
+ def thresholds():
+@@ -176,7 +176,7 @@ def test_same_seed_same_release_hash():
+ 
+ 
+ def test_rust_core_agrees_with_reference():
+-    binary = ROOT / "research" / "engine" / "target" / "release" / "bhr-core.exe"
++    binary = ROOT / "research" / "engine" / "target" / "release" / "switchyard-core.exe"
+     instances = ROOT / "research" / "evidence" / "instances.txt"
+     if not binary.exists() or not instances.exists():
+         pytest.skip("Rust core or instances not built")
+diff --git a/tests/test_physical_gate_s.py b/tests/test_physical_gate_s.py
+index 3b2e0e58..f8982cb9 100644
+--- a/tests/test_physical_gate_s.py
++++ b/tests/test_physical_gate_s.py
+@@ -15,8 +15,8 @@ from pathlib import Path
+ ROOT = Path(__file__).resolve().parents[1]
+ sys.path.insert(0, str(ROOT / "research" / "src"))
+ 
+-from bhr_rs.gate import evaluate  # noqa: E402
+-from bhr_rs.model import (  # noqa: E402
++from switchyard.gate import evaluate  # noqa: E402
++from switchyard.model import (  # noqa: E402
+     Consignment,
+     Lane,
+     LegPlan,
+diff --git a/tests/test_physics_layers_s.py b/tests/test_physics_layers_s.py
+index bd479c19..bf4ff869 100644
+--- a/tests/test_physics_layers_s.py
++++ b/tests/test_physics_layers_s.py
+@@ -1,4 +1,4 @@
+-"""Physical layers: analytic checks, not smoke tests (BHR-RS-11).
++"""Physical layers: analytic checks, not smoke tests (SW-11).
+ 
+ Each test pins a property that the imported mechanism must have, so a future
+ "small optimisation" cannot quietly change the physics:
+@@ -23,7 +23,7 @@ import pytest
+ ROOT = Path(__file__).resolve().parents[1]
+ sys.path.insert(0, str(ROOT / "research" / "src"))
+ 
+-from bhr_rs.physics import (  # noqa: E402
++from switchyard.physics import (  # noqa: E402
+     arrhenius_fraction_remaining,
+     availability_from_mtbf,
+     availability_parallel,
+diff --git a/tests/test_research_project_s.py b/tests/test_research_project_s.py
+index b9cce1b9..d81b0b2a 100644
+--- a/tests/test_research_project_s.py
++++ b/tests/test_research_project_s.py
+@@ -21,18 +21,24 @@ import math
+ import pathlib
+ 
+ ROOT = pathlib.Path(__file__).resolve().parents[1]
+-REG = ROOT / "research" / "config" / "research_projects.json"
++REG = ROOT / "research" / "_system" / "programme.json"
+ DOCS = ROOT / "research" / "docs"
+ 
++# The published document set. The system records that used to sit beside these
++# (capability audit, suspended workstream A, asset inventory, both plans) moved to
++# `research/_system/` on 2026-10-23: they are the working record of the programme,
++# not part of the artefact.
+ REQUIRED_DOCS = (
+-    "00_CAPABILITY_AUDIT.md",
+-    "01_TRACK_A_SILICON.md",
+     "02_TRACK_B_COLDCHAIN.md",
+     "03_EVIDENCE_2026.md",
+-    "04_ASSET_INVENTORY.md",
+-    "05_PLAN_35_DAYS.md",
++    "05_REPRODUCTION.md",
+     "06_EVENT_AGNOSTIC_GATE.md",
+     "07_LICENSING.md",
++    "08_B4_MEASUREMENT.md",
++    "09_CATALYST_LAYER.md",
++    "10_NUMERIC_CORE.md",
++    "11_PHYSICS_LAYERS.md",
++    "12_ROBUSTNESS.md",
+ )
+ 
+ 
+@@ -287,16 +293,22 @@ def test_documents_carry_identification_metadata():
+     for path in _documents():
+         text = path.read_text(encoding="utf-8")
+         head = text.splitlines()[0]
+-        assert head.startswith("# BHR-RS-"), (path.name, head)
++        assert head.startswith("# SW-"), (path.name, head)
+         body = "\n".join(text.splitlines()[:12])
+         assert "Document ID" in body, path.name
+         assert "Status" in body, path.name
+         assert "Version" in body, path.name
++        assert "Kind" in body, path.name
+ 
+ 
+-def test_plan_is_35_days_not_90_and_phases_have_outputs():
+-    assert (DOCS / "05_PLAN_35_DAYS.md").is_file()
+-    assert not (DOCS / "05_90_DAY_GATES.md").exists(), "90-day plan replaced by the 35-day plan"
++def test_superseded_plans_are_system_records_not_documents():
++    """A schedule is a working record: it describes a team, not the artefact."""
++    assert (DOCS / "05_REPRODUCTION.md").is_file()
++    assert not (DOCS / "05_PLAN_5_DAYS.md").exists()
++    assert not (DOCS / "05_PLAN_35_DAYS.md").exists()
++    plans = ROOT / "research" / "_system" / "plans"
++    assert (plans / "PLAN_5_DAYS.md").is_file()
++    assert (plans / "PLAN_35_DAYS_superseded.md").is_file()
+     for track in _reg()["tracks"]:
+         for phase in track.get("phases", []):
+             assert phase["days"] and phase["out"], phase
+@@ -321,7 +333,28 @@ def test_product_name_is_recorded_with_its_prior_art():
+     decision = next(x for x in d["open_owner_decisions"] if x["id"] == name["decision"])
+     assert decision["status"] == "resolved"
+     assert decision["options"] == ["Switchyard"]
+-    assert "BHR-RS" in decision["resolution"], "document identifiers stay stable"
++    assert "SW" in decision["resolution"], "document identifiers stay stable"
++
++
++def test_forbidden_claims_do_not_reach_a_published_document():
++    """A claim the measurement does not support is listed once and then gated.
++
++    The list lives in the programme record, because it is a decision about what may
++    be said; the gate lives here, because the published documents are what a reader
++    sees. Without it the wording reappears the first time somebody writes a summary.
++    """
++    claims = _reg().get("forbidden_claims") or []
++    assert claims, "the programme record must list the claims the measurement does not support"
++    published = [ROOT / "research" / "README.md", ROOT / "research" / "PACKAGE.md"] + sorted(
++        DOCS.glob("*.md")
++    )
++    offenders = []
++    for entry in claims:
++        phrase = entry["phrase"]
++        for path in published:
++            if phrase.lower() in path.read_text(encoding="utf-8").lower():
++                offenders.append(f"{path.name}: {phrase}")
++    assert offenders == [], f"forbidden claim in a published document: {offenders}"
+ 
+ 
+ def test_no_document_still_asks_for_a_product_name():
+diff --git a/tests/test_research_scrub_s.py b/tests/test_research_scrub_s.py
+index 41617e8d..195e1e3d 100644
+--- a/tests/test_research_scrub_s.py
++++ b/tests/test_research_scrub_s.py
+@@ -142,7 +142,7 @@ def test_patterns_actually_detect_a_known_bad_line():
+     """A gate that cannot fail is not a gate: prove each pattern fires."""
+     sample = (
+         "contact someone@example.com or +66812345678 or 081-234-5678 or 0812345678; "
+-        "path C:/Users/someone/project and D:/Bar H Ranch; "
++        "path C:/Users/someone/project and D:/the host system; "
+         "engine HclRandom from HCL.Core"
+     )
+     hits = {label for label, pattern in LEAK_PATTERNS.items() if pattern.search(sample)}
+diff --git a/tests/test_stats_s.py b/tests/test_stats_s.py
+index e02b88df..1d9f5984 100644
+--- a/tests/test_stats_s.py
++++ b/tests/test_stats_s.py
+@@ -8,7 +8,7 @@ from pathlib import Path
+ ROOT = Path(__file__).resolve().parents[1]
+ sys.path.insert(0, str(ROOT / "research" / "src"))
+ 
+-from bhr_rs.stats import (  # noqa: E402
++from switchyard.stats import (  # noqa: E402
+     bootstrap_ci,
+     cliffs_delta,
+     holdout_split,
+diff --git a/tests/test_weather_regions_s.py b/tests/test_weather_regions_s.py
+index be926ea6..3bf19e9e 100644
+--- a/tests/test_weather_regions_s.py
++++ b/tests/test_weather_regions_s.py
+@@ -1,5 +1,5 @@
+ # -*- coding: utf-8 -*-
+-"""Gate: the region table behind the ambient layer (BHR-RS-13, 2026-10-23).
++"""Gate: the region table behind the ambient layer (SW-11, 2026-10-23).
+ 
+ Why this gate exists
+ --------------------
+@@ -34,7 +34,7 @@ import pytest
+ ROOT = Path(__file__).resolve().parents[1]
+ sys.path.insert(0, str(ROOT / "research" / "src"))
+ 
+-from bhr_rs import rng, scenarios, weather  # noqa: E402
++from switchyard import rng, scenarios, weather  # noqa: E402
+ 
+ REGIONS_PATH = ROOT / "research" / "config" / "weather_regions.json"
+ FORMULAS_PATH = ROOT / "research" / "config" / "weather.json"
+diff --git a/tests/test_weather_risk_s.py b/tests/test_weather_risk_s.py
+index afa58543..e13ddc9c 100644
+--- a/tests/test_weather_risk_s.py
++++ b/tests/test_weather_risk_s.py
+@@ -1,6 +1,6 @@
+ """Weather layer and thermal risk: determinism, parity and honest limits.
+ 
+-These tests pin the four claims the paper makes about BHR-RS-13:
++These tests pin the four claims the paper makes about SW-11:
+ 
+ * the weather report is a pure function of the scenario seed (integer only), so
+   the Rust replay sees the same numbers;
+@@ -21,17 +21,17 @@ from pathlib import Path
+ ROOT = Path(__file__).resolve().parents[1]
+ sys.path.insert(0, str(ROOT / "research" / "src"))
+ 
+-from bhr_rs import risk, vector, weather  # noqa: E402
+-from bhr_rs.compare import (  # noqa: E402
++from switchyard import risk, vector, weather  # noqa: E402
++from switchyard.compare import (  # noqa: E402
+     COMPARATORS,
+     _plan_for,
+     run_comparison,
+     summarise_comparison,
+ )
+-from bhr_rs.evaluate import prepare  # noqa: E402
+-from bhr_rs.gate import evaluate  # noqa: E402
+-from bhr_rs.model import Thresholds  # noqa: E402
+-from bhr_rs.scenarios import scenario  # noqa: E402
++from switchyard.evaluate import prepare  # noqa: E402
++from switchyard.gate import evaluate  # noqa: E402
++from switchyard.model import Thresholds  # noqa: E402
++from switchyard.scenarios import scenario  # noqa: E402
+ 
+ SEEDS = range(1, 13)
+ 

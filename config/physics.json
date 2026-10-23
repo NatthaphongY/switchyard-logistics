@@ -1,0 +1,74 @@
+{
+  "_comment": "Physical layer constants for SW-11. Data, not code (README section 3, item 7). Every number here is a stated programme assumption for a synthetic network; none is an empirical estimate for a named corridor or product. See docs/11_PHYSICS_LAYERS.md section 8.",
+  "version": "1.0",
+  "queue": {
+    "_model": "Kingman / Allen-Cunneen approximation for GI/G/c. Delay factor is a table so the decision path never evaluates a power or an exponential.",
+    "ca2_milli": 1000,
+    "cs2_milli": 1250,
+    "servers_default": 2,
+    "service_min_default": 18,
+    "utilisation_ceiling_permille": 950,
+    "service_level_permille": 850,
+    "delay_factor_permille": [
+      1000, 1002, 1005, 1009, 1013, 1019, 1026, 1035, 1046, 1060,
+      1078, 1101, 1131, 1171, 1226, 1303, 1415, 1583, 1846, 2273, 3000
+    ]
+  },
+  "thermal": {
+    "_model": "Newton cooling for the continuous curve (reporting) and a linear exposure budget for the gate. The linear budget is a conservative bound: a test asserts it never under-reports Arrhenius degradation.",
+    "ambient_c": 31.0,
+    "u_value_w_per_m2k": 1.8,
+    "area_m2": 12.0,
+    "mass_kg": 800.0,
+    "cp_kj_per_kgk": 3.6,
+    "active_cooling_w": 900.0,
+    "heat_gain_permille_range": [700, 1400],
+    "protection_credit_permille": 620,
+    "protection_threshold_permille": 350,
+    "abandon_threshold_permille": 2200,
+    "quality_budget_min": 210,
+    "arrhenius": {
+      "ea_j_per_mol": 83000.0,
+      "gas_constant_j_per_molk": 8.314,
+      "reference_c": 5.0
+    }
+  },
+  "traffic": {
+    "_model": "LWR kinematic wave with a triangular fundamental diagram. Used to price congestion delay, not to decide release.",
+    "jam_density_veh_per_km": 140,
+    "capacity_veh_per_hour": 1800,
+    "free_flow_kmh": 90
+  },
+  "reliability": {
+    "_model": "Series product of per-mode availability (MTBF / (MTBF + MTTR)). A backup mode turns a series link into a parallel link.",
+    "mtbf_h": {"road": 420.0, "rail": 600.0, "sea": 900.0, "air": 300.0},
+    "mttr_h": {"road": 3.0, "rail": 5.5, "sea": 13.0, "air": 6.0},
+    "mode_availability_permille": {"road": 993, "rail": 991, "sea": 985, "air": 980},
+    "floor_permille": 900
+  },
+  "epidemic": {
+    "_model": "SIR final-size relation, imported as an analogy for cascade saturation. Reporting only.",
+    "r0": 2.4
+  },
+  "finance": {
+    "_model": "Expected shortfall (CVaR) of the loss distribution. Reporting only.",
+    "cvar_alpha_permille": 950
+  },
+  "service": {
+    "_model": "Anti-gaming floor: a planner that defers everything cannot win on unsafe actions.",
+    "floor_permille": 950
+  },
+  "cost": {
+    "_model": "Price list for compliance actions. Reported so that a reduction in unsafe actions is never free by construction.",
+    "pre_cool_per_unit": 0.18,
+    "refresh_feed_min": 15,
+    "pre_authorisation_per_unit": 0.07,
+    "capacity_measure_min": 20,
+    "escrow_permille_of_value": 5,
+    "out_of_band_verify_min": 25,
+    "backup_mode_permille_of_leg": 30,
+    "thermal_protection_per_unit": 0.9,
+    "preposition_per_unit": 1.25,
+    "deferral_per_unit": 1.1
+  }
+}

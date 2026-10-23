@@ -1,0 +1,12 @@
+# Machine state, not source.
+
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.egg-info/
+build/
+dist/
+.venv/
+
+# Cargo output. It records the host toolchain path, so it must never be committed.
+engine/target/

@@ -1,0 +1,130 @@
+{
+  "_comment": "Region profiles for the ambient layer (SW-11). Integers only. 'measured' is a frozen July climatology from open reanalysis; 'synthetic' is the invented table kept so older evidence replays. Rebuild with scripts/build_weather_regions.py.",
+  "active": "measured",
+  "profiles": {
+    "measured": {
+      "regions": {
+        "R0": {
+          "base_c_tenths": 200,
+          "humidity_permille": 664,
+          "label": "temperate maritime",
+          "observed": {
+            "days": 930,
+            "mean_c_thousandths": 20024,
+            "mean_daily_max_c_thousandths": 24572,
+            "mean_daily_min_c_thousandths": 14925,
+            "mean_humidity_thousandths": 66411,
+            "mean_shortwave_mj_m2_thousandths": 19348,
+            "wet_days": 330
+          },
+          "solar_permille": 645,
+          "storm_permille": 355,
+          "swing_c_tenths": 48
+        },
+        "R1": {
+          "base_c_tenths": 282,
+          "humidity_permille": 839,
+          "label": "humid subtropical",
+          "observed": {
+            "days": 930,
+            "mean_c_thousandths": 28235,
+            "mean_daily_max_c_thousandths": 31700,
+            "mean_daily_min_c_thousandths": 25699,
+            "mean_humidity_thousandths": 83872,
+            "mean_shortwave_mj_m2_thousandths": 18031,
+            "wet_days": 676
+          },
+          "solar_permille": 601,
+          "storm_permille": 727,
+          "swing_c_tenths": 30
+        },
+        "R2": {
+          "base_c_tenths": 181,
+          "humidity_permille": 633,
+          "label": "continental interior",
+          "observed": {
+            "days": 930,
+            "mean_c_thousandths": 18105,
+            "mean_daily_max_c_thousandths": 23600,
+            "mean_daily_min_c_thousandths": 11999,
+            "mean_humidity_thousandths": 63290,
+            "mean_shortwave_mj_m2_thousandths": 21091,
+            "wet_days": 345
+          },
+          "solar_permille": 703,
+          "storm_permille": 371,
+          "swing_c_tenths": 58
+        }
+      },
+      "source": {
+        "attribution": "Weather data by Open-Meteo.com (CC BY 4.0), derived from ERA5 reanalysis (Copernicus Climate Change Service)",
+        "cost": "free, keyless, no account",
+        "derivation": {
+          "arithmetic": "integer only; one float at the data boundary",
+          "base_c_tenths": "mean daily mean temperature, tenths of a degree",
+          "humidity_permille": "mean daily relative humidity, per-mille",
+          "solar_permille": "mean daily shortwave energy against a 30 MJ/m2 reference, capped at 1000",
+          "storm_permille": "share of July days with at least 1 mm of precipitation, per-mille",
+          "swing_c_tenths": "half the mean diurnal range, tenths of a degree"
+        },
+        "endpoint": "https://archive-api.open-meteo.com/v1/archive",
+        "kind": "reanalysis climatology",
+        "licence": "Open-Meteo data CC BY 4.0; ERA5 (C) Copernicus Climate Change Service, ECMWF",
+        "month": 7,
+        "period": "1991-2020",
+        "product": "ERA5 reanalysis via the Open-Meteo archive API",
+        "retrieved_utc": "2026-10-23T00:04:03Z",
+        "sites": {
+          "R0": {
+            "latitude": 50.1109,
+            "longitude": 8.6821,
+            "name": "Frankfurt am Main, DE"
+          },
+          "R1": {
+            "latitude": 23.1291,
+            "longitude": 113.2644,
+            "name": "Guangzhou, CN"
+          },
+          "R2": {
+            "latitude": 47.8864,
+            "longitude": 106.9057,
+            "name": "Ulaanbaatar, MN"
+          }
+        }
+      }
+    },
+    "synthetic": {
+      "regions": {
+        "R0": {
+          "base_c_tenths": 185,
+          "humidity_permille": 620,
+          "label": "temperate",
+          "solar_permille": 700,
+          "storm_permille": 180,
+          "swing_c_tenths": 70
+        },
+        "R1": {
+          "base_c_tenths": 262,
+          "humidity_permille": 780,
+          "label": "humid-subtropical",
+          "solar_permille": 820,
+          "storm_permille": 420,
+          "swing_c_tenths": 55
+        },
+        "R2": {
+          "base_c_tenths": 118,
+          "humidity_permille": 540,
+          "label": "continental",
+          "solar_permille": 610,
+          "storm_permille": 300,
+          "swing_c_tenths": 92
+        }
+      },
+      "source": {
+        "kind": "invented",
+        "note": "Placeholder table used before the ingest was wired. Retained only so the earlier evidence files replay exactly."
+      }
+    }
+  },
+  "version": "2.0"
+}

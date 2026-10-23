@@ -1,0 +1,53 @@
+{
+  "hostile": {
+    "absurd.txt": {
+      "bounded": true,
+      "exit_code": 0,
+      "panicked": false
+    },
+    "duplicate.txt": {
+      "bounded": true,
+      "exit_code": 0,
+      "panicked": false
+    },
+    "empty.txt": {
+      "bounded": true,
+      "exit_code": 2,
+      "panicked": false
+    },
+    "garbage.txt": {
+      "bounded": true,
+      "exit_code": 0,
+      "panicked": false
+    },
+    "truncated.txt": {
+      "bounded": true,
+      "exit_code": 2,
+      "panicked": false
+    },
+    "unicode.txt": {
+      "bounded": true,
+      "exit_code": 0,
+      "panicked": false
+    }
+  },
+  "liveness": {
+    "finished": true,
+    "peak_resident_mb": 10.36,
+    "wall_seconds": 2.023
+  },
+  "ok": true,
+  "parity": {
+    "checked": 300,
+    "exit_code": 0,
+    "mismatches": 0,
+    "passes": 200,
+    "per_pass_seconds": 0.0097,
+    "throughput_per_second": 30915.0,
+    "wall_seconds": 2.001
+  },
+  "python_deterministic": true,
+  "python_instances": 300,
+  "repeats": 200,
+  "threads": 8
+}

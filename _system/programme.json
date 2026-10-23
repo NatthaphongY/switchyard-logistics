@@ -1,0 +1,750 @@
+{
+  "_doc": "SW-REGISTRY - Research programme registry (system record, not published). Data only, no logic. Version 2.4, 2026-10-23. Moved here from config/research_projects.json when repository documents and system records were separated.",
+  "product_name": {
+    "name": "switchyard-logistics",
+    "decided": "2026-10-23",
+    "decision": 3,
+    "scope": "Product name only. Document and gate identifiers stay SW-xx, so evidence filenames, thresholds and imports are unchanged.",
+    "prior_art": [
+      {
+        "what": "switchyard on the Python Package Index",
+        "detail": "Version 1.0.1, an educational networking framework by Joel Sommers, GPLv3",
+        "consequence": "Different field, so the product name is free; a Python distribution would need a suffix"
+      },
+      {
+        "what": "Switchyard, an enterprise integration product",
+        "detail": "Retired; no current product in this field under the name",
+        "consequence": "No confusion with logistics planning"
+      }
+    ],
+    "previous": "Switchyard (2026-10-23, D-21; superseded by D-24)",
+    "note": "Import package `switchyard` and binary `switchyard-core` keep their names, and the registry id stays SW-xx."
+  },
+  "_rules": {
+    "read_only_paths": [],
+    "write_scope": "repository/**",
+    "no_llm_for_small_tasks": true,
+    "fail_closed": "A failed gate stops the workstream. Thresholds MUST NOT be lowered to obtain a pass.",
+    "evidence_required": "Every quantitative claim cites a source with a date, a path:line location, or a reproducible command.",
+    "language": "en",
+    "style": {
+      "decorative_markers": "prohibited",
+      "informal_register": "prohibited",
+      "enforcement": "tests/test_research_project_s.py"
+    }
+  },
+  "created": "2026-10-23",
+  "version": "2.4",
+  "purpose": "Determine whether the optimisation and verification machinery of the host system transfers to industrial planning problems, and package a verifiable public artefact.",
+  "decisions": [
+    {
+      "id": "D-1",
+      "decision": "No external investment and no return-on-investment defence.",
+      "date": "2026-10-23"
+    },
+    {
+      "id": "D-2",
+      "decision": "Business Source Licence 1.1 with an Additional Use Grant, paired with a specification under Apache-2.0.",
+      "date": "2026-10-23"
+    },
+    {
+      "id": "D-3",
+      "decision": "Elaborate mathematical machinery is permitted in this programme and prohibited on the host production tree. Re-import requires evidence and a proposal.",
+      "date": "2026-10-23"
+    },
+    {
+      "id": "D-4",
+      "decision": "Logistics is the active workstream. Electronic design automation is suspended and unstaffed.",
+      "date": "2026-10-23"
+    },
+    {
+      "id": "D-5",
+      "decision": "The event model is event-agnostic. Named events MUST NOT appear in decision logic.",
+      "date": "2026-10-23"
+    },
+    {
+      "id": "D-6",
+      "decision": "Data acquisition budget is zero. Only openly licensed data is used.",
+      "date": "2026-10-23"
+    },
+    {
+      "id": "D-7",
+      "decision": "Primary objective is professional reputation and a verifiable public artefact. Revenue is a secondary consequence.",
+      "date": "2026-10-23"
+    },
+    {
+      "id": "D-8",
+      "decision": "Schedule is 35 working days. The 90-day plan is withdrawn. Superseded by D-18, which re-baselines the schedule to five to seven working days.",
+      "date": "2026-10-23",
+      "superseded_by": "D-18"
+    },
+    {
+      "id": "D-9",
+      "decision": "The event model is layered, not six-dimensional: six physical axes plus propagation (4), information (2), institutions (3) and four catalyst domains with twelve indices.",
+      "date": "2026-10-23",
+      "reference": "SW-09"
+    },
+    {
+      "id": "D-10",
+      "decision": "Cascades are modelled as a branching process with k_eff = fanout x susceptibility x (1 + catalyst pressure), plus a percolation check on the largest connected component. Limits are stated: synthetic calibration only.",
+      "date": "2026-10-23",
+      "reference": "SW-09 section 3 and section 7"
+    },
+    {
+      "id": "D-11",
+      "decision": "Four structural catalysts are first-class: geoeconomic fragmentation, workforce volatility, credit and liquidity, cyber insecurity. Each adds gate codes rather than new narrative vocabulary.",
+      "date": "2026-10-23",
+      "reference": "SW-09 section 6"
+    },
+    {
+      "id": "D-12",
+      "decision": "All gate and planner decisions use integer micro-units and integer minutes, reusing ADR-001 of the host engine. Floating point is confined to transport and reporting.",
+      "date": "2026-10-23",
+      "reference": "SW-10"
+    },
+    {
+      "id": "D-13",
+      "decision": "Two implementations exist: the Python reference and a dependency-free Rust core. Conformance is proved by replaying exported instances; 300 of 300 agree. Release hashes are produced on the integer CPU path, never in a shader.",
+      "date": "2026-10-23",
+      "reference": "SW-10 sections 4 to 6"
+    },
+    {
+      "id": "D-14",
+      "decision": "Gate B4 is decided by a paired bootstrap with a zero guard band and a pre-registered ladder that raises coupling without lowering the bar. Both limbs must be reported even when only one is met.",
+      "date": "2026-10-23",
+      "reference": "SW-08"
+    },
+    {
+      "id": "D-15",
+      "decision": "Licence change date is two years from first public release. Two years is shorter than the BUSL-1.1 maximum of four, so it is compliant and reaches open source sooner. This supersedes the four-year answer for open decision 1.",
+      "date": "2026-10-22"
+    },
+    {
+      "id": "D-16",
+      "decision": "If gate B4 is non-separating, the artefact may be released as a plan auditor with reduced scope, provided SW-08 states the limitation in its first paragraph.",
+      "date": "2026-10-22"
+    },
+    {
+      "id": "D-17",
+      "decision": "No external domain reviewer is appointed. Limitations are recorded in SW-03, SW-11 and SW-12 instead of being hidden.",
+      "date": "2026-10-22"
+    },
+    {
+      "id": "D-18",
+      "decision": "The schedule is re-baselined to five to seven working days. The 35-day plan is withdrawn as unrepresentative of the work; this supersedes D-8.",
+      "date": "2026-10-22",
+      "supersedes": "D-8"
+    },
+    {
+      "id": "D-19",
+      "decision": "A physical layer is adopted only when it changes a decision, and its constants live in config/physics.json. Fields that do not change a decision stay in the survey, not in the code.",
+      "date": "2026-10-22"
+    },
+    {
+      "id": "D-20",
+      "decision": "The research tree is English and code only, with no CJK characters, and contains no if/elif dispatch: rules live in tables. Both rules are enforced by tests, not by review.",
+      "date": "2026-10-22"
+    },
+    {
+      "id": "D-21",
+      "decision": "The product name is Switchyard. Prior art was checked before adoption: the name is already used by an unrelated educational networking framework on the Python Package Index, so a Python distribution would need a suffix.",
+      "date": "2026-10-23",
+      "reference": "programme.json, product_name"
+    },
+    {
+      "id": "D-22",
+      "decision": "Ambient weather data is open reanalysis only: the free, keyless Open-Meteo archive API serving ERA5, frozen as a July 1991-2020 climatology in config/weather_regions.json. A live forecast ingest is out of scope until a consumer needs one.",
+      "date": "2026-10-23",
+      "reference": "SW-11"
+    },
+    {
+      "id": "D-23",
+      "decision": "Separation precedes new work. From 2026-10-23 this tree is a standalone repository: the copy held inside the host tree is extracted, the guard modules travel with it, and nothing here is a worktree of the host. The three candidate projects are deferred. Re-entry into the host system, and the repair of pain points in it, are recorded directions rather than scheduled work, and re-entry happens as a dependency or as a ported mechanism with tests, never by copying files into the host tree.",
+      "date": "2026-10-23",
+      "reference": "SW-SYS-09"
+    },
+    {
+      "id": "D-24",
+      "decision": "The product name is switchyard-logistics, by the owner's instruction on 2026-10-23; D-21 is superseded. The distribution name in pyproject.toml already carried the qualifier because `switchyard` is taken on the Python Package Index. The registry id SW-xx, the import package `switchyard` and the Rust binary `switchyard-core` are identifiers and are unchanged, so no document is renumbered and no import moves.",
+      "date": "2026-10-23",
+      "reference": "programme.json, product_name"
+    }
+  ],
+  "goal": {
+    "primary": "reputation_portfolio",
+    "secondary": "optional_revenue",
+    "success_definition": "An independent party reproduces the same release hash on a machine without a graphics processor and without credentials, and explains the verdict within five minutes.",
+    "not_goal": [
+      "become an electronic design automation vendor",
+      "acquire commercial data",
+      "introduce elaborate machinery into the production pipeline"
+    ]
+  },
+  "licensing": {
+    "strategy": "Source-available reference implementation with a freely licensed specification.",
+    "posture": "Source is public; production use is free for individuals and small organisations; each release becomes open source after a published date. The software MUST NOT be described as open source while the Business Source Licence applies.",
+    "components": [
+      {
+        "name": "gate-spec",
+        "what": "Vocabulary, gate codes, unsafe control actions, dispatch release schema. Documents only.",
+        "license": "Apache-2.0",
+        "why": "A specification must be freely available to be cited and independently implemented."
+      },
+      {
+        "name": "gate-ref",
+        "what": "Checker, simulator, replay. Source code.",
+        "license": "BSL-1.1",
+        "additional_use_grant": {
+          "production_use_free_for": [
+            "individuals",
+            "research and teaching",
+            "non-profit organisations",
+            "companies with annual revenue below USD 5M and fewer than 100 employees"
+          ],
+          "excluded": [
+            "offering this software as a competing managed or hosted service"
+          ],
+          "everything_else": "commercial licence required"
+        },
+        "change_license": "Apache-2.0",
+        "change_date_years": 4,
+        "why": "The implementation is the only component with commercial value, and it becomes open source on a fixed calendar.",
+        "change_date_basis": "BUSL-1.1 converts on the Change Date or the fourth anniversary of first public distribution, whichever comes first; a later date is inert. Four years is the maximum, not a preference.",
+        "per_version_clock": "Each released version starts its own four-year clock, so the current version is always protected without amending the licence.",
+        "commitments": [
+          "No retroactive extension of a published Change Date",
+          "No restriction added to the Additional Use Grant for a published version"
+        ],
+        "no_conversion_fallback": "PolyForm Shield 1.0.0 if a version must never convert"
+      }
+    ],
+    "alternatives_considered": [
+      {
+        "name": "PolyForm Small Business 1.0.0",
+        "advantage": "Prepared legal text; free below 100 people and USD 1M revenue.",
+        "limitation": "Fixed threshold with no change date; never becomes open source.",
+        "role": "fallback"
+      },
+      {
+        "name": "PolyForm Shield",
+        "advantage": "Explicit non-compete wording.",
+        "limitation": "Reads as hostile to the intended audience.",
+        "role": "clause inside a commercial licence"
+      },
+      {
+        "name": "AGPL-3.0",
+        "advantage": "Strong copyleft for hosted services.",
+        "limitation": "Rejected by infrastructure buyers; incompatible with a free tier for small users.",
+        "role": "rejected"
+      }
+    ],
+    "threshold_policy": "Threshold values are data and are changed only in this file. Revenue and headcount are used because both are verifiable; fleet size is not.",
+    "clean_room_stance": {
+      "legal_fact": "Copyright protects expression, not idea or behaviour. An independent implementation written from the published specification does not infringe.",
+      "therefore": [
+        "publish the specification deliberately",
+        "sell conformance testing and certification",
+        "retain the operational advantage in data, scenario packs, and integration",
+        "price the commercial licence below the cost of an independent reimplementation",
+        "protect the name through trademark policy rather than the idea through licence terms"
+      ],
+      "patent": "The commercial licence carries a patent grant with a retaliation clause, used only for a genuinely novel mechanism."
+    },
+    "never": [
+      "publish customer data or purchased data",
+      "claim that a passing verdict establishes legal or regulatory safety",
+      "describe a Business Source Licence release as open source"
+    ]
+  },
+  "event_agnostic": {
+    "invariant": "The gate decides from state and constraints. Event names MUST NOT appear in decision logic.",
+    "axes": [
+      {
+        "id": "onset_rate",
+        "values": [
+          "instant",
+          "gradual"
+        ]
+      },
+      {
+        "id": "notice_min",
+        "values": [
+          "0",
+          "hours",
+          "days"
+        ]
+      },
+      {
+        "id": "duration",
+        "values": [
+          "hours",
+          "days",
+          "weeks",
+          "months"
+        ]
+      },
+      {
+        "id": "magnitude",
+        "unit": "fraction",
+        "fields": [
+          "capacity_loss",
+          "lead_time_inflation",
+          "cost_inflation"
+        ]
+      },
+      {
+        "id": "scope",
+        "values": [
+          "node",
+          "lane",
+          "region",
+          "global"
+        ]
+      },
+      {
+        "id": "reversibility",
+        "values": [
+          "recoverable",
+          "structural"
+        ]
+      }
+    ],
+    "damage_patterns": [
+      {
+        "id": "D1",
+        "name": "Excessive dwell",
+        "detect": "time at node above node 95th percentile"
+      },
+      {
+        "id": "D2",
+        "name": "Thermal drift",
+        "detect": "rate of change above available cooling capacity",
+        "validation": "hypothesis model"
+      },
+      {
+        "id": "D3",
+        "name": "Broken handoff",
+        "detect": "missing accountable party, document, or timestamp at a boundary"
+      },
+      {
+        "id": "D4",
+        "name": "Slack exhaustion",
+        "detect": "critical path slack at or below zero",
+        "mechanism": "critical path method"
+      },
+      {
+        "id": "D5",
+        "name": "Capacity collapse",
+        "detect": "maximum flow below demand",
+        "mechanism": "minimum cut"
+      },
+      {
+        "id": "D6",
+        "name": "Stale decision",
+        "detect": "decision input age above freshness limit"
+      }
+    ],
+    "unsafe_control_actions": [
+      {
+        "id": "UCA1",
+        "action": "release without verified pre-cooling"
+      },
+      {
+        "id": "UCA2",
+        "action": "release with slack below maximum handoff time"
+      },
+      {
+        "id": "UCA3",
+        "action": "accept a reroute that removes temperature monitoring"
+      },
+      {
+        "id": "UCA4",
+        "action": "consolidate two temperature classes in one container"
+      },
+      {
+        "id": "UCA5",
+        "action": "depart on data older than the freshness limit"
+      },
+      {
+        "id": "UCA6",
+        "action": "accept an excursion without documented disposition"
+      },
+      {
+        "id": "UCA7",
+        "action": "release when receiving door is unconfirmed"
+      },
+      {
+        "id": "UCA8",
+        "action": "use an unassessed backup node"
+      },
+      {
+        "id": "UCA9",
+        "action": "depend on a single mode with an open blocking condition"
+      },
+      {
+        "id": "UCA10",
+        "action": "accept a cost reduction without recomputing excursion"
+      },
+      {
+        "id": "UCA11",
+        "action": "release without a per-leg accountable party"
+      },
+      {
+        "id": "UCA12",
+        "action": "accept a plan requiring approval when notice is zero"
+      }
+    ],
+    "verdicts": [
+      "PASS",
+      "PASS_WITH_CONDITION",
+      "BLOCKED"
+    ],
+    "banned_in_logic": [
+      "comparison against an event name",
+      "port, canal, or country names as branch conditions"
+    ],
+    "named_events_allowed_only_in": [
+      "scenarios/*.json"
+    ]
+  },
+  "import_back_policy": {
+    "rule": "Any mechanism from this programme re-enters production only through three steps: a research proposal, owner approval, and an implementation with tests.",
+    "forbidden_direct_edit": [
+      "core/outline/**",
+      "core/production_orchestrator.py",
+      "scripts/spine_guard.py"
+    ],
+    "why": "Decision D-3: elaborate machinery degrades the production path.",
+    "evidence_required": "Measured comparison against the current implementation. An assertion that the new approach is preferable is not evidence."
+  },
+  "verdict_of_prior_claims": {
+    "confirmed": [
+      "edmonds_karp_min_cut",
+      "dag_topological_sort",
+      "critical_path_method",
+      "generic_graph_relabeling"
+    ],
+    "label_only": [
+      "cellular_sheaf_cohomology"
+    ],
+    "degenerate_or_mislabeled": [
+      "non_equilibrium_thermo_speed_limit",
+      "three_phase_transit_state_machine"
+    ],
+    "unsupported": [
+      "success_probability_85_and_75",
+      "this_is_an_eda_or_logistics_product"
+    ],
+    "b4_measurement": {
+      "status": "measured_partial",
+      "date": "2026-10-23",
+      "excursion_limb": "met at intensities 1.0, 1.5 and 2.0; CI lower bounds 25.0 to 27.1 percent",
+      "unsafe_action_limb": "not met; point estimate 15.3 to 16.1 pp, CI lower bounds 13.0 to 13.8",
+      "claim_allowed": "fewer excursion minutes with a positive lower bound",
+      "claim_forbidden": "15 percentage points fewer unsafe control actions",
+      "reference": "SW-08"
+    }
+  },
+  "tracks": [
+    {
+      "id": "B",
+      "name": "Time-and-Temperature Critical Plans: Event-Agnostic Compliance Gate",
+      "status": "active",
+      "summary": "Returns PASS, PASS_WITH_CONDITION, or BLOCKED with a replayable dispatch release, independent of any event name.",
+      "spec": "docs/06_EVENT_AGNOSTIC_GATE.md",
+      "plan": "docs/05_PLAN_35_DAYS.md",
+      "prior_claim_probability": 0.75,
+      "my_probability": {
+        "outsider_reproduces_same_hash_35d": [
+          0.8,
+          0.9
+        ],
+        "cited_or_used_by_3_externals_6mo": [
+          0.25,
+          0.4
+        ],
+        "paying_pilot_ever": [
+          0.15,
+          0.25
+        ],
+        "feeds_back_into_novel_pipeline": [
+          0.5,
+          0.6
+        ]
+      },
+      "phases": [
+        {
+          "id": "P0",
+          "days": "1-5",
+          "name": "Definition and packaging",
+          "out": "specification, twelve gate codes, twelve unsafe control actions, scenario schema"
+        },
+        {
+          "id": "P1",
+          "days": "6-15",
+          "name": "Gate v0, deterministic",
+          "out": "checker, dispatch release, replay hash"
+        },
+        {
+          "id": "P2",
+          "days": "16-28",
+          "name": "Event-agnostic stress",
+          "out": "six-axis event generator, remedy menu, comparison against greedy baseline"
+        },
+        {
+          "id": "P3",
+          "days": "29-35",
+          "name": "Release",
+          "out": "specification under Apache-2.0, implementation under BSL, demonstration, article"
+        }
+      ],
+      "gates": [
+        {
+          "id": "B0",
+          "days": "1-5",
+          "deliverable": "specification from which a third party predicts verdicts",
+          "pass": ">=4 of 5 sample cases predicted correctly",
+          "kill": ">=2 incorrect predictions: specification ambiguous, revise before code"
+        },
+        {
+          "id": "B1",
+          "days": "6-12",
+          "deliverable": "lane dataset, >=50 nodes and >=150 lanes with temperature classes, open or documented synthetic",
+          "pass": "loads and validates; no event names in logic",
+          "kill": "open data insufficient: synthetic set with explicit assumptions"
+        },
+        {
+          "id": "B2",
+          "days": "13-15",
+          "deliverable": "gate v0 with twenty gold cases",
+          "pass": "20 of 20 agree; identical hash across three runs",
+          "kill": "unstable hash: stop"
+        },
+        {
+          "id": "B3",
+          "days": "16-24",
+          "deliverable": "six-axis event generator, damage patterns D1-D6, remedy menu",
+          "pass": "no event-name branches; unseen vectors execute",
+          "kill": "event-name branch required: structure incorrect, return to P0"
+        },
+        {
+          "id": "B4",
+          "days": "25-28",
+          "deliverable": "measurement against greedy baseline on held-out samples",
+          "pass": ">=15 percentage points fewer unsafe control actions or >=10 per cent fewer excursion minutes",
+          "kill": "no separation: release as plan auditor"
+        },
+        {
+          "id": "B5",
+          "days": "29-35",
+          "deliverable": "public release and five-minute demonstration",
+          "pass": "one external reproduction of the same hash",
+          "kill": null
+        }
+      ],
+      "constraints_removed": [
+        "no commercial data required",
+        "no dependence on a single crisis",
+        "no external investment"
+      ],
+      "risks": [
+        "thermal model unvalidated; label as hypothesis",
+        "compliance may be misread as regulatory certification"
+      ]
+    },
+    {
+      "id": "A",
+      "name": "Semiconductor Floorplanning and Routing",
+      "status": "paused_by_owner",
+      "paused_reason": "Decision D-4: logistics is the active workstream.",
+      "resume_condition": "Workstream B reaches gate B5, or decision D-4 is formally reversed.",
+      "detail": "_system/TRACK_A_EDA.md",
+      "prior_claim_probability": 0.85,
+      "my_probability": {
+        "become_eda_vendor": [
+          0.1,
+          0.15
+        ],
+        "benchmarked_open_artifact_6mo": [
+          0.5,
+          0.6
+        ]
+      },
+      "gates": [
+        {
+          "id": "A0",
+          "deliverable": "open toolchain and one benchmark execute on central processing units",
+          "pass": "baseline completes with log and hash",
+          "kill": "cannot install within two weeks: partitioner-only scope"
+        },
+        {
+          "id": "A4",
+          "deliverable": "public release and feedback",
+          "pass": ">=3 external issues",
+          "kill": "no interest: portfolio only"
+        }
+      ]
+    }
+  ],
+  "open_owner_decisions": [
+    {
+      "id": 1,
+      "question": "Business Source Licence change date: four years or two years?",
+      "options": [
+        "4y",
+        "2y",
+        "unspecified"
+      ],
+      "status": "resolved",
+      "resolution": "Two years, per D-15. Four years remains the legal maximum, not the chosen value.",
+      "resolved_date": "2026-10-22"
+    },
+    {
+      "id": 2,
+      "question": "May a non-separating result at gate B4 be released as a plan auditor?",
+      "options": [
+        "yes",
+        "specification only"
+      ],
+      "status": "resolved",
+      "resolution": "Yes, per D-16, with the limitation stated in SW-08. In this run the gate separates, so the fallback is unused.",
+      "resolved_date": "2026-10-22"
+    },
+    {
+      "id": 3,
+      "question": "What is the product name? The artefact is referred to by registry id SW until the owner decides.",
+      "options": [
+        "Switchyard"
+      ],
+      "status": "resolved",
+      "resolution": "Switchyard, chosen by the owner on 2026-10-23 and recorded here as the product name. The registry id SW-xx stays as the document and gate identifier, so no document has to be renumbered. Prior art checked the same day: the name is used by an unrelated educational networking framework published on the Python Package Index (switchyard 1.0.1, GPLv3) and by a retired integration product. Both are different fields, so the name is usable as a product name; it is NOT usable as a Python distribution name, which must carry a suffix (for example switchyard-logistics) if anything is ever published.",
+      "resolved_date": "2026-10-23"
+    }
+  ],
+  "resolved_owner_decisions": [
+    {
+      "id": 1,
+      "was": "approve installation of an electronic design automation toolchain?",
+      "answer": "not required; EDA suspended",
+      "resolved": "2026-10-23"
+    },
+    {
+      "id": 2,
+      "was": "data budget?",
+      "answer": "$0, open data only",
+      "resolved": "2026-10-23"
+    },
+    {
+      "id": 3,
+      "was": "workstream order?",
+      "answer": "logistics first; EDA suspended",
+      "resolved": "2026-10-23"
+    },
+    {
+      "id": 4,
+      "was": "primary objective?",
+      "answer": "reputation and portfolio; revenue secondary",
+      "resolved": "2026-10-23"
+    },
+    {
+      "id": 5,
+      "was": "documentation language and style?",
+      "answer": "professional English; decorative markers prohibited",
+      "resolved": "2026-10-23"
+    },
+    {
+      "id": 6,
+      "question": "Business Source Licence change date",
+      "answer": "Two years (D-15); four years is the legal maximum, not the chosen value",
+      "date": "2026-10-23",
+      "rationale": "Recorded here to match the decision log: the change date is two years from publication, and the licence text converts at that anniversary. The earlier entry in this file said four years, which contradicted D-15 and has been corrected."
+    },
+    {
+      "id": 7,
+      "question": "Which ambient weather data may the research programme use?",
+      "answer": "Free open reanalysis only: Open-Meteo archive API (ERA5), keyless, no account",
+      "date": "2026-10-23",
+      "rationale": "Keeps the data budget at zero as decided (D-02) and makes every number checkable by a reader. The profile table is a frozen July 1991-2020 climatology committed as config/weather_regions.json, with attribution inside the file because the licence is CC BY 4.0. A live forecast ingest, if ever wanted, is the same seam with a fresher snapshot."
+    }
+  ],
+  "market_evidence": [
+    {
+      "what": "Cold chain logistics market",
+      "size_2026": "USD 384.9B",
+      "size_2032": "USD 555.4B",
+      "cagr": "6.34 per cent",
+      "source": "Mordor Intelligence",
+      "retrieved_at": "2026-10-23"
+    },
+    {
+      "what": "Suez route recovery",
+      "fact": "approximately two thirds of Far East to Europe capacity returned to Suez",
+      "source": "The Loadstar",
+      "published": "2026-10-21",
+      "consequence": "a product premised on a permanent closure is unsound"
+    },
+    {
+      "what": "Electronic design automation market (suspended workstream)",
+      "size_2026": "USD 20.78B",
+      "size_2031": "USD 30.67B",
+      "cagr": "8.1 per cent",
+      "source": "Mordor Intelligence",
+      "retrieved_at": "2026-10-23"
+    },
+    {
+      "what": "Incumbent partnership (suspended workstream)",
+      "fact": "OpenAI and Synopsys announced a joint model that operates electronic design automation tools",
+      "source": "Tom's Hardware",
+      "published": "2026-10-06"
+    }
+  ],
+  "forbidden_claims": [
+    {
+      "phrase": "15 pp fewer unsafe control actions",
+      "why": "The phrase asserts a specific comparator and rounding. The measured point estimate is larger, but the comparison basis and the rounding differ, so the phrase overstates what the report supports."
+    }
+  ],
+  "future_projects": {
+    "_doc": "Ideas recorded for later. None is started, and no name here is a decision.",
+    "recorded": "2026-10-23",
+    "family": "Switchyard is the first of four planned projects. The other three and the mass-market check are in _system/FUTURE_PROJECTS.md.",
+    "separation": {
+      "status": "not_started",
+      "task": "Move  out of the host tree into its own repository with its own licence, so nothing in it depends on the host system."
+    },
+    "dedupe": {
+      "status": "not_started",
+      "task": "Delete files under  that duplicate the host tree; the host copy is the one that stays."
+    },
+    "candidates": [
+      {
+        "id": "flow-core",
+        "status": "not_started",
+        "subject": "Graph and causal invariants: cycle and paradox detection, max-flow min-cut bottleneck, critical path with slack.",
+        "exists_today": "Only max-flow with a min-cut certificate (src/switchyard/graph.py, 168 lines). Cycle detection and critical path are not written.",
+        "name_pypi": "free",
+        "name_crates": "taken",
+        "note": "The crates.io name is taken, so a Rust crate needs a suffix."
+      },
+      {
+        "id": "exact-sim",
+        "status": "not_started",
+        "subject": "Bit-exact fixed-point state machine with rule tables and replay hashes.",
+        "exists_today": "Substantial: integer micro-units, a seeded PRNG with stream splitting, canonical JSON and content hashing, plus a dependency-free Rust replay core.",
+        "name_pypi": "free",
+        "name_crates": "free",
+        "note": "Closest to shippable of the three."
+      },
+      {
+        "id": "tda-lite",
+        "status": "not_started",
+        "subject": "Betti-1 cycle detection over Vietoris-Rips complexes for anomaly detection.",
+        "exists_today": "Nothing. No simplicial, homology, or persistence code exists in the tree.",
+        "name_pypi": "free",
+        "name_crates": "free",
+        "note": "Greenfield, largest effort, smallest audience."
+      }
+    ],
+    "mass_market_note": "The three candidates address niche but high-stakes pain. The pain that most developers report is different: review load and low-quality generated code, slow pipelines, unbounded technical debt, and cloud or token cost. See _system/FUTURE_PROJECTS.md section 4."
+  }
+}

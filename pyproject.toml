@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+# The distribution name is not the import name. `switchyard` is already published on the
+# Python Package Index by an unrelated project, so the distribution carries a qualifier and
+# the package stays `switchyard`. Checked on 2026-10-23.
+name = "switchyard-logistics"
+version = "0.1.0"
+description = "Deterministic compliance gate for cold-chain logistics plans: a fixed-point Python reference, a dependency-free Rust replay core, and the measurements that compare them"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = []
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Topic :: Scientific/Engineering",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=8"]
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

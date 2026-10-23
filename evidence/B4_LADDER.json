@@ -1,0 +1,169 @@
+{
+  "conclusion": "separation at intensity 1.0",
+  "levels": [
+    1.0,
+    1.5,
+    2.0
+  ],
+  "rows": [
+    {
+      "baseline": {
+        "blocked_rate": 0.99,
+        "blocks_mean": 9.433,
+        "cost_mean": 103.63,
+        "excursion_mean": 28.6,
+        "uca_free_rate": 0.0,
+        "uca_mean": 12.22
+      },
+      "composed": {
+        "blocked_rate": 0.9733,
+        "blocks_mean": 7.617,
+        "cost_mean": 102.7,
+        "excursion_mean": 16.1,
+        "uca_free_rate": 0.0033,
+        "uca_mean": 10.3
+      },
+      "decision": {
+        "blocks_guard_pass": true,
+        "excursion_gate_pass": true,
+        "rule": "uca CI lower bound at least 15 pp OR excursion CI lower bound at least 10 percent, with blocks not worse",
+        "status": "SEPARATES",
+        "uca_gate_pass": false
+      },
+      "effect": {
+        "baseline_selected": 79,
+        "blocks_delta_ci95": [
+          1.563,
+          1.817
+        ],
+        "excursion_reduction_pct": 50.93,
+        "excursion_reduction_pct_ci95": [
+          25.93,
+          75.93
+        ],
+        "priced_selected": 221,
+        "uca_reduction_pp": 15.71,
+        "uca_reduction_pp_ci95": [
+          13.42,
+          18.11
+        ]
+      },
+      "elapsed_s": 12.02,
+      "first_hash": "30705ef69b25ba8bb4921760851a7088",
+      "intensity": 1.0,
+      "scenarios": 300,
+      "seed": 20261023,
+      "thresholds": {
+        "materiality_excursion_ratio": 10.0,
+        "materiality_uca_points": 15.0
+      }
+    },
+    {
+      "baseline": {
+        "blocked_rate": 0.99,
+        "blocks_mean": 10.233,
+        "cost_mean": 94.53,
+        "excursion_mean": 23.6,
+        "uca_free_rate": 0.0,
+        "uca_mean": 13.067
+      },
+      "composed": {
+        "blocked_rate": 0.98,
+        "blocks_mean": 8.24,
+        "cost_mean": 89.74,
+        "excursion_mean": 12.5,
+        "uca_free_rate": 0.0033,
+        "uca_mean": 11.073
+      },
+      "decision": {
+        "blocks_guard_pass": true,
+        "excursion_gate_pass": true,
+        "rule": "uca CI lower bound at least 15 pp OR excursion CI lower bound at least 10 percent, with blocks not worse",
+        "status": "SEPARATES",
+        "uca_gate_pass": false
+      },
+      "effect": {
+        "baseline_selected": 89,
+        "blocks_delta_ci95": [
+          1.727,
+          1.993
+        ],
+        "excursion_reduction_pct": 54.17,
+        "excursion_reduction_pct_ci95": [
+          27.08,
+          81.25
+        ],
+        "priced_selected": 211,
+        "uca_reduction_pp": 15.26,
+        "uca_reduction_pp_ci95": [
+          12.98,
+          17.6
+        ]
+      },
+      "elapsed_s": 12.06,
+      "first_hash": "4f7b16402bce4676eec1635b8795ef08",
+      "intensity": 1.5,
+      "scenarios": 300,
+      "seed": 20261023,
+      "thresholds": {
+        "materiality_excursion_ratio": 10.0,
+        "materiality_uca_points": 15.0
+      }
+    },
+    {
+      "baseline": {
+        "blocked_rate": 0.9933,
+        "blocks_mean": 11.04,
+        "cost_mean": 89.85,
+        "excursion_mean": 22.2,
+        "uca_free_rate": 0.0,
+        "uca_mean": 14.023
+      },
+      "composed": {
+        "blocked_rate": 0.9867,
+        "blocks_mean": 8.75,
+        "cost_mean": 81.28,
+        "excursion_mean": 8.9,
+        "uca_free_rate": 0.0033,
+        "uca_mean": 11.76
+      },
+      "decision": {
+        "blocks_guard_pass": true,
+        "excursion_gate_pass": true,
+        "rule": "uca CI lower bound at least 15 pp OR excursion CI lower bound at least 10 percent, with blocks not worse",
+        "status": "SEPARATES",
+        "uca_gate_pass": false
+      },
+      "effect": {
+        "baseline_selected": 94,
+        "blocks_delta_ci95": [
+          1.973,
+          2.29
+        ],
+        "excursion_reduction_pct": 58.33,
+        "excursion_reduction_pct_ci95": [
+          25.0,
+          89.29
+        ],
+        "priced_selected": 206,
+        "uca_reduction_pp": 16.14,
+        "uca_reduction_pp_ci95": [
+          13.81,
+          18.64
+        ]
+      },
+      "elapsed_s": 11.14,
+      "first_hash": "2b9130dcbb2813fa454490f9a046dd85",
+      "intensity": 2.0,
+      "scenarios": 300,
+      "seed": 20261023,
+      "thresholds": {
+        "materiality_excursion_ratio": 10.0,
+        "materiality_uca_points": 15.0
+      }
+    }
+  ],
+  "scenarios_per_level": 300,
+  "seed": 20261023,
+  "separating_level": 1.0
+}
