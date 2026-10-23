@@ -4,7 +4,7 @@
 |---|---|
 | Document ID | SW-PKG |
 | Kind | Repository document (published) |
-| Version | 1.0 |
+| Version | 1.1 |
 | Status | Active |
 | Date | 2026-10-23 |
 | Scope | The exact set of paths that make up the published artefact |
@@ -24,6 +24,8 @@ section 2 and nowhere else. A path that is not listed is not published, even if 
 ```
 README.md
 PACKAGE.md
+LICENSE
+LICENSE-SPEC
 docs/02_TRACK_B_COLDCHAIN.md
 docs/03_EVIDENCE_2026.md
 docs/05_REPRODUCTION.md
@@ -61,7 +63,9 @@ engine/src/main.rs
    missing from section 2, or if a `_system` path appears in it.
 3. `tests/test_research_scrub_s.py` fails on a personal name, an e-mail address, a phone
    number, a host path, or a third-party product token anywhere in the tree that git would
-   publish.
+   publish. The licence files are the one exemption, because a licence must name its holder:
+   the set is exactly `LICENSE` and `LICENSE-SPEC`, it is resolved by path, and a second test
+   proves the name appears in no other tracked file.
 4. `tests/test_research_project_s.py` fails if a document loses its identification block, its
    ASCII property, or its metadata.
 

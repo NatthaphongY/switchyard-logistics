@@ -4,7 +4,7 @@
 |---|---|
 | Document ID | SW-SYS-01 |
 | Kind | System record (internal; not published) |
-| Version | 1.2 |
+| Version | 1.3 |
 | Status | Active |
 | Date | 2026-10-23 |
 | Machine record | `programme.json` in this directory; this file is its readable form |
@@ -54,6 +54,8 @@ reaches `README.md`, `PACKAGE.md` or `docs/`.
 | D-23 | Separation precedes new work. From 2026-10-23 this tree is a standalone repository: the copy held inside the host tree is extracted, the guard modules travel with it, and nothing here is a worktree of the host. The three candidate projects are deferred. Re-entry into the host system, and the repair of pain points in it, are recorded directions rather than scheduled work, and re-entry happens as a dependency or as a ported mechanism with tests, never by copying files into the host tree. | 2026-10-23 | SW-SYS-09 |
 | D-24 | The product name is switchyard-logistics, by the owner's instruction on 2026-10-23; D-21 is superseded. The distribution name in pyproject.toml already carried the qualifier because `switchyard` is taken on the Python Package Index. The registry id SW-xx, the import package `switchyard` and the Rust binary `switchyard-core` are identifiers and are unchanged, so no document is renumbered and no import moves. | 2026-10-23 | programme.json, product_name |
 | D-25 | The earlier commit enters this repository as an ancestor, and the host copy is deleted only after three checks. Commit 8c4d712a is carried by a root commit whose tree is its research/ subtree byte for byte (0214f168) with the original author, date and message, merged into this branch with the ours strategy, so the ancestry is restored without moving the tree. Deletion was cleared by: all 147 refs of the copy resolving to objects the host repository holds; all 58 uncommitted paths captured in `_system/host_transfer/` with a hash each; and 37 files written inside the copy after it was made classified, the 20 that nothing else carried archived and then moved out of the repository on the owner's instruction, because they are host-side state rather than work of this programme. Deleting a duplicate without those three checks is a guess, not a cleanup. | 2026-10-23 | SW-SYS-TRANSFER, SW-SYS-06 |
+| D-26 | The copyright holder is a natural person publishing as an individual developer, and no company is registered: registration costs time the release does not have. The holder is named only on the Licensor line of `LICENSE`. Two licence files are written from the canonical texts instead of being retyped: `LICENSE` is BUSL-1.1 with the Licensor, the Additional Use Grant, Change Date 2028-10-23 and Change License Apache-2.0, and `LICENSE-SPEC` is the Apache-2.0 text verbatim. The publication scrub learns exactly one exemption, resolved by path and pinned by a test, because a licence that cannot name its holder is not a licence; the holder line is the only personal name in the tree. | 2026-10-23 | `LICENSE`, `LICENSE-SPEC`, SW-07, D-2 |
+| D-27 | The product name switchyard-logistics is provisional. The owner will rename the product, `flow-core` is to be renamed before it is published, and the two further candidates come later. Identifiers that carry history move only with a migration: the SW-xx document and gate ids, the import package `switchyard` and the binary `switchyard-core`. A rename of the product therefore renumbers no document and breaks no import. | 2026-10-23 | product_name, SW-SYS-09 section 5 |
 
 ## 3. Answers given before the record was opened
 
@@ -74,13 +76,13 @@ reaches `README.md`, `PACKAGE.md` or `docs/`.
 | 1 | Business Source Licence change date: four years or two years? | 4y, 2y, unspecified | resolved | Two years, per D-15. Four years remains the legal maximum, not the chosen value. | 2026-10-22 |
 | 2 | May a non-separating result at gate B4 be released as a plan auditor? | yes, specification only | resolved | Yes, per D-16, with the limitation stated in SW-08. In this run the gate separates, so the fallback is unused. | 2026-10-22 |
 | 3 | What is the product name? The artefact is referred to by registry id SW until the owner decides. | Switchyard | resolved | switchyard-logistics, fixed by the owner on 2026-10-23 (D-24) and recorded here as the product name. The registry id SW-xx stays as the document and gate identifier, so no document has to be renumbered. Prior art checked the same day: the name is used by an unrelated educational networking framework published on the Python Package Index (switchyard 1.0.1, GPLv3) and by a retired integration product. Both are different fields, so the name is usable as a product name; it is NOT usable as a Python distribution name, which must carry a suffix (for example switchyard-logistics) if anything is ever published. | 2026-10-23 |
-| 4 | Which licence text goes in `LICENSE`, and who is the holder: the person or an entity? | person, entity, defer | open | Deferred by the owner on 2026-10-23. The record declares Apache-2.0 for the specification and a source-available posture for the code, but no `LICENSE` file exists yet, and the gate that keeps personal names out of published files stands in the way of a holder line until the question is answered. | 2026-10-23 |
+| 4 | Which licence text goes in `LICENSE`, and who is the holder: the person or an entity? | person, entity, defer | resolved | The person, publishing as an individual developer; no entity is formed and no registration is filed (D-26). `LICENSE` carries the name on its Licensor line and `LICENSE-SPEC` carries none, so the specification licence stays anonymous while the code licence is valid. The scrub keeps one documented exemption for those two paths and still fails on the name anywhere else. | 2026-10-23 |
 
 ## 5. Product name and prior art
 
 | Field | Value |
 |---|---|
-| Product name | Switchyard |
+| Product name | switchyard-logistics (provisional; the owner will rename it, D-27) |
 | Date | 2026-10-23 |
 | Scope | Product name only. Document and gate identifiers stay SW-xx, so evidence filenames, thresholds and imports are unchanged. |
 

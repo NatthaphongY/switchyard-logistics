@@ -49,9 +49,10 @@ The normative document is SW-06. Where any other document conflicts with it, SW-
 These properties are binding on the released artefact. Each is enforced by code or by a test,
 not by convention.
 
-1. Two licences with different purposes: the specification is Apache-2.0 so it can be cited and
-   independently implemented; the reference implementation is Business Source Licence 1.1 with
-   an Additional Use Grant; the names and marks are not licensed (SW-07).
+1. Two licences with different purposes: the specification is Apache-2.0 in `LICENSE-SPEC`, so it
+   can be cited and independently implemented; the reference implementation is Business Source
+   Licence 1.1 in `LICENSE`, with an Additional Use Grant and a published Change Date; the names
+   and marks are not licensed (SW-07).
 2. The gate is event-agnostic. Decision logic reads state and constraints; a named event never
    appears in a branch, a table key, or a threshold (SW-06 section 3).
 3. All decisions use integer micro-units and integer minutes. Floating point is confined to

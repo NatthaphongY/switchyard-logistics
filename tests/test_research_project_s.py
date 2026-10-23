@@ -16,6 +16,7 @@ here and force the audit to be updated instead of silently diverging.
 """
 from __future__ import annotations
 
+import hashlib
 import json
 import pathlib
 
@@ -139,6 +140,47 @@ def test_bsl_grant_has_verifiable_thresholds_and_a_change_date():
     assert any("hosted service" in x.lower() for x in grant["excluded"])
     assert ref["change_license"] == "Apache-2.0"
     assert ref["change_date_years"] in (2, 4), "BSL caps the change date at four years"
+
+
+def _licence_digest(path: pathlib.Path) -> str:
+    """Digest of the licence text with line endings normalised to LF.
+
+    Git stores these files with LF and may check them out with CRLF on Windows, so the raw
+    bytes differ between machines while the text does not. Normalising keeps the recorded
+    digest meaningful on both, and still catches a change of wording.
+    """
+    text = path.read_bytes().decode("utf-8").replace("\r\n", "\n")
+    return hashlib.sha256(text.encode("utf-8")).hexdigest()
+
+
+def test_the_licence_files_carry_the_recorded_terms_and_their_digests():
+    """A licence is legal text: it changes by decision, and the record holds its digest.
+
+    The two files are the only place in this tree where a personal name is allowed, so the
+    terms in them are pinned here rather than trusted to stay in step with the registry.
+    The digest check is the honest half: editing the wording without recording it fails.
+    """
+    code = (ROOT / "LICENSE").read_text(encoding="utf-8")
+    spec = (ROOT / "LICENSE-SPEC").read_text(encoding="utf-8")
+    assert code.startswith("Business Source License 1.1")
+    assert "Licensor:" in code, "BUSL-1.1 requires the licensor to be specified"
+    assert "Change License:       Apache License, Version 2.0" in code
+    assert "Change Date:          2028-10-23" in code, "two years from first distribution (D-15)"
+    assert "USD 5 million" in code and "fewer than 100" in code, (
+        "the grant in the text and the threshold in the registry must be the same sentence"
+    )
+    ref = {c["name"]: c for c in _reg()["licensing"]["components"]}["gate-ref"]
+    assert ref["change_date_years"] == 2, "D-15 fixes two years; four is the legal ceiling"
+    assert spec.lstrip().startswith("Apache License")
+    assert "Version 2.0, January 2004" in spec, "the specification licence is the Apache text"
+    files = _reg()["licensing"]["files"]
+    assert set(files) == {"code", "specification"}
+    for entry in files.values():
+        path = ROOT / entry["path"]
+        assert path.is_file(), entry["path"]
+        assert _licence_digest(path) == entry["sha256"], (
+            f"{entry['path']} changed without the registry being updated"
+        )
 
 
 def test_licensing_records_the_clean_room_reality_and_label_rules():

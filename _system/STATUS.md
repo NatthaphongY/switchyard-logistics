@@ -4,7 +4,7 @@
 |---|---|
 | Document ID | SW-SYS-06 |
 | Kind | System record (internal; not published) |
-| Version | 1.3 |
+| Version | 1.4 |
 | Status | Active |
 | Date | 2026-10-23 |
 
@@ -22,7 +22,8 @@
 | History | Grafted 2026-10-23 (D-25): `8c4d712a` is an ancestor of this branch through a root commit whose tree is its `research/` subtree, so the earlier work keeps its author, date and message |
 | Host copy | Deleted 2026-10-23 after three checks; 318.1 MB returned. Its uncommitted work is recorded in `_system/host_transfer/`, and the commit it held remains in the host repository |
 | Orphan box | Moved out of the repository on 2026-10-23 (owner's instruction): the 20 host-side files live in the folder `switchyard_host_transfer_20261023`, and this tree keeps the record and the digest |
-| Licence | Deferred by the owner (question 4): no `LICENSE` file yet, holder undecided. The texts still declare Apache-2.0 for the specification and a source-available posture for the code |
+| Licence | Written 2026-10-23 (D-26): `LICENSE` is BUSL-1.1 with the holder named on its Licensor line, Change Date 2028-10-23 and Change License Apache-2.0; `LICENSE-SPEC` is the Apache-2.0 text verbatim. The holder is one natural person publishing as an individual; no entity is formed. The scrub keeps one exemption for those two paths and still fails on the name anywhere else |
+| Naming | switchyard-logistics is provisional (D-27): the owner will rename the product, `flow-core` is renamed before publication, and the two further candidates come later. SW-xx ids, the package `switchyard` and the binary `switchyard-core` move only with a migration |
 | Future projects | Three candidates recorded and deferred by the owner (D-23); two further directions recorded and unscheduled (SW-SYS-09 section 8) |
 
 ## 2. Open items
@@ -41,7 +42,8 @@
    the gate; the commands are in `README.md` section 7.
 5. Separation is closed as of 2026-10-23 (D-23, D-25). The earlier commit is an ancestor, the host
    copy is deleted, and its uncommitted work is recorded in `_system/host_transfer/` with a hash
-   for every path. What is left from that batch is the licence (question 4).
+   for every path. The licence that batch still owed was written the same day (D-26), so nothing
+   from that batch is open.
 6. Duplication was measured before the deletion, not assumed: the copy held 147 refs that all
    resolved to objects the host repository holds, 58 uncommitted paths (recorded), and 37 files
    written inside it after it was made, of which nothing but the 20 now archived carried their

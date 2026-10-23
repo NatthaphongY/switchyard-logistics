@@ -58,6 +58,13 @@ LEAK_PATTERNS = {
 PERSONAL_NAME_DIGESTS = frozenset({"e8a887fcd8517bdf", "a2a2f60cd47ac3f7", "0a4d20c6aead3bdf"})
 WORD = re.compile(r"[A-Za-z][A-Za-z._-]{3,}")
 
+# A licence has to name its copyright holder, and this holder is a natural person
+# publishing as an individual rather than an entity (D-26, owner 2026-10-23). Exactly
+# two files carry that one line: the code licence and the specification licence. The
+# exemption is resolved by path and stated here, never inferred from a file name or a
+# missing suffix, and a test below proves the name appears in no other tracked file.
+HOLDER_FILES = frozenset({"LICENSE", "LICENSE-SPEC"})
+
 
 def _digest(word: str) -> str:
     return hashlib.sha256(word.lower().encode("utf-8")).hexdigest()[:DIGEST_CHARS]
@@ -84,6 +91,18 @@ def _tracked_or_unignored(path: Path) -> bool:
     return result.returncode != 0
 
 
+def _tracked() -> list:
+    """Every path git would publish, one entry per file, never split on spaces.
+
+    `-z` rather than line splitting: a path with a space in it would be silently
+    skipped, and a guard that skips files reports an empty result it has not earned.
+    """
+    output = subprocess.run(
+        ["git", "ls-files", "-z"], cwd=ROOT, capture_output=True
+    ).stdout
+    return [entry for entry in output.decode("utf-8").split("\0") if entry]
+
+
 def _public_files():
     instrument = Path(__file__).resolve()
     for path in sorted(RESEARCH.rglob("*")):
@@ -93,6 +112,9 @@ def _public_files():
         # to work at all, so this module cannot pass its own scan. The exemption is one
         # file, resolved by path, and it is stated rather than inferred from a name.
         if path.resolve() == instrument:
+            continue
+        # The licence files name the holder on purpose; see HOLDER_FILES above.
+        if path.relative_to(ROOT).as_posix() in HOLDER_FILES:
             continue
         if _tracked_or_unignored(path):
             yield path
@@ -165,3 +187,41 @@ def test_the_name_check_fires_without_publishing_the_names():
         len(entry) == DIGEST_CHARS and set(entry) <= set("0123456789abcdef")
         for entry in PERSONAL_NAME_DIGESTS
     ), "the guard must hold digests, never the names it protects"
+
+
+def test_the_copyright_holder_is_named_only_in_the_licence_files():
+    """One personal name is allowed in this tree, and only on the holder line.
+
+    The name is read out of `LICENSE` rather than written here, because a guard that
+    repeats the name it protects is itself the leak. The exemption is exactly two paths,
+    pinned below. Every other tracked file is searched for the name, including the
+    extensionless ones that the suffix filter in `_public_files` never reaches, so the
+    exemption cannot widen by a file being renamed or by a copy being left somewhere.
+    """
+    assert HOLDER_FILES == {"LICENSE", "LICENSE-SPEC"}, (
+        "widening the holder exemption is a decision (D-26), not an edit here"
+    )
+    licences = {name: (ROOT / name).read_text(encoding="utf-8") for name in HOLDER_FILES}
+    holders = [
+        line.split(":", 1)[1].strip()
+        for line in licences["LICENSE"].splitlines()
+        if line.startswith("Licensor:")
+    ]
+    assert holders and holders[0], "LICENSE must name the holder on a Licensor line"
+    holder = holders[0]
+    assert _digest(holder.split()[0]) in PERSONAL_NAME_DIGESTS, (
+        "the holder must be one of the names this guard exists to protect, "
+        "otherwise the exemption proves nothing"
+    )
+    assert holder not in licences["LICENSE-SPEC"], (
+        "the specification licence carries no holder line; scope is stated in SW-07"
+    )
+    offenders = []
+    for relative in _tracked():
+        if relative in HOLDER_FILES:
+            continue
+        path = ROOT / relative
+        if path.is_file() and holder in path.read_text(encoding="utf-8", errors="replace"):
+            offenders.append(relative)
+    assert offenders == [], f"the holder's name appears outside the licence: {offenders}"
+

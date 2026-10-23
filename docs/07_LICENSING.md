@@ -4,7 +4,7 @@
 |---|---|
 | Document ID | SW-07 |
 | Kind | Repository document (published) |
-| Version | 2.0 |
+| Version | 2.1 |
 | Status | In force from the first public distribution |
 | Date | 2026-10-23 |
 | Normative status | Informative; threshold values are held in the registry |
@@ -19,6 +19,22 @@ either forfeits the commercial position or discourages adoption.
 | Specification: vocabulary, gate codes, unsafe control actions, release schema | Apache-2.0 | Enable citation and independent implementation. A standard that is not freely available is not a standard |
 | Reference implementation: checker, simulator, replay | Business Source Licence 1.1 with an Additional Use Grant | Free for parties who cannot pay; licensed for parties who can |
 | Names and marks | Trademark policy; no licence granted | Prevent a derivative from representing itself as a certified implementation |
+
+### Where the texts live
+
+The two licence texts sit in the repository root and were taken from the SPDX licence list
+rather than retyped, so the wording is the published one.
+
+| File | Licence | Applies to |
+|---|---|---|
+| `LICENSE` | Business Source Licence 1.1, with the Licensor, the Additional Use Grant, the Change Date and the Change License specified | The reference implementation: `src/switchyard`, `engine`, `scripts`, `config`, `evidence`, `tests` |
+| `LICENSE-SPEC` | Apache-2.0, verbatim and unannotated | The documents under `docs/`, the artefact table above, and any third-party implementation written from them |
+
+The copyright holder is one natural person, publishing as an individual developer. The holder
+is named on the Licensor line of `LICENSE` and in no other place in this repository, and the
+release gate enforces exactly that: one exemption, for those two paths, resolved by path and
+proved not to widen. A licence that cannot name its holder is not a licence; a name repeated
+across a repository is a leak.
 
 ## 2. Business Source Licence 1.1 configuration
 
@@ -122,9 +138,10 @@ certification, and the commercial position.
 ## 6. Execution checklist for gate B5
 
 1. `LICENSE` with completed Additional Use Grant, Change Licence, and Change Date in the
-   reference implementation.
-2. `LICENSE` under Apache-2.0 and a `NOTICE` file in the specification.
-3. SPDX identifiers in every source file header.
+   reference implementation. Written 2026-10-23.
+2. `LICENSE-SPEC` under Apache-2.0. Written 2026-10-23. A `NOTICE` file is still owed for the
+   specification, because the Apache text is kept verbatim and is not annotated in place.
+3. SPDX identifiers in every source file header. Not written.
 4. `COMMERCIAL.md` stating who requires a licence, how to obtain one, and the price tiers.
 5. `TRADEMARK.md` stating what may and may not be described as certified.
 6. `CONTRIBUTING.md` with contribution licence terms; without these, contributions cannot be

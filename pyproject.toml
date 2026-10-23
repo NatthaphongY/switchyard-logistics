@@ -10,6 +10,7 @@ name = "switchyard-logistics"
 version = "0.1.0"
 description = "Deterministic compliance gate for cold-chain logistics plans: a fixed-point Python reference, a dependency-free Rust replay core, and the measurements that compare them"
 readme = "README.md"
+license = { file = "LICENSE" }
 requires-python = ">=3.11"
 dependencies = []
 classifiers = [

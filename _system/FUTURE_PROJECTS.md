@@ -4,7 +4,7 @@
 |---|---|
 | Document ID | SW-SYS-09 |
 | Kind | System record (internal; not published) |
-| Version | 1.0 |
+| Version | 1.1 |
 | Status | Task A executed 2026-10-23. Tasks B to D recorded, not started |
 | Date | 2026-10-23 |
 | Machine record | `programme.json -> future_projects` |
@@ -57,7 +57,7 @@ followed by one full test run. Doing it half way is worse than not doing it.
 | Gates | Ten guard modules carried across. Their root expression was `parents[1]` plus the old prefix; it is now `parents[1]` alone, so the modules resolve to the new root without a special case |
 | Paths | Every written path rewritten. The replacement required a delimiter check rather than a plain search, because `web_research` contains the same letters and must not be touched |
 | Records | The registry rule set named the host layout in `write_scope` and `read_only_paths`. Neither path is reachable from the new root, so the scope became `repository/**` and the read-only list became empty. A rule that names an unreachable path is worse than no rule: it reads as a guarantee |
-| Licence files | Not written. The terms are recorded in D-2 and in the published licensing document, but a `LICENSE` file is still owed, and it needs a copyright holder name, which the publication scrub rejects by design. That tension is an open question, not an oversight |
+| Licence files | Written on 2026-10-23 (D-26), after the owner settled the holder. `LICENSE` is BUSL-1.1 with the holder named on the Licensor line, Change Date 2028-10-23 and Change License Apache-2.0; `LICENSE-SPEC` is the Apache-2.0 text verbatim. Both were taken from the SPDX licence list rather than retyped, and the record holds a digest of each. The holder is one natural person publishing as an individual, so the tree carries one personal name, on one line, in two files |
 | History | Not transferred. The new repository starts from the copied state. The host commit and the uncommitted work still exist only in the original folder, so the folder must not be deleted before step 3 of section 4 |
 
 ## 4. Task B: delete what duplicates the host tree
@@ -189,9 +189,10 @@ choice belongs to the owner.
 4. What is deleted in Task B is irreversible once the repository is published. The candidate
    list needs a review before anything is removed, not after.
 5. A `LICENSE` file needs a copyright holder, and the publication scrub rejects personal
-   names by design. Either the holder is named in the licence only and the scrub learns that
-   one exception, or the licence names an entity rather than a person. The second is cleaner
-   and the owner has to choose it.
+   names by design. Resolved on 2026-10-23 (D-26): the holder is the person, publishing as an
+   individual developer, and the scrub learned one exemption resolved by path, which a test
+   pins and which is proved not to widen. The alternative - naming an entity - was not taken,
+   because forming one costs time the release does not have.
 
 ## 8. Directions recorded after separation (2026-10-23)
 
