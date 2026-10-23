@@ -4,7 +4,7 @@
 |---|---|
 | Document ID | SW-README |
 | Kind | Repository document (published) |
-| Version | 3.1 |
+| Version | 3.2 |
 | Status | Active |
 | Date | 2026-10-23 |
 | Product name | switchyard-logistics. Document and gate identifiers are `SW-xx`; the import package is `switchyard` and the binary is `switchyard-core`. |
@@ -107,8 +107,22 @@ git rev-parse --show-toplevel
 
 Host paths are omitted on purpose: the document is published, the machine layout is not part
 of the evidence. The tree was extracted from the host repository on 2026-10-23. It is not a
-worktree of the host and shares no branch with it; the earlier history has not been carried
-across yet, so this repository currently starts from the extracted state.
+worktree of the host and shares no branch with it.
+
+The earlier work is carried as ancestry rather than as a copy: the commit under which the
+programme lived in the host repository is reachable from this branch through a root commit whose
+tree is that commit's `research/` subtree, with the original author, date and message. A reader
+can therefore read the first commit of the programme without visiting the host repository, and
+`git log --graph` shows where the two lines join:
+
+```
+git log --graph --oneline
+# *   the extracted state on top of the graft
+# |\
+# | * the programme as it stood inside the host repository
+# * the extracted state
+```
+
 
 Working rules:
 

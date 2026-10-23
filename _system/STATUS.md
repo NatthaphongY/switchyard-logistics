@@ -4,7 +4,7 @@
 |---|---|
 | Document ID | SW-SYS-06 |
 | Kind | System record (internal; not published) |
-| Version | 1.0 |
+| Version | 1.2 |
 | Status | Active |
 | Date | 2026-10-23 |
 
