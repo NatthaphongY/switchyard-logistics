@@ -1,0 +1,40 @@
+{
+  "_comment": "Weather formulas (BHR-RS-13). Integers only: tenths of a degree Celsius and per-mille, so no float enters the decision path. Region profiles live in weather_regions.json (measured July climatology from open reanalysis, plus the synthetic table older evidence used); every formula here is independent of which profile is selected.",
+  "version": "1.1",
+  "severity_divisor": 200000,
+  "severity_ceiling_c_tenths": 120,
+  "bands_c_tenths": {
+    "frozen": -150,
+    "chilled": 80,
+    "ambient": 250
+  },
+  "onset_severity_permille": {
+    "instant": 1000,
+    "gradual": 500
+  },
+  "duration_severity_tenths": {
+    "hours": 8,
+    "days": 18,
+    "weeks": 35,
+    "months": 55
+  },
+  "scope_regions": {
+    "global": 3,
+    "region": 1,
+    "lane": 1,
+    "node": 1
+  },
+  "class_sensitivity_permille": {
+    "frozen": 1400,
+    "chilled": 1150,
+    "ambient": 1000
+  },
+  "multiplier_floor_permille": 1000,
+  "multiplier_ceiling_permille": 2000,
+  "heat_ceiling_permille": 2200,
+  "advisory": {
+    "multiplier_permille": 1250,
+    "storm_permille": 350,
+    "band_gap_c_tenths": 50
+  }
+}

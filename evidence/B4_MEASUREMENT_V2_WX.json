@@ -1,0 +1,413 @@
+{
+  "ablation": {},
+  "checks": [
+    {
+      "criterion": "uca_ci_low_pp",
+      "fact": "uca_ci_low_pp",
+      "hard": true,
+      "limit": 15.0,
+      "operator": "ge",
+      "passed": true,
+      "value": 48.43
+    },
+    {
+      "criterion": "blocks_not_worse",
+      "fact": "blocks_delta_mean",
+      "hard": true,
+      "limit": 0.0,
+      "operator": "ge",
+      "passed": true,
+      "value": 5.256667
+    },
+    {
+      "criterion": "service_floor_held",
+      "fact": "min_served",
+      "hard": true,
+      "limit": 950,
+      "operator": "ge",
+      "passed": true,
+      "value": 1000.0
+    },
+    {
+      "criterion": "cost_within_budget",
+      "fact": "compliance_pct_value",
+      "hard": true,
+      "limit": 0.5,
+      "operator": "le",
+      "passed": true,
+      "value": 0.2236
+    },
+    {
+      "criterion": "dose_unit_not_worse_than_practice",
+      "fact": "dose_unit",
+      "hard": true,
+      "limit": 18.0608,
+      "operator": "le",
+      "passed": true,
+      "value": 5.0753
+    },
+    {
+      "criterion": "delivered_not_below_gen1",
+      "fact": "routed_qty",
+      "hard": true,
+      "limit": 40.64,
+      "operator": "ge",
+      "passed": true,
+      "value": 41.8733
+    }
+  ],
+  "decision": {
+    "failed": [],
+    "status": "SEPARATES"
+  },
+  "effects": {
+    "gen1_vs_baseline": {
+      "blocks_delta": {
+        "ci_high": 1.783333,
+        "ci_low": 1.346667,
+        "losses": 10,
+        "mean": 1.56,
+        "p_permutation": 0.0001,
+        "p_sign": 0.0,
+        "ties": 78,
+        "wins": 212
+      },
+      "cliffs_delta_uca": 0.1104,
+      "dose_reduction_pct": 54.47,
+      "dose_reduction_pct_ci95": [
+        25.9,
+        82.54
+      ],
+      "uca_delta": {
+        "ci_high": 1.766667,
+        "ci_low": 1.306667,
+        "losses": 22,
+        "mean": 1.53,
+        "p_permutation": 0.0001,
+        "p_sign": 0.0,
+        "ties": 76,
+        "wins": 202
+      },
+      "uca_reduction_pp": 11.58,
+      "uca_reduction_pp_ci95": [
+        9.89,
+        13.37
+      ]
+    },
+    "gen2_vs_baseline": {
+      "blocks_delta": {
+        "ci_high": 7.49,
+        "ci_low": 6.19,
+        "losses": 6,
+        "mean": 6.816667,
+        "p_permutation": 0.0001,
+        "p_sign": 0.0,
+        "ties": 27,
+        "wins": 267
+      },
+      "cliffs_delta_uca": 0.6514,
+      "dose_reduction_pct": 62.7,
+      "dose_reduction_pct_ci95": [
+        42.04,
+        80.45
+      ],
+      "uca_delta": {
+        "ci_high": 8.523333,
+        "ci_low": 7.133333,
+        "losses": 7,
+        "mean": 7.813333,
+        "p_permutation": 0.0001,
+        "p_sign": 0.0,
+        "ties": 14,
+        "wins": 279
+      },
+      "uca_reduction_pp": 59.12,
+      "uca_reduction_pp_ci95": [
+        53.97,
+        64.49
+      ]
+    },
+    "gen2_vs_gen1": {
+      "blocks_delta": {
+        "ci_high": 5.86,
+        "ci_low": 4.683333,
+        "losses": 22,
+        "mean": 5.256667,
+        "p_permutation": 0.0001,
+        "p_sign": 0.0,
+        "ties": 62,
+        "wins": 216
+      },
+      "cliffs_delta_uca": 0.5614,
+      "dose_reduction_pct": 38.36,
+      "dose_reduction_pct_ci95": [
+        11.76,
+        62.0
+      ],
+      "uca_delta": {
+        "ci_high": 6.92,
+        "ci_low": 5.66,
+        "losses": 11,
+        "mean": 6.283333,
+        "p_permutation": 0.0001,
+        "p_sign": 0.0,
+        "ties": 37,
+        "wins": 252
+      },
+      "uca_reduction_pp": 53.76,
+      "uca_reduction_pp_ci95": [
+        48.43,
+        59.21
+      ]
+    }
+  },
+  "elapsed_s": 19.45,
+  "facts": {
+    "blocks_delta_mean": 5.256667,
+    "cliffs_delta": 0.5614,
+    "compliance_pct_value": 0.2236,
+    "dose_ci_low_pct": 11.76,
+    "dose_unit": 5.0753,
+    "min_served": 1000.0,
+    "p_permutation": 0.0001,
+    "routed_qty": 41.8733,
+    "uca_ci_low_pp": 48.43
+  },
+  "first_hash": "e4b30beab28f1d5a3b8e052de3d40a8b",
+  "holdout": {
+    "test": {
+      "blocks_delta": {
+        "ci_high": 6.06,
+        "ci_low": 4.433333,
+        "losses": 11,
+        "mean": 5.253333,
+        "p_permutation": 0.0001,
+        "p_sign": 0.0,
+        "ties": 33,
+        "wins": 106
+      },
+      "cliffs_delta_uca": 0.5638,
+      "dose_reduction_pct": 49.6,
+      "dose_reduction_pct_ci95": [
+        24.8,
+        62.01
+      ],
+      "uca_delta": {
+        "ci_high": 7.14,
+        "ci_low": 5.373333,
+        "losses": 5,
+        "mean": 6.266667,
+        "p_permutation": 0.0001,
+        "p_sign": 0.0,
+        "ties": 21,
+        "wins": 124
+      },
+      "uca_reduction_pp": 53.14,
+      "uca_reduction_pp_ci95": [
+        45.56,
+        60.54
+      ]
+    },
+    "train": {
+      "blocks_delta": {
+        "ci_high": 6.14,
+        "ci_low": 4.42,
+        "losses": 11,
+        "mean": 5.26,
+        "p_permutation": 0.0001,
+        "p_sign": 0.0,
+        "ties": 29,
+        "wins": 110
+      },
+      "cliffs_delta_uca": 0.5646,
+      "dose_reduction_pct": -17.81,
+      "dose_reduction_pct_ci95": [
+        -17.81,
+        -17.81
+      ],
+      "uca_delta": {
+        "ci_high": 7.24,
+        "ci_low": 5.406667,
+        "losses": 6,
+        "mean": 6.3,
+        "p_permutation": 0.0001,
+        "p_sign": 0.0,
+        "ties": 16,
+        "wins": 128
+      },
+      "uca_reduction_pp": 54.4,
+      "uca_reduction_pp_ci95": [
+        46.69,
+        62.52
+      ]
+    },
+    "train_fraction": 0.5
+  },
+  "intensity": 1.0,
+  "means": {
+    "baseline": {
+      "blocks": 10.4967,
+      "compliance_pct_value": 0.0036,
+      "cost": 112.4183,
+      "cost_pct_value": 0.0592,
+      "dose": 106.5067,
+      "dose_expected": 15.2567,
+      "dose_pct_budget": 6.7263,
+      "dose_unit": 18.0608,
+      "excursion": 17.22,
+      "max_dose_permille": 67.2633,
+      "over_budget": 0.0333,
+      "p_exceedance": 0.0223,
+      "routed_qty": 42.0667,
+      "served": 1000.0,
+      "uca": 13.2167,
+      "value_at_risk": 1573.9167
+    },
+    "gen1": {
+      "blocks": 8.9367,
+      "compliance_pct_value": 0.0036,
+      "cost": 115.8308,
+      "cost_pct_value": 0.0609,
+      "dose": 40.4133,
+      "dose_expected": 7.7633,
+      "dose_pct_budget": 4.0413,
+      "dose_unit": 7.9721,
+      "excursion": 6.21,
+      "max_dose_permille": 40.4133,
+      "over_budget": 0.01,
+      "p_exceedance": 0.0126,
+      "routed_qty": 40.64,
+      "served": 1000.0,
+      "uca": 11.6867,
+      "value_at_risk": 786.8459
+    },
+    "gen2": {
+      "blocks": 3.68,
+      "compliance_pct_value": 0.2236,
+      "cost": 638.5255,
+      "cost_pct_value": 0.2843,
+      "dose": 32.1933,
+      "dose_expected": 5.1733,
+      "dose_pct_budget": 2.32,
+      "dose_unit": 5.0753,
+      "excursion": 12.8133,
+      "max_dose_permille": 23.2,
+      "over_budget": 0.0133,
+      "p_exceedance": 0.0112,
+      "routed_qty": 41.8733,
+      "served": 1000.0,
+      "uca": 5.4033,
+      "value_at_risk": 881.3196
+    }
+  },
+  "scenarios": 300,
+  "seed": 20261023,
+  "weather": {
+    "advisory_counts": {
+      "WX-ADV-001": 1002,
+      "WX-ADV-002": 964,
+      "WX-ADV-003": 1042
+    },
+    "budget_permille": 1000,
+    "counterfactual": {
+      "blocks_delta": {
+        "ci_high": 0.0,
+        "ci_low": -0.01,
+        "losses": 1,
+        "mean": -0.003333,
+        "p_permutation": 1.0,
+        "p_sign": 1.0,
+        "ties": 299,
+        "wins": 0
+      },
+      "cliffs_delta_uca": -0.0004,
+      "dose_change_pct": 29.62,
+      "dose_reduction_pct": -30.76,
+      "dose_reduction_pct_ci95": [
+        -39.67,
+        -23.87
+      ],
+      "mean_dose_priced": 32.193,
+      "mean_dose_unpriced": 24.837,
+      "uca_delta": {
+        "ci_high": 0.0,
+        "ci_low": -0.01,
+        "losses": 1,
+        "mean": -0.003333,
+        "p_permutation": 1.0,
+        "p_sign": 1.0,
+        "ties": 299,
+        "wins": 0
+      },
+      "uca_reduction_pp": -0.06,
+      "uca_reduction_pp_ci95": [
+        -0.19,
+        0.0
+      ]
+    },
+    "layer": true,
+    "panel": {
+      "baseline": {
+        "expected_dose_permille": 15.257,
+        "max_dose_permille": 67.263,
+        "mean_dose_pct_budget": 6.726,
+        "p_any_exceedance": 0.022318,
+        "share_dose_positive": 0.03,
+        "value_at_risk_usd": 1573.92
+      },
+      "gen1": {
+        "expected_dose_permille": 7.763,
+        "max_dose_permille": 40.413,
+        "mean_dose_pct_budget": 4.041,
+        "p_any_exceedance": 0.012577,
+        "share_dose_positive": 0.02,
+        "value_at_risk_usd": 786.85
+      },
+      "gen2": {
+        "expected_dose_permille": 5.173,
+        "max_dose_permille": 23.2,
+        "mean_dose_pct_budget": 2.32,
+        "p_any_exceedance": 0.011158,
+        "share_dose_positive": 0.0267,
+        "value_at_risk_usd": 881.32
+      }
+    },
+    "profile": "measured",
+    "profile_source": {
+      "attribution": "Weather data by Open-Meteo.com (CC BY 4.0), derived from ERA5 reanalysis (Copernicus Climate Change Service)",
+      "cost": "free, keyless, no account",
+      "derivation": {
+        "arithmetic": "integer only; one float at the data boundary",
+        "base_c_tenths": "mean daily mean temperature, tenths of a degree",
+        "humidity_permille": "mean daily relative humidity, per-mille",
+        "solar_permille": "mean daily shortwave energy against a 30 MJ/m2 reference, capped at 1000",
+        "storm_permille": "share of July days with at least 1 mm of precipitation, per-mille",
+        "swing_c_tenths": "half the mean diurnal range, tenths of a degree"
+      },
+      "endpoint": "https://archive-api.open-meteo.com/v1/archive",
+      "kind": "reanalysis climatology",
+      "licence": "Open-Meteo data CC BY 4.0; ERA5 (C) Copernicus Climate Change Service, ECMWF",
+      "month": 7,
+      "period": "1991-2020",
+      "product": "ERA5 reanalysis via the Open-Meteo archive API",
+      "retrieved_utc": "2026-10-23T00:04:03Z",
+      "sites": {
+        "R0": {
+          "latitude": 50.1109,
+          "longitude": 8.6821,
+          "name": "Frankfurt am Main, DE"
+        },
+        "R1": {
+          "latitude": 23.1291,
+          "longitude": 113.2644,
+          "name": "Guangzhou, CN"
+        },
+        "R2": {
+          "latitude": 47.8864,
+          "longitude": 106.9057,
+          "name": "Ulaanbaatar, MN"
+        }
+      }
+    }
+  }
+}

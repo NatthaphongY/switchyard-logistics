@@ -1,0 +1,326 @@
+{
+  "ablation": {
+    "active_cooling": {
+      "delta_uca": 0.017,
+      "uca_mean": 5.417
+    },
+    "backup_mode": {
+      "delta_uca": 0.827,
+      "uca_mean": 6.227
+    },
+    "capacity_measure": {
+      "delta_uca": 0.213,
+      "uca_mean": 5.613
+    },
+    "escrow": {
+      "delta_uca": 3.467,
+      "uca_mean": 8.867
+    },
+    "out_of_band_verify": {
+      "delta_uca": 1.48,
+      "uca_mean": 6.88
+    },
+    "pre_authorisation": {
+      "delta_uca": 0.143,
+      "uca_mean": 5.543
+    },
+    "preposition": {
+      "delta_uca": 0.0,
+      "uca_mean": 5.4
+    },
+    "refresh_feed": {
+      "delta_uca": 0.163,
+      "uca_mean": 5.563
+    }
+  },
+  "checks": [
+    {
+      "criterion": "uca_ci_low_pp",
+      "fact": "uca_ci_low_pp",
+      "hard": true,
+      "limit": 15.0,
+      "operator": "ge",
+      "passed": true,
+      "value": 48.43
+    },
+    {
+      "criterion": "blocks_not_worse",
+      "fact": "blocks_delta_mean",
+      "hard": true,
+      "limit": 0.0,
+      "operator": "ge",
+      "passed": true,
+      "value": 5.26
+    },
+    {
+      "criterion": "service_floor_held",
+      "fact": "min_served",
+      "hard": true,
+      "limit": 950,
+      "operator": "ge",
+      "passed": true,
+      "value": 1000.0
+    },
+    {
+      "criterion": "cost_within_budget",
+      "fact": "compliance_pct_value",
+      "hard": true,
+      "limit": 0.5,
+      "operator": "le",
+      "passed": true,
+      "value": 0.2236
+    },
+    {
+      "criterion": "dose_unit_not_worse_than_practice",
+      "fact": "dose_unit",
+      "hard": true,
+      "limit": 14.2936,
+      "operator": "le",
+      "passed": true,
+      "value": 3.9335
+    },
+    {
+      "criterion": "delivered_not_below_gen1",
+      "fact": "routed_qty",
+      "hard": true,
+      "limit": 40.64,
+      "operator": "ge",
+      "passed": true,
+      "value": 41.8733
+    }
+  ],
+  "decision": {
+    "failed": [],
+    "status": "SEPARATES"
+  },
+  "effects": {
+    "gen1_vs_baseline": {
+      "blocks_delta": {
+        "ci_high": 1.783333,
+        "ci_low": 1.346667,
+        "losses": 10,
+        "mean": 1.56,
+        "p_permutation": 0.0001,
+        "p_sign": 0.0,
+        "ties": 78,
+        "wins": 212
+      },
+      "cliffs_delta_uca": 0.1104,
+      "dose_reduction_pct": 54.47,
+      "dose_reduction_pct_ci95": [
+        25.9,
+        82.54
+      ],
+      "uca_delta": {
+        "ci_high": 1.766667,
+        "ci_low": 1.306667,
+        "losses": 22,
+        "mean": 1.53,
+        "p_permutation": 0.0001,
+        "p_sign": 0.0,
+        "ties": 76,
+        "wins": 202
+      },
+      "uca_reduction_pp": 11.58,
+      "uca_reduction_pp_ci95": [
+        9.89,
+        13.37
+      ]
+    },
+    "gen2_vs_baseline": {
+      "blocks_delta": {
+        "ci_high": 7.493333,
+        "ci_low": 6.19,
+        "losses": 6,
+        "mean": 6.82,
+        "p_permutation": 0.0001,
+        "p_sign": 0.0,
+        "ties": 27,
+        "wins": 267
+      },
+      "cliffs_delta_uca": 0.6517,
+      "dose_reduction_pct": 62.73,
+      "dose_reduction_pct_ci95": [
+        42.07,
+        80.47
+      ],
+      "uca_delta": {
+        "ci_high": 8.53,
+        "ci_low": 7.136667,
+        "losses": 7,
+        "mean": 7.816667,
+        "p_permutation": 0.0001,
+        "p_sign": 0.0,
+        "ties": 14,
+        "wins": 279
+      },
+      "uca_reduction_pp": 59.14,
+      "uca_reduction_pp_ci95": [
+        54.0,
+        64.54
+      ]
+    },
+    "gen2_vs_gen1": {
+      "blocks_delta": {
+        "ci_high": 5.863333,
+        "ci_low": 4.686667,
+        "losses": 22,
+        "mean": 5.26,
+        "p_permutation": 0.0001,
+        "p_sign": 0.0,
+        "ties": 62,
+        "wins": 216
+      },
+      "cliffs_delta_uca": 0.5619,
+      "dose_reduction_pct": 38.42,
+      "dose_reduction_pct_ci95": [
+        11.83,
+        62.05
+      ],
+      "uca_delta": {
+        "ci_high": 6.92,
+        "ci_low": 5.66,
+        "losses": 11,
+        "mean": 6.286667,
+        "p_permutation": 0.0001,
+        "p_sign": 0.0,
+        "ties": 37,
+        "wins": 252
+      },
+      "uca_reduction_pp": 53.79,
+      "uca_reduction_pp_ci95": [
+        48.43,
+        59.21
+      ]
+    }
+  },
+  "elapsed_s": 42.51,
+  "facts": {
+    "blocks_delta_mean": 5.26,
+    "cliffs_delta": 0.5619,
+    "compliance_pct_value": 0.2236,
+    "dose_ci_low_pct": 11.83,
+    "dose_unit": 3.9335,
+    "min_served": 1000.0,
+    "p_permutation": 0.0001,
+    "routed_qty": 41.8733,
+    "uca_ci_low_pp": 48.43
+  },
+  "first_hash": "e4b30beab28f1d5a3b8e052de3d40a8b",
+  "holdout": {
+    "test": {
+      "blocks_delta": {
+        "ci_high": 6.06,
+        "ci_low": 4.433333,
+        "losses": 11,
+        "mean": 5.253333,
+        "p_permutation": 0.0001,
+        "p_sign": 0.0,
+        "ties": 33,
+        "wins": 106
+      },
+      "cliffs_delta_uca": 0.5638,
+      "dose_reduction_pct": 49.64,
+      "dose_reduction_pct_ci95": [
+        24.82,
+        62.06
+      ],
+      "uca_delta": {
+        "ci_high": 7.14,
+        "ci_low": 5.373333,
+        "losses": 5,
+        "mean": 6.266667,
+        "p_permutation": 0.0001,
+        "p_sign": 0.0,
+        "ties": 21,
+        "wins": 124
+      },
+      "uca_reduction_pp": 53.14,
+      "uca_reduction_pp_ci95": [
+        45.56,
+        60.54
+      ]
+    },
+    "train": {
+      "blocks_delta": {
+        "ci_high": 6.146667,
+        "ci_low": 4.426667,
+        "losses": 11,
+        "mean": 5.266667,
+        "p_permutation": 0.0001,
+        "p_sign": 0.0,
+        "ties": 29,
+        "wins": 110
+      },
+      "cliffs_delta_uca": 0.5658,
+      "dose_reduction_pct": -17.69,
+      "dose_reduction_pct_ci95": [
+        -17.69,
+        -17.69
+      ],
+      "uca_delta": {
+        "ci_high": 7.253333,
+        "ci_low": 5.413333,
+        "losses": 6,
+        "mean": 6.306667,
+        "p_permutation": 0.0001,
+        "p_sign": 0.0,
+        "ties": 16,
+        "wins": 128
+      },
+      "uca_reduction_pp": 54.46,
+      "uca_reduction_pp_ci95": [
+        46.75,
+        62.64
+      ]
+    },
+    "train_fraction": 0.5
+  },
+  "intensity": 1.0,
+  "means": {
+    "baseline": {
+      "blocks": 10.4967,
+      "compliance_pct_value": 0.0036,
+      "cost": 112.4183,
+      "cost_pct_value": 0.0592,
+      "dose": 83.26,
+      "dose_unit": 14.2936,
+      "excursion": 17.22,
+      "over_budget": 0.0333,
+      "routed_qty": 42.0667,
+      "served": 1000.0,
+      "uca": 13.2167
+    },
+    "gen1": {
+      "blocks": 8.9367,
+      "compliance_pct_value": 0.0036,
+      "cost": 115.8308,
+      "cost_pct_value": 0.0609,
+      "dose": 31.62,
+      "dose_unit": 6.3089,
+      "excursion": 6.21,
+      "over_budget": 0.01,
+      "routed_qty": 40.64,
+      "served": 1000.0,
+      "uca": 11.6867
+    },
+    "gen2": {
+      "blocks": 3.6767,
+      "compliance_pct_value": 0.2236,
+      "cost": 638.5255,
+      "cost_pct_value": 0.2843,
+      "dose": 24.8367,
+      "dose_unit": 3.9335,
+      "excursion": 12.8133,
+      "over_budget": 0.01,
+      "routed_qty": 41.8733,
+      "served": 1000.0,
+      "uca": 5.4
+    }
+  },
+  "scenarios": 300,
+  "seed": 20261023,
+  "weather": {
+    "layer": false
+  }
+}

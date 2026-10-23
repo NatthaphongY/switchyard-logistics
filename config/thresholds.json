@@ -1,0 +1,14 @@
+{
+  "_comment": "Thresholds for the reference implementation. Data, not code (BHR-RS-05 working rule 2).",
+  "version": "1.1",
+  "freshness_limit_min": 240,
+  "handoff_max_min": 90,
+  "materiality_uca_points": 15.0,
+  "materiality_excursion_ratio": 0.1,
+  "queue_ceiling_permille": 950,
+  "availability_floor_permille": 900,
+  "service_floor_permille": 950,
+  "thermal_budget_permille": 1000,
+  "dose_materiality_pct": 10.0,
+  "cost_budget_pct_of_value": 0.5
+}

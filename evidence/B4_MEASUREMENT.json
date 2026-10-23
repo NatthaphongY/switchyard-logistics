@@ -1,0 +1,52 @@
+{
+  "baseline": {
+    "blocked_rate": 0.99,
+    "blocks_mean": 9.487,
+    "cost_mean": 106.23,
+    "excursion_mean": 28.4,
+    "uca_free_rate": 0.0033,
+    "uca_mean": 12.223
+  },
+  "composed": {
+    "blocked_rate": 0.9733,
+    "blocks_mean": 7.653,
+    "cost_mean": 104.76,
+    "excursion_mean": 16.5,
+    "uca_free_rate": 0.0067,
+    "uca_mean": 10.297
+  },
+  "decision": {
+    "blocks_guard_pass": true,
+    "excursion_gate_pass": true,
+    "rule": "uca CI lower bound at least 15 pp OR excursion CI lower bound at least 10 percent, with blocks not worse",
+    "status": "SEPARATES",
+    "uca_gate_pass": false
+  },
+  "effect": {
+    "baseline_selected": 76,
+    "blocks_delta_ci95": [
+      1.58,
+      1.833
+    ],
+    "excursion_reduction_pct": 45.37,
+    "excursion_reduction_pct_ci95": [
+      23.15,
+      67.59
+    ],
+    "priced_selected": 224,
+    "uca_reduction_pp": 15.76,
+    "uca_reduction_pp_ci95": [
+      13.47,
+      18.19
+    ]
+  },
+  "elapsed_s": 12.85,
+  "first_hash": "7f6b9a3af740d57f7bf59f6fa6678efe",
+  "intensity": 1.0,
+  "scenarios": 300,
+  "seed": 20261023,
+  "thresholds": {
+    "materiality_excursion_ratio": 10.0,
+    "materiality_uca_points": 15.0
+  }
+}
