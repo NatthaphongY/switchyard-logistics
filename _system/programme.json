@@ -1,5 +1,5 @@
 {
-  "_doc": "SW-REGISTRY - Research programme registry (system record, not published). Data only, no logic. Version 2.4, 2026-10-23. Moved here from config/research_projects.json when repository documents and system records were separated.",
+  "_doc": "SW-REGISTRY - Research programme registry (system record, not published). Data only, no logic. Version 2.5, 2026-10-23. Moved here from config/research_projects.json when repository documents and system records were separated.",
   "product_name": {
     "name": "switchyard-logistics",
     "decided": "2026-10-23",
@@ -34,7 +34,7 @@
     }
   },
   "created": "2026-10-23",
-  "version": "2.4",
+  "version": "2.5",
   "purpose": "Determine whether the optimisation and verification machinery of the host system transfers to industrial planning problems, and package a verifiable public artefact.",
   "decisions": [
     {
@@ -168,6 +168,12 @@
       "decision": "The product name is switchyard-logistics, by the owner's instruction on 2026-10-23; D-21 is superseded. The distribution name in pyproject.toml already carried the qualifier because `switchyard` is taken on the Python Package Index. The registry id SW-xx, the import package `switchyard` and the Rust binary `switchyard-core` are identifiers and are unchanged, so no document is renumbered and no import moves.",
       "date": "2026-10-23",
       "reference": "programme.json, product_name"
+    },
+    {
+      "id": "D-25",
+      "decision": "The earlier commit enters this repository as an ancestor, and the host copy is deleted only after three checks. Commit 8c4d712a is carried by a root commit whose tree is its research/ subtree byte for byte (0214f168) with the original author, date and message, merged into this branch with the ours strategy, so the ancestry is restored without moving the tree. Deletion was cleared by: all 147 refs of the copy resolving to objects the host repository holds; all 58 uncommitted paths captured in _system/host_transfer/ with a hash each; and 37 files written inside the copy after it was made classified, the 20 that nothing else carried archived. Deleting a duplicate without those three checks is a guess, not a cleanup.",
+      "date": "2026-10-23",
+      "reference": "SW-SYS-TRANSFER, SW-SYS-06"
     }
   ],
   "goal": {
@@ -619,6 +625,19 @@
       "status": "resolved",
       "resolution": "Switchyard, chosen by the owner on 2026-10-23 and recorded here as the product name. The registry id SW-xx stays as the document and gate identifier, so no document has to be renumbered. Prior art checked the same day: the name is used by an unrelated educational networking framework published on the Python Package Index (switchyard 1.0.1, GPLv3) and by a retired integration product. Both are different fields, so the name is usable as a product name; it is NOT usable as a Python distribution name, which must carry a suffix (for example switchyard-logistics) if anything is ever published.",
       "resolved_date": "2026-10-23"
+    },
+    {
+      "id": 4,
+      "question": "Which licence text goes in LICENSE, and who is the holder: the person or an entity?",
+      "options": [
+        "person",
+        "entity",
+        "defer"
+      ],
+      "status": "open",
+      "resolution": "",
+      "note": "Deferred by the owner on 2026-10-23. The record declares Apache-2.0 for the specification and a source-available posture for the code, but no LICENSE file exists yet, and the gate that keeps personal names out of published files stands in the way of a holder line until the question is answered.",
+      "raised_date": "2026-10-23"
     }
   ],
   "resolved_owner_decisions": [

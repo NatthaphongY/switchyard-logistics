@@ -18,7 +18,10 @@
 | Document split | Repository documents and system records are separated by directory and enforced by `tests/test_doc_separation_s.py` |
 | Ambient layer | Frozen July 1991-2020 ERA5 climatology, three measured sites plus a synthetic profile for replay |
 | Public release | Not prepared |
-| Separation | Done 2026-10-23 (D-23): the tree is a standalone repository with its own test suite, and the ten guard modules travel with it. The host copy still exists and is the only copy of one commit and of the uncommitted work, so it is deleted last (SW-SYS-09) |
+| Separation | Done 2026-10-23 (D-23): standalone repository with its own test suite, and the ten guard modules travel with it |
+| History | Grafted 2026-10-23 (D-25): `8c4d712a` is an ancestor of this branch through a root commit whose tree is its `research/` subtree, so the earlier work keeps its author, date and message |
+| Host copy | Deleted 2026-10-23 after three checks; 318.1 MB returned. Its uncommitted work is recorded in `_system/host_transfer/`, and the commit it held remains in the host repository |
+| Licence | Deferred by the owner (question 4): no `LICENSE` file yet, holder undecided. The texts still declare Apache-2.0 for the specification and a source-available posture for the code |
 | Future projects | Three candidates recorded and deferred by the owner (D-23); two further directions recorded and unscheduled (SW-SYS-09 section 8) |
 
 ## 2. Open items
@@ -35,13 +38,14 @@
 4. This repository's own suite is green from the new root: 113 tests across the ten guard
    modules, run on 2026-10-23 after the move. The host suite is a separate matter and was never
    the gate; the commands are in `README.md` section 7.
-5. Separation is done as of 2026-10-23 (D-23). What remains is history, licence, and deletion:
-   the host copy still holds the only copy of commit `8c4d712a` and of the uncommitted work, so
-   it is not deleted yet. SW-SYS-09 sections 3 and 4 carry the order.
-6. Duplication is measured, so the deletion is no longer a guess. The holding folder is a copy
-   of the host repository, 318.1 MB against 6.8 MB for the tree itself, one commit ahead and
-   zero behind. The file-level rule in SW-SYS-09 section 4 applies after the deletion, to
-   anything this repository holds but does not own.
+5. Separation is closed as of 2026-10-23 (D-23, D-25). The earlier commit is an ancestor, the host
+   copy is deleted, and its uncommitted work is recorded in `_system/host_transfer/` with a hash
+   for every path. What is left from that batch is the licence (question 4).
+6. Duplication was measured before the deletion, not assumed: the copy held 147 refs that all
+   resolved to objects the host repository holds, 58 uncommitted paths (recorded), and 37 files
+   written inside it after it was made, of which nothing but the 20 now archived carried their
+   bytes. The file-level rule in SW-SYS-09 section 4 now applies to anything this repository holds
+   but does not own.
 7. The three candidate projects are deferred by the owner (D-23). Two further directions are
    recorded and unscheduled: re-entry of a mechanism into the host system, and repair of the
    pain points reported there. Section 8 of SW-SYS-09 states why the two cannot be pursued by
