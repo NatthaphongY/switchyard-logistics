@@ -264,23 +264,33 @@ def test_superseded_plans_are_system_records_not_documents():
 def test_product_name_is_recorded_with_its_prior_art():
     """The name is a decision, not a preference (owner, 2026-10-23).
 
-    A product name that lives only in conversation gets lost, and a name that is
-    adopted without checking prior art can be unusable where it matters. Both
-    halves are pinned here: the decision entry, and the prior-art list that says
-    why the name is free.
+    The owner settled the name twice on the same day: `Switchyard` first (D-21), then
+    `switchyard-logistics` (D-24), because the bare name is taken on the Python Package
+    Index. Both decisions stay in the record, the older one marked as superseded, and the
+    identifiers are pinned so that a rename never renumbers documents or moves an import.
     """
     d = _reg()
     name = d["product_name"]
-    assert name["name"] == "Switchyard"
+    assert name["name"] == "switchyard-logistics"
     assert name["decided"] == "2026-10-23"
+    assert "D-21" in name["previous"] and "superseded" in name["previous"]
     assert name["prior_art"], "a chosen name must carry the prior-art check"
     assert any("Package Index" in entry["what"] for entry in name["prior_art"]), (
         "the distribution-name collision is the one that matters if anything is published"
+    )
+    decisions = {entry["id"]: entry for entry in d["decisions"]}
+    assert {"D-21", "D-24"} <= set(decisions)
+    rename = decisions["D-24"]["decision"]
+    assert "switchyard-core" in rename and "SW-xx" in rename, (
+        "the rename must say which names are identifiers and therefore do not move"
     )
     decision = next(x for x in d["open_owner_decisions"] if x["id"] == name["decision"])
     assert decision["status"] == "resolved"
     assert decision["options"] == ["Switchyard"]
     assert "SW" in decision["resolution"], "document identifiers stay stable"
+    assert "switchyard-logistics" in decision["resolution"], (
+        "the resolution must carry the name that is in force, not only the first choice"
+    )
 
 
 def test_forbidden_claims_do_not_reach_a_published_document():

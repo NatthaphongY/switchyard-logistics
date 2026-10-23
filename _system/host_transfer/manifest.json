@@ -398,5 +398,111 @@
       "research/docs/05_REPRODUCTION.md": "7493b75619b38f4cabd5b03c29f1cc046adf52cf7cab4a828ec93219716126e3",
       "tests/test_doc_separation_s.py": "03d4af475b800e23340e0bbb00d7fcc19a77a8dc3cb289f69df70aeeed991418"
     }
+  },
+  "copy_orphans": {
+    "path": "copy_orphans.tar.gz",
+    "note": "State written inside the copy, absent from the host repository and from every commit, so nothing else carries it.",
+    "files": [
+      {
+        "path": "data/approvals/0215.json",
+        "bytes": 382,
+        "sha256": "06045a5b4faa8be7270f4200b78d18d69eabe61b65edc863cb12dab24213a16b"
+      },
+      {
+        "path": "data/approvals/2cec.json",
+        "bytes": 278,
+        "sha256": "9a901ade52045961bfd15de5d5ff6c5758e0b1b1f339c3cac5c99e5f1d2d93c2"
+      },
+      {
+        "path": "data/approvals/3bd9.json",
+        "bytes": 233,
+        "sha256": "8b800589d508f461a8c5fdfa867e9611e892a486a5dc5b630c60d02fe7675d5e"
+      },
+      {
+        "path": "data/approvals/519d.json",
+        "bytes": 267,
+        "sha256": "1c3acae59dceb9ae02f93e68ba1e1306a2de131b3092e6a3ed263690f07b92cd"
+      },
+      {
+        "path": "data/approvals/57aa.json",
+        "bytes": 382,
+        "sha256": "f0c61466dc1605b20b73059e962adc9df2957084702cd537bd2318ed0a247643"
+      },
+      {
+        "path": "data/approvals/9cdf.json",
+        "bytes": 278,
+        "sha256": "a574b20c51438af5dd5d914ece06d7f05a8377a58a034502fec2da1410ab435a"
+      },
+      {
+        "path": "data/approvals/e484.json",
+        "bytes": 233,
+        "sha256": "4c5fb2f2453c612800c553094689f028f22e013acc294f65a97d051639cfd899"
+      },
+      {
+        "path": "data/approvals/fae5.json",
+        "bytes": 267,
+        "sha256": "6e791f75d7beb2afc4548ea71ccc3c3c982dbe293c5dd8782c9abc67e58125db"
+      },
+      {
+        "path": "data/catalog_ledger.jsonl",
+        "bytes": 4654,
+        "sha256": "4f221d091459b8aae47d5ceca3c62bbdabd3a25733e05d47204dc9b66bdc241e"
+      },
+      {
+        "path": "data/ledger.db",
+        "bytes": 81920,
+        "sha256": "01f1553dbd12d8b597ef1a71f17f9eab7b74bc267fc38a88b39634212c130804"
+      },
+      {
+        "path": "data/manifest.json",
+        "bytes": 10853,
+        "sha256": "4fe11e046cce62405e38e0fb5394aa553f9057113ba96f98f5e8e36e809743fa"
+      },
+      {
+        "path": "data/ore_catalog.db",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "data/owner_feedback.jsonl",
+        "bytes": 1528,
+        "sha256": "f2f20c2b176b285f8be3aa298fbfcf2f2cbbc9ff5a74cf6c18db37c8c7fd79b3"
+      },
+      {
+        "path": "full_tests.log",
+        "bytes": 1023,
+        "sha256": "7f73aa55e44b633197fc0faa4e6628bfcbd20952c02ef295c5c26fabccf66902"
+      },
+      {
+        "path": "release_pack/U/PL/files/PL_U.epub",
+        "bytes": 425,
+        "sha256": "f4e6b04e1e60f81a0ace4d733dc990416541c353f166fbaddbb9ed317ba27efe"
+      },
+      {
+        "path": "release_pack/U/PL/manifest.json",
+        "bytes": 2317,
+        "sha256": "5cd60f8d68ec00c4778c0f8b273157f3cebc44ca0c953b7d995f5c5623da9400"
+      },
+      {
+        "path": "release_pack/U/SE/files/SE_U.epub",
+        "bytes": 4746,
+        "sha256": "dc9cb743486b442fbfc5ceb9601e9e3b7ca2385bbd0b4a3429c8f19d250d55df"
+      },
+      {
+        "path": "release_pack/U/SE/manifest.json",
+        "bytes": 2326,
+        "sha256": "53c4b4e115ac24008c7941f5b042c4ee2ba6a2da15732ac037f0c161e7389053"
+      },
+      {
+        "path": "riley/riley_memory/episodic.db",
+        "bytes": 16384,
+        "sha256": "e0e309ac8fb9d5b69f8b2cab7dd634ddb9d271daf44b8f09a89272414750451a"
+      },
+      {
+        "path": "tests/test_doc_separation_s.py",
+        "bytes": 7843,
+        "sha256": "03d4af475b800e23340e0bbb00d7fcc19a77a8dc3cb289f69df70aeeed991418"
+      }
+    ]
   }
 }

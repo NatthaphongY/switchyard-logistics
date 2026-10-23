@@ -16,8 +16,9 @@ deleted, its uncommitted state was captured here, because that state existed now
 | File | Contents |
 |---|---|
 | `clone_uncommitted.patch` | Binary patch of every tracked change in the host copy against its own HEAD (`8c4d712a`). |
-| `clone_untracked/` | Byte copies of the eight files that were untracked there, at their original paths. |
-| `manifest.json` | HEAD, branch, the two stashes, and a SHA-256 for each of the 58 entries. |
+| `clone_untracked.tar.gz` | The eight files that were untracked there, at their original paths, archived rather than stored as text: a copy of a host document is not a document of this repository, and the separation gate reads every text file in the tree. |
+| `copy_orphans.tar.gz` | Twenty files that state written inside the copy left behind: approval records, ledger databases, a release pack and one test log. Absent from the host repository and from every commit, so nothing else carries them. |
+| `manifest.json` | HEAD, branch, the two stashes, a SHA-256 for each of the 58 status entries, and the same for both archives. |
 
 ## Why this was needed
 
@@ -27,6 +28,20 @@ existed only there. Its working tree, however, held 58 uncommitted paths: 50 tra
 modifications and renames, and eight new files. The eight guard test modules and the research
 tree itself were copied into this repository, but the copies were rewritten for the new root,
 so the pre-rewrite bytes are kept here as the record.
+
+## How the deletion was cleared
+
+Three questions, each answered before the copy was removed.
+
+1. **Did the copy hold a commit the host repository does not?** No. All 147 refs in the copy,
+   including the two stashes, the tag and the tool checkpoints, resolve to objects present in
+   the host repository with the same ids.
+2. **Did its working tree hold tracked changes nothing else carries?** They are in the patch,
+   path by path, with a hash each.
+3. **Did it hold files that were never committed at all?** Twenty, listed above. Everything else
+   written inside the copy after it was made either matched a file in the host repository, or
+   matched its own committed blob, or is one of the eight recorded in the untracked archive.
+
 
 ## How to read the patch
 
