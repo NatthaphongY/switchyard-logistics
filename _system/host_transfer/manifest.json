@@ -400,8 +400,8 @@
     }
   },
   "copy_orphans": {
-    "path": "copy_orphans.tar.gz",
-    "note": "State written inside the copy, absent from the host repository and from every commit, so nothing else carries it.",
+    "path": "copy_orphans.tar.gz (moved out of this repository; not present here)",
+    "note": "State written inside the copy, absent from the host repository and from every commit, so nothing else carries it. Moved out of this repository on 2026-10-23; the digest below is of the archive as it left, so a copy can be verified against this record wherever it is kept.",
     "files": [
       {
         "path": "data/approvals/0215.json",
@@ -503,6 +503,11 @@
         "bytes": 7843,
         "sha256": "03d4af475b800e23340e0bbb00d7fcc19a77a8dc3cb289f69df70aeeed991418"
       }
-    ]
+    ],
+    "moved_out": "2026-10-23",
+    "moved_to": "the folder switchyard_host_transfer_20261023, outside this repository",
+    "moved_reason": "The owner instructed on 2026-10-23 that the box be moved out. Its contents are host-side runtime state, so the repository keeps the record of what it held and of its digest, but not the archive itself.",
+    "archive_sha256": "4c119463baf1ebeb508e898ff946399a898c5a7d49d29729ae8c45f2a9e740ec",
+    "archive_bytes": 10039
   }
 }

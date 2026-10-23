@@ -17,8 +17,8 @@ deleted, its uncommitted state was captured here, because that state existed now
 |---|---|
 | `clone_uncommitted.patch` | Binary patch of every tracked change in the host copy against its own HEAD (`8c4d712a`). |
 | `clone_untracked.tar.gz` | The eight files that were untracked there, at their original paths, archived rather than stored as text: a copy of a host document is not a document of this repository, and the separation gate reads every text file in the tree. |
-| `copy_orphans.tar.gz` | Twenty files that state written inside the copy left behind: approval records, ledger databases, a release pack and one test log. Absent from the host repository and from every commit, so nothing else carries them. |
-| `manifest.json` | HEAD, branch, the two stashes, a SHA-256 for each of the 58 status entries, and the same for both archives. |
+| `copy_orphans.tar.gz` | **Not in this repository.** Twenty files that state written inside the copy left behind: approval records, ledger databases, a release pack and one test log. Absent from the host repository and from every commit, so nothing else carries them. Moved out on the owner's instruction of 2026-10-23; `manifest.json` keeps the digest of the archive as it left, so any copy can be verified against this record. |
+| `manifest.json` | HEAD, branch, the two stashes, a SHA-256 for each of the 58 status entries, the contents of both archives, and the account of the move. |
 
 ## Why this was needed
 
@@ -42,6 +42,15 @@ Three questions, each answered before the copy was removed.
    written inside the copy after it was made either matched a file in the host repository, or
    matched its own committed blob, or is one of the eight recorded in the untracked archive.
 
+
+## Where the orphan box is kept
+
+The box is state of the host side, not work of this repository, so it lives outside the tree: in
+the folder `switchyard_host_transfer_20261023` in the machine's backup area, beside its own short
+README. The record stays here, which is the part that matters: the twenty paths, their sizes, a
+SHA-256 for each, and the digest of the archive itself
+(`4c119463baf1ebeb508e898ff946399a898c5a7d49d29729ae8c45f2a9e740ec`, 10,039 bytes). A copy found
+anywhere can be checked against that digest without trusting where it came from.
 
 ## How to read the patch
 

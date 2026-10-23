@@ -1,5 +1,5 @@
 {
-  "_doc": "SW-REGISTRY - Research programme registry (system record, not published). Data only, no logic. Version 2.5, 2026-10-23. Moved here from config/research_projects.json when repository documents and system records were separated.",
+  "_doc": "SW-REGISTRY - Research programme registry (system record, not published). Data only, no logic. Version 2.6, 2026-10-23. Moved here from config/research_projects.json when repository documents and system records were separated.",
   "product_name": {
     "name": "switchyard-logistics",
     "decided": "2026-10-23",
@@ -34,7 +34,7 @@
     }
   },
   "created": "2026-10-23",
-  "version": "2.5",
+  "version": "2.6",
   "purpose": "Determine whether the optimisation and verification machinery of the host system transfers to industrial planning problems, and package a verifiable public artefact.",
   "decisions": [
     {
@@ -171,7 +171,7 @@
     },
     {
       "id": "D-25",
-      "decision": "The earlier commit enters this repository as an ancestor, and the host copy is deleted only after three checks. Commit 8c4d712a is carried by a root commit whose tree is its research/ subtree byte for byte (0214f168) with the original author, date and message, merged into this branch with the ours strategy, so the ancestry is restored without moving the tree. Deletion was cleared by: all 147 refs of the copy resolving to objects the host repository holds; all 58 uncommitted paths captured in _system/host_transfer/ with a hash each; and 37 files written inside the copy after it was made classified, the 20 that nothing else carried archived. Deleting a duplicate without those three checks is a guess, not a cleanup.",
+      "decision": "The earlier commit enters this repository as an ancestor, and the host copy is deleted only after three checks. Commit 8c4d712a is carried by a root commit whose tree is its research/ subtree byte for byte (0214f168) with the original author, date and message, merged into this branch with the ours strategy, so the ancestry is restored without moving the tree. Deletion was cleared by: all 147 refs of the copy resolving to objects the host repository holds; all 58 uncommitted paths captured in _system/host_transfer/ with a hash each; and 37 files written inside the copy after it was made classified, the 20 that nothing else carried archived and then moved out of the repository on the owner instruction, because they are host-side state rather than work of this programme. Deleting a duplicate without those three checks is a guess, not a cleanup.",
       "date": "2026-10-23",
       "reference": "SW-SYS-TRANSFER, SW-SYS-06"
     }

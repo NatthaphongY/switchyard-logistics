@@ -4,7 +4,7 @@
 |---|---|
 | Document ID | SW-SYS-06 |
 | Kind | System record (internal; not published) |
-| Version | 1.2 |
+| Version | 1.3 |
 | Status | Active |
 | Date | 2026-10-23 |
 
@@ -21,6 +21,7 @@
 | Separation | Done 2026-10-23 (D-23): standalone repository with its own test suite, and the ten guard modules travel with it |
 | History | Grafted 2026-10-23 (D-25): `8c4d712a` is an ancestor of this branch through a root commit whose tree is its `research/` subtree, so the earlier work keeps its author, date and message |
 | Host copy | Deleted 2026-10-23 after three checks; 318.1 MB returned. Its uncommitted work is recorded in `_system/host_transfer/`, and the commit it held remains in the host repository |
+| Orphan box | Moved out of the repository on 2026-10-23 (owner's instruction): the 20 host-side files live in the folder `switchyard_host_transfer_20261023`, and this tree keeps the record and the digest |
 | Licence | Deferred by the owner (question 4): no `LICENSE` file yet, holder undecided. The texts still declare Apache-2.0 for the specification and a source-available posture for the code |
 | Future projects | Three candidates recorded and deferred by the owner (D-23); two further directions recorded and unscheduled (SW-SYS-09 section 8) |
 

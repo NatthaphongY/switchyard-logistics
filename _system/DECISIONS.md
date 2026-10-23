@@ -4,7 +4,7 @@
 |---|---|
 | Document ID | SW-SYS-01 |
 | Kind | System record (internal; not published) |
-| Version | 1.1 |
+| Version | 1.2 |
 | Status | Active |
 | Date | 2026-10-23 |
 | Machine record | `programme.json` in this directory; this file is its readable form |
@@ -53,7 +53,7 @@ reaches `README.md`, `PACKAGE.md` or `docs/`.
 | D-22 | Ambient weather data is open reanalysis only: the free, keyless Open-Meteo archive API serving ERA5, frozen as a July 1991-2020 climatology in config/weather_regions.json. A live forecast ingest is out of scope until a consumer needs one. | 2026-10-23 | SW-11 |
 | D-23 | Separation precedes new work. From 2026-10-23 this tree is a standalone repository: the copy held inside the host tree is extracted, the guard modules travel with it, and nothing here is a worktree of the host. The three candidate projects are deferred. Re-entry into the host system, and the repair of pain points in it, are recorded directions rather than scheduled work, and re-entry happens as a dependency or as a ported mechanism with tests, never by copying files into the host tree. | 2026-10-23 | SW-SYS-09 |
 | D-24 | The product name is switchyard-logistics, by the owner's instruction on 2026-10-23; D-21 is superseded. The distribution name in pyproject.toml already carried the qualifier because `switchyard` is taken on the Python Package Index. The registry id SW-xx, the import package `switchyard` and the Rust binary `switchyard-core` are identifiers and are unchanged, so no document is renumbered and no import moves. | 2026-10-23 | programme.json, product_name |
-| D-25 | The earlier commit enters this repository as an ancestor, and the host copy is deleted only after three checks. Commit 8c4d712a is carried by a root commit whose tree is its research/ subtree byte for byte (0214f168) with the original author, date and message, merged into this branch with the ours strategy, so the ancestry is restored without moving the tree. Deletion was cleared by: all 147 refs of the copy resolving to objects the host repository holds; all 58 uncommitted paths captured in `_system/host_transfer/` with a hash each; and 37 files written inside the copy after it was made classified, the 20 that nothing else carried archived. Deleting a duplicate without those three checks is a guess, not a cleanup. | 2026-10-23 | SW-SYS-TRANSFER, SW-SYS-06 |
+| D-25 | The earlier commit enters this repository as an ancestor, and the host copy is deleted only after three checks. Commit 8c4d712a is carried by a root commit whose tree is its research/ subtree byte for byte (0214f168) with the original author, date and message, merged into this branch with the ours strategy, so the ancestry is restored without moving the tree. Deletion was cleared by: all 147 refs of the copy resolving to objects the host repository holds; all 58 uncommitted paths captured in `_system/host_transfer/` with a hash each; and 37 files written inside the copy after it was made classified, the 20 that nothing else carried archived and then moved out of the repository on the owner's instruction, because they are host-side state rather than work of this programme. Deleting a duplicate without those three checks is a guess, not a cleanup. | 2026-10-23 | SW-SYS-TRANSFER, SW-SYS-06 |
 
 ## 3. Answers given before the record was opened
 
