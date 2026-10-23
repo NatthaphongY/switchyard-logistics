@@ -132,6 +132,9 @@ Working rules:
    a defect.
 3. Nothing here modifies production source files. Re-entry into production goes through a
    proposal, a maintainer decision, and an implementation with tests.
+4. The working record - decisions, schedules, status, audits, the machine registry - is not in
+   this repository at all: it lives in a sibling folder named `record`. What a reader clones is
+   the work and the documents, and nothing else.
 
 ## 7. Verification
 

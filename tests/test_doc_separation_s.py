@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Gate: repository documents and system records stay separate, and neither leaks (2026-10-23).
+"""Gate: the working record stays outside the artefact, and neither leaks (2026-10-23).
 
 Why this gate exists
 --------------------
@@ -10,9 +10,12 @@ private code base). Mixing them produced three defects at once: a published docu
 cited `D-19`, which a reader cannot resolve; a schedule was published as if it were
 part of the product; and the tree carried a name that pointed back to the publisher.
 
-The split is a directory boundary, not a convention: `_system/` holds the
-records, everything else in this repository is published. `PACKAGE.md` lists the
-published paths. This file enforces both directions and the absence of the brand.
+The first answer was a directory inside the repository. The owner rejected it on
+2026-10-23 - plans and work were still one folder, and the eye cannot separate them. So
+the boundary is now the repository edge itself: this tree is the work and the published
+documents, and the `record` folder sits beside it, outside version control of this
+repository. `PACKAGE.md` lists the published paths. This file enforces both directions,
+the absence of the brand, and that the record never moves back in.
 """
 from __future__ import annotations
 
@@ -20,9 +23,14 @@ import json
 import pathlib
 import re
 
+import pytest
+
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 RESEARCH = ROOT
-SYSTEM = RESEARCH / "_system"
+# The record folder is a sibling, not a child: `Switchyard House/record` beside
+# `Switchyard House/switchyard`. A published clone has no such folder, so the two checks
+# that need it skip rather than fail on a file that was never part of the artefact.
+RECORD = ROOT.parent / "record"
 
 # Tokens that identify the host system, its vocabulary, or the person behind the work.
 # A published document must read as a standalone product artefact.
@@ -33,7 +41,7 @@ BANNED = {
         r"|core/outline|docs/spine_library"
     ),
     "decision_identifier": re.compile(r"\bD-\d{1,2}\b"),
-    "system_path": re.compile(r"_system"),
+    "system_path": re.compile(r"_system|\.\./record"),
     "owner_register": re.compile(r"(?i)\bowner\b|\bboss\b|\bceo\b|curriculum vitae"),
     "undecided_handover": re.compile(r"(?i)outstanding items|approved for execution|pending owner"),
 }
@@ -45,23 +53,17 @@ def published_documents() -> list:
     )
 
 
-def system_records() -> list:
-    return sorted(path for path in SYSTEM.rglob("*.md") if path.is_file())
-
-
 def read(path: pathlib.Path) -> str:
     return path.read_text(encoding="utf-8", errors="replace")
 
 
 def test_no_brand_or_host_reference_in_a_published_document():
-    # PACKAGE.md has one job that needs the internal path: it names what is not published.
-    allowance = {("PACKAGE.md", "system_path")}
     offenders = []
     for path in published_documents():
         for number, line in enumerate(read(path).splitlines(), 1):
             for label, pattern in BANNED.items():
                 match = pattern.search(line)
-                if match and (path.name, label) not in allowance:
+                if match:
                     offenders.append(
                         f"{path.relative_to(ROOT).as_posix()}:{number}:{label}:{match.group(0)[:40]}"
                     )
@@ -112,27 +114,39 @@ def test_every_published_document_declares_that_it_is_published():
         assert "Document ID" in body and "Status" in body and "Version" in body, path.name
 
 
-def test_every_system_record_declares_that_it_is_internal():
-    records = system_records()
-    assert records, "the system record directory must exist and hold the working record"
-    for path in records:
-        body = "\n".join(read(path).splitlines()[:12])
-        assert "| Kind | System record" in body, path.name
-        assert "internal" in body.lower(), path.name
+def test_the_working_record_does_not_live_inside_the_repository():
+    """The owner's instruction, 2026-10-23: work and paper in different folders.
+
+    The records lived in a directory here until the split, and the easy way to add a note or
+    a plan is to drop it beside the code again. A guard is the only thing that stops that.
+    """
+    offenders = sorted(
+        path.relative_to(ROOT).as_posix()
+        for path in ROOT.rglob("_system*")
+        if path.is_file() or path.is_dir()
+    )
+    assert offenders == [], (
+        "the working record belongs in the `record` folder beside this repository, "
+        f"not inside it: {offenders}"
+    )
 
 
-def test_a_system_record_is_never_referenced_by_a_published_document():
-    """Match full relative paths: a bare file name such as README.md is not a pointer."""
-    pointers = {
-        path.relative_to(RESEARCH).as_posix() for path in system_records()
-    } | {"_system/README.md", "_system/programme.json"}
-    offenders = []
-    for path in published_documents():
-        text = read(path)
-        for pointer in pointers:
-            if pointer in text:
-                offenders.append(f"{path.name} -> {pointer}")
-    assert offenders == [], f"published documents point at internal records: {offenders}"
+def test_decision_log_mirrors_the_machine_record():
+    """The readable log and the machine record are two forms of one thing.
+
+    Both live in the record folder, which a published clone does not have, so this check
+    skips there instead of failing on a file that was never part of the artefact.
+    """
+    registry = RECORD / "programme.json"
+    log = RECORD / "DECISIONS.md"
+    if not registry.is_file() or not log.is_file():
+        pytest.skip("the record folder is not beside this repository")
+    programme = json.loads(read(registry))
+    text = read(log)
+    missing = [entry["id"] for entry in programme["decisions"] if entry["id"] not in text]
+    assert missing == [], f"decisions in programme.json but absent from DECISIONS.md: {missing}"
+
+
 
 def _manifest_paths() -> list:
     text = read(RESEARCH / "PACKAGE.md")
@@ -145,17 +159,11 @@ def test_package_manifest_is_complete_and_publishable():
     assert listed, "PACKAGE.md must list the published paths"
     for entry in listed:
         assert (ROOT / entry.rstrip("/")).exists(), f"manifest lists a missing path: {entry}"
-        assert "_system" not in entry, f"manifest must not publish an internal record: {entry}"
+        assert not entry.startswith("record"), f"manifest must not publish the working record: {entry}"
     published = {path.relative_to(ROOT).as_posix() for path in published_documents()}
     missing = published - set(listed)
     assert missing == set(), f"documents missing from the manifest: {sorted(missing)}"
 
-
-def test_decision_log_mirrors_the_machine_record():
-    programme = json.loads(read(SYSTEM / "programme.json"))
-    log = read(SYSTEM / "DECISIONS.md")
-    missing = [entry["id"] for entry in programme["decisions"] if entry["id"] not in log]
-    assert missing == [], f"decisions in programme.json but absent from DECISIONS.md: {missing}"
 
 
 def test_no_record_is_left_under_config_or_docs():

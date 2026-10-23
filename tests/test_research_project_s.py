@@ -20,14 +20,21 @@ import hashlib
 import json
 import pathlib
 
+import pytest
+
 ROOT = pathlib.Path(__file__).resolve().parents[1]
-REG = ROOT / "_system" / "programme.json"
+# The programme registry is a record, not part of the artefact: since 2026-10-23 it lives in
+# the `record` folder beside this repository, so this tree holds work and published
+# documents only. A published clone has no record folder, and the registry gates skip there
+# rather than fail on a file that was never published.
+RECORD = ROOT.parent / "record"
+REG = RECORD / "programme.json"
 DOCS = ROOT / "docs"
 
-# The published document set. The system records that used to sit beside these
-# (capability audit, suspended workstream A, asset inventory, both plans) moved to
-# `_system/` on 2026-10-23: they are the working record of the programme,
-# not part of the artefact.
+# The published document set. The records that used to sit beside these (capability audit,
+# suspended workstream A, asset inventory, both plans) are now outside the repository, in the
+# `record` folder beside it: they are the working record of the programme, not part of the
+# artefact. `_system/` was their name inside the tree until the split on 2026-10-23.
 REQUIRED_DOCS = (
     "02_TRACK_B_COLDCHAIN.md",
     "03_EVIDENCE_2026.md",
@@ -43,6 +50,8 @@ REQUIRED_DOCS = (
 
 
 def _reg() -> dict:
+    if not REG.is_file():
+        pytest.skip("the programme registry is not beside this repository (record folder absent)")
     return json.loads(REG.read_text(encoding="utf-8"))
 
 
@@ -295,7 +304,9 @@ def test_superseded_plans_are_system_records_not_documents():
     assert (DOCS / "05_REPRODUCTION.md").is_file()
     assert not (DOCS / "05_PLAN_5_DAYS.md").exists()
     assert not (DOCS / "05_PLAN_35_DAYS.md").exists()
-    plans = ROOT / "_system" / "plans"
+    plans = RECORD / "plans"
+    if not plans.is_dir():
+        pytest.skip("the record folder is not beside this repository")
     assert (plans / "PLAN_5_DAYS.md").is_file()
     assert (plans / "PLAN_35_DAYS_superseded.md").is_file()
     for track in _reg()["tracks"]:

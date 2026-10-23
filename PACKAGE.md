@@ -51,16 +51,17 @@ engine/src/main.rs
 
 | Path | Content | Why not |
 |---|---|---|
-| `_system/` | Decision log, programme rules, plans, status, professional material, host-system audit | Internal record. A decision log invites an argument about the decision instead of the measurement, and professional material is personal |
+| `record/`, a folder beside this repository rather than a path inside it | Decision log, programme rules, plans, status, professional material, host-system audit, and the machine registry | Internal record, and outside the artefact by construction: work and paper live in different folders. A decision log invites an argument about the decision instead of the measurement, and professional material is personal |
 | `engine/target/` | Cargo build output | Records the host toolchain path; git-ignored |
 | `__pycache__/`, `.pytest_cache/` | Interpreter and test caches | Machine state |
 
 ## 4. How the boundary is enforced
 
 1. `tests/test_doc_separation_s.py` fails if a published document contains a decision
-   identifier, a personal reference, a personal-name class token, or the string `_system`.
+   identifier, a personal reference, a personal-name class token, or a pointer into the record
+   folder. It also fails if the record directory ever appears inside this repository again.
 2. The same test fails if a path in section 2 does not exist, if a document under `docs/` is
-   missing from section 2, or if a `_system` path appears in it.
+   missing from section 2, or if a record path appears in it.
 3. `tests/test_research_scrub_s.py` fails on a personal name, an e-mail address, a phone
    number, a host path, or a third-party product token anywhere in the tree that git would
    publish. The licence files are the one exemption, because a licence must name its holder:
@@ -72,6 +73,7 @@ engine/src/main.rs
 ## 5. Release checklist
 
 1. Run the gates in `docs/05_REPRODUCTION.md` section 5.
-2. Confirm that section 2 above lists every document under `docs/` and nothing under `_system/`.
+2. Confirm that section 2 above lists every document under `docs/`, and that no record path
+   appears inside this repository at all.
 3. Publish the paths in section 2. Do not publish the branch as a whole: it contains the
    internal records by design.
