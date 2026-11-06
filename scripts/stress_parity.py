@@ -162,10 +162,9 @@ def main() -> int:
         ).stdout
         cells = listing.strip().strip('"').split('","')
         if len(cells) >= 5:
-            try:
-                peak_kb = max(peak_kb, int(cells[4].replace(",", "").replace(" K", "")))
-            except ValueError:
-                pass
+            clean_mem = cells[4].replace(",", "").replace(" K", "").strip()
+            if clean_mem.isdigit():
+                peak_kb = max(peak_kb, int(clean_mem))
         time.sleep(0.05)
     evidence["liveness"] = {
         "finished": process.returncode == 0,

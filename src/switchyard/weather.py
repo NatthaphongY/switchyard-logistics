@@ -57,13 +57,19 @@ PERMILLE = 1000
 @lru_cache(maxsize=1)
 def config() -> dict:
     """Load the formula table once. Data, not code (README section 3, item 7)."""
-    return json.loads(CONFIG_PATH.read_text(encoding="utf-8"))
+    try:
+        return json.loads(CONFIG_PATH.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError) as e:
+        raise ValueError(f"Failed to load weather config from {CONFIG_PATH}: {e}") from e
 
 
 @lru_cache(maxsize=1)
 def profiles() -> dict:
     """Load the region profile table once. A frozen snapshot, not a live feed."""
-    return json.loads(REGIONS_PATH.read_text(encoding="utf-8"))
+    try:
+        return json.loads(REGIONS_PATH.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError) as e:
+        raise ValueError(f"Failed to load weather regions from {REGIONS_PATH}: {e}") from e
 
 
 def profile_names() -> Tuple[str, ...]:

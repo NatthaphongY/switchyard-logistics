@@ -52,7 +52,11 @@ class Physics:
 
     @classmethod
     def load(cls, path: Optional[Path] = None) -> "Physics":
-        payload = json.loads(Path(path or _DEFAULT_PATH).read_text(encoding="utf-8"))
+        target = Path(path or _DEFAULT_PATH)
+        try:
+            payload = json.loads(target.read_text(encoding="utf-8"))
+        except (json.JSONDecodeError, OSError) as e:
+            raise ValueError(f"Failed to load physics configuration from {target}: {e}") from e
         return cls(
             queue=payload["queue"],
             thermal=payload["thermal"],
