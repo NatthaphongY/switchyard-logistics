@@ -45,7 +45,10 @@ REGION_FIELDS = ("base_c_tenths", "swing_c_tenths", "humidity_permille",
 
 
 def _data() -> dict:
-    return json.loads(REGIONS_PATH.read_text(encoding="utf-8"))
+    try:
+        return json.loads(REGIONS_PATH.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, ValueError) as exc:
+        raise ValueError(f"Invalid JSON in {REGIONS_PATH}: {exc}") from exc
 
 
 
@@ -122,7 +125,10 @@ def test_measured_regions_are_cool_to_hot_in_the_expected_order():
 
 def test_region_profiles_have_exactly_one_source():
     """`weather.json` holds formulas; the region table lives in its own file."""
-    formulas = json.loads(FORMULAS_PATH.read_text(encoding="utf-8"))
+    try:
+        formulas = json.loads(FORMULAS_PATH.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, ValueError) as exc:
+        raise ValueError(f"Invalid JSON in {FORMULAS_PATH}: {exc}") from exc
     assert "regions" not in formulas, "duplicate region table in weather.json"
     assert weather.regions() == _data()["profiles"]["measured"]["regions"]
 

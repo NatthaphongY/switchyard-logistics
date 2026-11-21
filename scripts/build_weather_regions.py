@@ -195,11 +195,17 @@ def synthetic_profile() -> dict:
     loses the numbers that the published evidence quotes.
     """
     if REGIONS_PATH.is_file():
-        existing = json.loads(REGIONS_PATH.read_text(encoding="utf-8"))
+        try:
+            existing = json.loads(REGIONS_PATH.read_text(encoding="utf-8"))
+        except (json.JSONDecodeError, ValueError) as exc:
+            raise ValueError(f"Invalid JSON in {REGIONS_PATH}: {exc}") from exc
         block = existing.get("profiles", {}).get("synthetic")
         if block and block.get("regions"):
             return block["regions"]
-    inline = json.loads(WEATHER_PATH.read_text(encoding="utf-8"))["regions"]
+    try:
+        inline = json.loads(WEATHER_PATH.read_text(encoding="utf-8"))["regions"]
+    except (json.JSONDecodeError, ValueError) as exc:
+        raise ValueError(f"Invalid JSON in {WEATHER_PATH}: {exc}") from exc
     return {
         key: {
             "label": value["label"],

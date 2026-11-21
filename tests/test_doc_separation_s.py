@@ -141,7 +141,10 @@ def test_decision_log_mirrors_the_machine_record():
     log = RECORD / "DECISIONS.md"
     if not registry.is_file() or not log.is_file():
         pytest.skip("the record folder is not beside this repository")
-    programme = json.loads(read(registry))
+    try:
+        programme = json.loads(read(registry))
+    except (json.JSONDecodeError, ValueError) as exc:
+        raise ValueError(f"Invalid JSON in {registry}: {exc}") from exc
     text = read(log)
     missing = [entry["id"] for entry in programme["decisions"] if entry["id"] not in text]
     assert missing == [], f"decisions in programme.json but absent from DECISIONS.md: {missing}"

@@ -64,7 +64,11 @@ HOSTILE = {
 
 
 def _thresholds():
-    payload = json.loads((ROOT / "config" / "thresholds.json").read_text(encoding="utf-8"))
+    thresholds_path = ROOT / "config" / "thresholds.json"
+    try:
+        payload = json.loads(thresholds_path.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, ValueError) as exc:
+        raise ValueError(f"Invalid JSON in {thresholds_path}: {exc}") from exc
     payload.pop("_comment", None)
     payload.pop("version", None)
     return load_thresholds(payload)

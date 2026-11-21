@@ -24,7 +24,11 @@ from switchyard.scenarios import scenario  # noqa: E402
 
 def main() -> int:
     count = int(sys.argv[1]) if len(sys.argv) > 1 else 300
-    payload = json.loads((ROOT / "config" / "thresholds.json").read_text(encoding="utf-8"))
+    thresholds_path = ROOT / "config" / "thresholds.json"
+    try:
+        payload = json.loads(thresholds_path.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, ValueError) as exc:
+        raise ValueError(f"Invalid JSON in {thresholds_path}: {exc}") from exc
     payload.pop("_comment", None)
     payload.pop("version", None)
     thresholds = load_thresholds(payload)

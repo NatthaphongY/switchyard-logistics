@@ -340,7 +340,8 @@ fn consignment_findings<'a>(
         let slack = c.due - arrival;
         if slack <= 0 {
             found.push(("GATE-SLACK-001", c.id.clone()));
-        } else if slack < HANDOFF_MAX_MIN {
+        }
+        if slack > 0 && slack < HANDOFF_MAX_MIN {
             found.push(("GATE-SLACK-002", c.id.clone()));
         }
         if cold && !inst.plan.precool.contains(&c.id) {

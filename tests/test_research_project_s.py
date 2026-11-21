@@ -52,7 +52,10 @@ REQUIRED_DOCS = (
 def _reg() -> dict:
     if not REG.is_file():
         pytest.skip("the programme registry is not beside this repository (record folder absent)")
-    return json.loads(REG.read_text(encoding="utf-8"))
+    try:
+        return json.loads(REG.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, ValueError) as exc:
+        raise ValueError(f"Invalid JSON in {REG}: {exc}") from exc
 
 
 # ---------------------------------------------------------------------------
