@@ -24,6 +24,52 @@ time-and-temperature critical logistics planning. Switchyard couples an integer
 micro-unit evaluation pipeline in Python with a zero-dependency Rust replay core,
 proving compliance against pre-registered physical and institutional constraints.
 
+## Architecture Flow
+
+```
+  +-------------------------------------------------------------+
+  |                        Plan Input                           |
+  |     (Waypoints, Arrival/Departure Intervals, Cargo Limits)  |
+  +-------------------------------------------------------------+
+                                 |
+                                 v
+  +-------------------------------------------------------------+
+  |                 Integer Micro-Units Engine                  |
+  |       Fixed-Point Minutes (t) & Micro-Degrees Celsius       |
+  +-------------------------------------------------------------+
+            |                                       |
+            v                                       v
+  +-------------------+                   +-------------------+
+  |  Python Reference |                   |     Rust Core     |
+  | (Evaluation &     |                   | (Zero-Dependency  |
+  |  Research Model)  |                   |  29,653 evals/s)  |
+  +-------------------+                   +-------------------+
+            \                                       /
+             \                                     /
+              v                                   v
+  +-------------------------------------------------------------+
+  |                     Event-Agnostic Gate                     |
+  |     (Physical State Bounds & 20 Formal Gate Codes)          |
+  +-------------------------------------------------------------+
+                                 |
+                                 v
+  +-------------------------------------------------------------+
+  |                      Bit-Exact Verdict                      |
+  |        (Deterministic PASS/FAIL, Exact Parity Match)        |
+  +-------------------------------------------------------------+
+```
+
+## Performance & Parity Summary
+
+| Metric | Python Reference | Rust Core Engine | Conformance Status |
+|---|---|---|---|
+| Evaluation Throughput | ~320 evals/s | 29,653 evals/s | 92x Speedup |
+| Numeric Precision | Integer micro-units | Integer micro-units | Bit-Exact (0 drift) |
+| Scenario Coverage | 300 / 300 scenarios | 300 / 300 scenarios | 100% Identical |
+| Ambient Data Source | ERA5 (July 1991-2020) | Frozen LUT (Integer) | Exact Replay |
+| Gate Codes Evaluated | 20 Formal Codes | 20 Formal Codes | Full Compliance |
+| Memory Overhead | Standard runtime | Zero alloc during eval | Leak-free |
+
 ## Key Highlights
 
 - High-Throughput Verification: 29,653 evaluations per second in Rust replay core.
@@ -33,25 +79,7 @@ proving compliance against pre-registered physical and institutional constraints
 - Pre-Registered Benchmark: Gate B4 measurement separates optimized plans from standard practice across all 6 criteria.
 - Open Climatology: Ambient physical layer derived from frozen July 1991-2020 ERA5 reanalysis data.
 
-## Document Set
-
-| ID | Document | Description |
-|---|---|---|
-| SW-02 | `docs/02_TRACK_B_COLDCHAIN.md` | Problem statement, capability gap, and system architecture |
-| SW-03 | `docs/03_EVIDENCE_2026.md` | Evidence register with technical and market source citations |
-| SW-05 | `docs/05_REPRODUCTION.md` | Reproduction guide: commands for regenerating every published figure |
-| SW-06 | `docs/06_EVENT_AGNOSTIC_GATE.md` | Specification of the 20-code compliance gate (normative) |
-| SW-07 | `docs/07_LICENSING.md` | Dual licensing model, thresholds, and clean-room provenance |
-| SW-08 | `docs/08_B4_MEASUREMENT.md` | Pre-registered Gate B4 measurement and empirical separation results |
-| SW-09 | `docs/09_CATALYST_LAYER.md` | Propagation, information, and institutional cascade layers |
-| SW-10 | `docs/10_NUMERIC_CORE.md` | Fixed-point numeric engine, Rust core, and throughput benchmarks |
-| SW-11 | `docs/11_PHYSICS_LAYERS.md` | Queueing, traffic, thermal, reliability, and epidemic models |
-| SW-12 | `docs/12_ROBUSTNESS.md` | Parity proofs, hostile input bounds, liveness, and memory stability |
-| SW-PKG | `PACKAGE.md` | Scope manifest: published artifacts versus withheld private assets |
-
-*Note: The normative document is SW-06. If any document conflicts with it, SW-06 governs.*
-
-## Quickstart
+## 30-Second Quickstart
 
 Clone the repository and install the development package locally:
 
@@ -97,7 +125,31 @@ py -3.13 -X utf8 scripts/stress_parity.py --repeats 200
 | Rust Core Parity | `switchyard-core --instances evidence/instances.txt --threads 8 --repeat 200` | 0 mismatches across 300 scenarios |
 | Liveness & Robustness | `py -3.13 -X utf8 scripts/stress_parity.py --repeats 200` | PASS under hostile inputs |
 
-## Architecture & Licensing
+## Document Set
+
+| ID | Document | Description |
+|---|---|---|
+| SW-02 | `docs/02_TRACK_B_COLDCHAIN.md` | Problem statement, capability gap, and system architecture |
+| SW-03 | `docs/03_EVIDENCE_2026.md` | Evidence register with technical and market source citations |
+| SW-05 | `docs/05_REPRODUCTION.md` | Reproduction guide: commands for regenerating every published figure |
+| SW-06 | `docs/06_EVENT_AGNOSTIC_GATE.md` | Specification of the 20-code compliance gate (normative) |
+| SW-07 | `docs/07_LICENSING.md` | Dual licensing model, thresholds, and clean-room provenance |
+| SW-08 | `docs/08_B4_MEASUREMENT.md` | Pre-registered Gate B4 measurement and empirical separation results |
+| SW-09 | `docs/09_CATALYST_LAYER.md` | Propagation, information, and institutional cascade layers |
+| SW-10 | `docs/10_NUMERIC_CORE.md` | Fixed-point numeric engine, Rust core, and throughput benchmarks |
+| SW-11 | `docs/11_PHYSICS_LAYERS.md` | Queueing, traffic, thermal, reliability, and epidemic models |
+| SW-12 | `docs/12_ROBUSTNESS.md` | Parity proofs, hostile input bounds, liveness, and memory stability |
+| SW-PKG | `PACKAGE.md` | Scope manifest: published artifacts versus withheld private assets |
+
+*Note: The normative document is SW-06. If any document conflicts with it, SW-06 governs.*
+
+## Contributing & Security
+
+- Contributions are welcome under our development workflows and verification gates. Please refer to [CONTRIBUTING.md](CONTRIBUTING.md) for testing guidelines and code standards.
+- To report potential vulnerabilities or security flaws, please consult [SECURITY.md](SECURITY.md) for our disclosure policy and reporting process.
+- All notable changes and release milestones are tracked in [CHANGELOG.md](CHANGELOG.md).
+
+## Architecture & Dual-Licensing
 
 - Specification (`docs/06_EVENT_AGNOSTIC_GATE.md` and document set) is licensed under **Apache-2.0** (`LICENSE-SPEC`) to permit independent, citation-backed implementations.
 - Reference implementation (`src/`, `engine/`, and tooling) is licensed under the **Business Source License 1.1** (`LICENSE`), with defined Use Grants converting to open source on the Change Date.

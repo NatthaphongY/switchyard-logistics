@@ -1,0 +1,41 @@
+name: Bug Report
+description: Create a report to help us improve switchyard
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report an issue. Switchyard prioritizes deterministic behavior, bit-exact parity, and zero-drift verification.
+  - type: textarea
+    id: problem-description
+    attributes:
+      label: Problem Description
+      description: A clear and concise description of the bug or unexpected behavior.
+    validations:
+      required: true
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: Steps to Reproduce
+      description: Steps or commands to reproduce the behavior.
+      placeholder: |
+        1. Run command '...'
+        2. Scenario configuration '...'
+        3. Observe discrepancy '...'
+    validations:
+      required: true
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Expected Behavior
+      description: A clear explanation of what should have occurred under normative specifications (SW-06).
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Python version, Rust version, OS platform, and architecture.
+      placeholder: Python 3.13.x, Rust 1.80+, Linux x86_64 / Windows AMD64
+    validations:
+      required: true

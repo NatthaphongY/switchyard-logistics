@@ -1,0 +1,29 @@
+name: Feature Request
+description: Suggest an idea or enhancement for switchyard
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Feature proposals should align with event-agnostic compliance gates, deterministic fixed-point integer arithmetic, or physical/institutional layer extensions.
+  - type: textarea
+    id: feature-description
+    attributes:
+      label: Proposed Enhancement
+      description: What is the proposed change or feature?
+    validations:
+      required: true
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Motivation and Use Case
+      description: Explain the problem or gap this addresses, referencing relevant specification docs if applicable.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives-considered
+    attributes:
+      label: Alternatives Considered
+      description: Describe alternative designs, trade-offs, or approaches considered.
+    validations:
+      false
