@@ -1,0 +1,32 @@
+# Switchyard Logistics
+
+> Event-agnostic compliance gate and verifiable reference implementation for time-and-temperature critical logistics planning.
+
+Switchyard couples an integer micro-unit evaluation pipeline in Python with a zero-dependency Rust replay core, proving compliance against pre-registered physical and institutional constraints.
+
+- Evaluation Throughput: 29,653 evals/s (Rust replay core) vs ~320 evals/s (Python reference).
+- Parity: 300/300 scenarios match identically (bit-exact, 0 drift).
+- Arithmetic: Pure integer micro-units (fixed-point minutes and micro-degrees Celsius). No floating-point in decisions.
+- Compliance: 20 formal gate codes evaluated deterministically.
+
+## Architecture
+
+- `src/switchyard/`: Python reference implementation and research model.
+- `engine/`: Zero-dependency Rust replay core (`switchyard-core`).
+- `tests/`: 114 pytest test cases covering verification, research scrub, and parity.
+- `scripts/`: Reproduction and parity verification scripts.
+
+## Key Documentation
+
+- [docs/06_EVENT_AGNOSTIC_GATE.md](docs/06_EVENT_AGNOSTIC_GATE.md): Normative specification of the 20-code compliance gate.
+- [docs/10_NUMERIC_CORE.md](docs/10_NUMERIC_CORE.md): Integer fixed-point numeric engine and Rust throughput benchmarks.
+- [docs/12_ROBUSTNESS.md](docs/12_ROBUSTNESS.md): Bit-exact parity proofs and memory stability.
+- [docs/05_REPRODUCTION.md](docs/05_REPRODUCTION.md): Step-by-step reproduction guide for published findings.
+
+## Verification Commands
+
+- Python test suite: `py -3.13 -m pytest -q`
+- Rust test suite: `cd engine && cargo test`
+- Corral static analysis: `py -3.13 -m corral.cli check .`
+- Parity export: `py -3.13 -X utf8 scripts/export_instances.py --scenarios 300`
+- Gate B4 benchmark: `py -3.13 -X utf8 scripts/run_b4.py --scenarios 300`

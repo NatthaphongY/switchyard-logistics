@@ -1,11 +1,13 @@
 # SW-README - switchyard-logistics
 
+[![CI](https://github.com/NatthaphongY/switchyard-logistics/actions/workflows/ci.yml/badge.svg)](https://github.com/NatthaphongY/switchyard-logistics/actions/workflows/ci.yml) [![Specification License](https://img.shields.io/badge/spec_license-Apache--2.0-blue.svg)](LICENSE-SPEC) [![Code License](https://img.shields.io/badge/code_license-BSL--1.1-orange.svg)](LICENSE) [![Python](https://img.shields.io/badge/python-3.13+-blue.svg)](pyproject.toml) [![Rust](https://img.shields.io/badge/rust-1.80+-red.svg)](engine/Cargo.toml) [![Parity](https://img.shields.io/badge/parity-300%2F300%20bit--exact-brightgreen.svg)](docs/12_ROBUSTNESS.md)
+
 | Field | Value |
 |---|---|
 | Document ID | SW-README |
-| Kind | Repository document (published) |
-| Version | 3.2 |
 | Status | Active |
+| Version | 3.2 |
+| Kind | Repository document (published) |
 | Date | 2026-10-23 |
 | Product name | switchyard-logistics (`SW-xx`; Python package `switchyard`, Rust binary `switchyard-core`) |
 | License | Apache-2.0 (Specification: `LICENSE-SPEC`) / BSL 1.1 (Code: `LICENSE`) |
@@ -13,16 +15,12 @@
 | Audience | Maintainers, external reviewers, systems engineers, prospective contributors |
 | Normative status | Informative; SW-06 is the normative specification |
 
-[![Specification License](https://img.shields.io/badge/spec_license-Apache--2.0-blue.svg)](LICENSE-SPEC)
-[![Code License](https://img.shields.io/badge/code_license-BSL--1.1-orange.svg)](LICENSE)
-[![Python](https://img.shields.io/badge/python-3.13+-blue.svg)](pyproject.toml)
-[![Rust](https://img.shields.io/badge/rust-1.80+-red.svg)](engine/Cargo.toml)
-[![Parity](https://img.shields.io/badge/parity-300%2F300%20bit--exact-brightgreen.svg)](docs/12_ROBUSTNESS.md)
-
 An event-agnostic compliance gate and verifiable reference implementation for
 time-and-temperature critical logistics planning. Switchyard couples an integer
 micro-unit evaluation pipeline in Python with a zero-dependency Rust replay core,
 proving compliance against pre-registered physical and institutional constraints.
+
+For AI agents and automated tools, see [llms.txt](llms.txt) and [AGENTS.md](AGENTS.md).
 
 ## Architecture Flow
 
