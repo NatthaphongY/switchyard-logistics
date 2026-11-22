@@ -1,60 +1,34 @@
 # SW-README - switchyard-logistics
 
-[![CI](https://github.com/NatthaphongY/switchyard-logistics/actions/workflows/ci.yml/badge.svg)](https://github.com/NatthaphongY/switchyard-logistics/actions/workflows/ci.yml) [![Specification License](https://img.shields.io/badge/spec_license-Apache--2.0-blue.svg)](LICENSE-SPEC) [![Code License](https://img.shields.io/badge/code_license-BSL--1.1-orange.svg)](LICENSE) [![Python](https://img.shields.io/badge/python-3.13+-blue.svg)](pyproject.toml) [![Rust](https://img.shields.io/badge/rust-1.80+-red.svg)](engine/Cargo.toml) [![Parity](https://img.shields.io/badge/parity-300%2F300%20bit--exact-brightgreen.svg)](docs/12_ROBUSTNESS.md)
+[![CI](https://github.com/NatthaphongY/switchyard-logistics/actions/workflows/ci.yml/badge.svg)](https://github.com/NatthaphongY/switchyard-logistics/actions/workflows/ci.yml)
+[![Specification License](https://img.shields.io/badge/spec_license-Apache--2.0-blue.svg)](LICENSE-SPEC)
+[![Code License](https://img.shields.io/badge/code_license-BSL--1.1-orange.svg)](LICENSE)
+[![Python Version](https://img.shields.io/badge/python-3.13%2B-blue.svg)](pyproject.toml)
+[![Rust Version](https://img.shields.io/badge/rust-1.80%2B-red.svg)](engine/Cargo.toml)
+[![Typing](https://img.shields.io/badge/typing-PEP_561-blueviolet.svg)](https://peps.python.org/pep-0561/)
 
-| Field | Value |
-|---|---|
-| Document ID | SW-README |
-| Status | Active |
-| Version | 3.2 |
-| Kind | Repository document (published) |
-| Date | 2026-10-23 |
-| Product name | switchyard-logistics (`SW-xx`; Python package `switchyard`, Rust binary `switchyard-core`) |
-| License | Apache-2.0 (Specification: `LICENSE-SPEC`) / BSL 1.1 (Code: `LICENSE`) |
-| Repository | Standalone; extracted from host tree on 2026-10-23 |
-| Audience | Maintainers, external reviewers, systems engineers, prospective contributors |
-| Normative status | Informative; SW-06 is the normative specification |
+| Document ID: SW-README | Kind | Repository document | Version: 3.2 | Status: Active | Spec: SW-06 |
 
-An event-agnostic compliance gate and verifiable reference implementation for
-time-and-temperature critical logistics planning. Switchyard couples an integer
-micro-unit evaluation pipeline in Python with a zero-dependency Rust replay core,
-proving compliance against pre-registered physical and institutional constraints.
+> **An event-agnostic compliance gate and verifiable reference implementation for time-and-temperature critical logistics planning.**
 
-For AI agents and automated tools, see [llms.txt](llms.txt) and [AGENTS.md](AGENTS.md).
+Switchyard couples an integer micro-unit evaluation pipeline in Python with a zero-dependency Rust replay core, proving compliance against pre-registered physical and institutional constraints.
 
-## Architecture Flow
+> **AI Agents**: See [llms.txt](llms.txt) and [AGENTS.md](AGENTS.md).
 
-```
-  +-------------------------------------------------------------+
-  |                        Plan Input                           |
-  |     (Waypoints, Arrival/Departure Intervals, Cargo Limits)  |
-  +-------------------------------------------------------------+
-                                 |
-                                 v
-  +-------------------------------------------------------------+
-  |                 Integer Micro-Units Engine                  |
-  |       Fixed-Point Minutes (t) & Micro-Degrees Celsius       |
-  +-------------------------------------------------------------+
-            |                                       |
-            v                                       v
-  +-------------------+                   +-------------------+
-  |  Python Reference |                   |     Rust Core     |
-  | (Evaluation &     |                   | (Zero-Dependency  |
-  |  Research Model)  |                   |  29,653 evals/s)  |
-  +-------------------+                   +-------------------+
-            \                                       /
-             \                                     /
-              v                                   v
-  +-------------------------------------------------------------+
-  |                     Event-Agnostic Gate                     |
-  |     (Physical State Bounds & 20 Formal Gate Codes)          |
-  +-------------------------------------------------------------+
-                                 |
-                                 v
-  +-------------------------------------------------------------+
-  |                      Bit-Exact Verdict                      |
-  |        (Deterministic PASS/FAIL, Exact Parity Match)        |
-  +-------------------------------------------------------------+
+---
+
+## Architecture Pipeline
+
+Switchyard evaluates cold-chain logistics plans across physical state bounds and institutional constraints via a dual-engine architecture:
+
+```mermaid
+flowchart LR
+    A["Plan Input<br/>(Waypoints, Intervals, Cargo)"] --> B["Integer Micro-Units Engine<br/>(Fixed-Point t, Micro-Celsius)"]
+    B --> C["Python Reference<br/>(Research Model)"]
+    B --> D["Rust Replay Core<br/>(Zero Alloc, 29k evals/s)"]
+    C --> E{"Event-Agnostic Gate<br/>(20 Gate Codes)"}
+    D --> E
+    E --> F["Bit-Exact Verdict<br/>(Deterministic PASS / FAIL)"]
 ```
 
 ## Performance & Parity Summary
